@@ -7902,50 +7902,16 @@
         PŁATNOŚĆ
       </div>
 
-      <!-- option 1: selected -->
-      <div class="pay-option pay-selected" onclick="selectPayment(this)">
-        <div class="pay-option-header">
-          <span style="flex:1"></span>
-          <span class="pay-badge">Domyślny</span>
+      <!-- płatność automatyczna: brak wyboru, tylko konstatacja -->
+      <div class="pay-option pay-selected" style="cursor:default;">
+        <div class="pay-option-top" style="gap:0;">
+          <span class="pay-option-name" style="font-weight:600;">Konto depozytowe</span>
         </div>
-        <div class="pay-option-top">
-          <span class="pay-radio"><span class="pay-radio-dot"></span></span>
-          <span class="pay-option-name">Konto depozytowe</span>
-        </div>
-        <div class="pay-option-desc">
-          Zapłać za pomocą przedpłaconego salda firmowego<br>
+        <div class="pay-option-desc" style="padding-left:0;">
+          Płatność zostanie automatycznie pobrana z przedpłaconego salda firmowego.<br>
           <strong>Saldo: 4 200,00 €</strong>
         </div>
       </div>
-
-      <!-- option 2 -->
-      <div class="pay-option" onclick="selectPayment(this)">
-        <div class="pay-option-top">
-          <span class="pay-radio"><span class="pay-radio-dot"></span></span>
-          <span class="pay-option-name">Przelew bankowy</span>
-        </div>
-        <div class="pay-option-desc">Zapłać w ciągu 14 dni</div>
-      </div>
-
-      <!-- option 3 -->
-      <div class="pay-option" onclick="selectPayment(this)">
-        <div class="pay-option-top">
-          <span class="pay-radio"><span class="pay-radio-dot"></span></span>
-          <span class="pay-option-name">Płatność przy odbiorze</span>
-        </div>
-        <div class="pay-option-desc">Zapłać w ciągu 14 dni</div>
-      </div>
-
-      <!-- option 4 -->
-      <div class="pay-option" onclick="selectPayment(this)">
-        <div class="pay-option-top">
-          <span class="pay-radio"><span class="pay-radio-dot"></span></span>
-          <span class="pay-option-name">Indywidualne warunki</span>
-        </div>
-        <div class="pay-option-desc">Zapłać później. Netto 30 (warunki umowy)</div>
-      </div>
-
-      <div id="checkoutStep2Hint" class="checkout-step-hint" style="display:none;">Nie wybrano jeszcze metody płatności.</div>
 
     </div><!-- /payment card -->
 
@@ -13192,7 +13158,8 @@ function submitOrder() {
     return (typeof checkoutAddrData !== 'undefined') && checkoutAddrData.length > 0 && !!_checkoutSelectedId;
   }
   function isCheckoutStep2Valid(){
-    return !!document.querySelector('#screenCheckout2 .pay-option.pay-selected');
+    // Płatność jest automatyczna (Konto depozytowe) — brak wyboru, krok zawsze valid.
+    return true;
   }
 
   function updateCheckoutStep1State(){
