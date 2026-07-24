@@ -1807,6 +1807,7 @@
   .orl-badge-success{ background:#f0fdf4; color:#15803d; border-color:#bbf7d0; }
   .orl-badge-cancelled{ background:#fef2f2; color:#b91c1c; border-color:#fecaca; }
   .orl-badge-return{ background:#faf5ff; color:#7e22ce; border-color:#e9d5ff; }
+  .orl-badge-progress{ background:#e6f2f3; color:#005f6e; border-color:#a8cdd1; } /* 🆕 W realizacji (3.1) */
 
   .orl-location{ padding:var(--space-sm) 0; border-top:1px solid var(--border-surface); }
   .orl-location-name{ font-family:var(--font-body); font-weight:700; font-size:16px; color:var(--text-default); }
@@ -8311,9 +8312,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.3-4.3"></path></svg>
         <span>Nr zamówienia lub lokalizacja</span>
       </div>
-      <div style="display:flex;gap:var(--space-sm);">
+      <div style="display:flex;gap:var(--space-sm);flex-wrap:wrap;">
+        <button class="orl-filter-btn" onclick="toggleOrderStageOverlay()">
+          Status realizacji
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+        </button>
         <button class="orl-filter-btn" onclick="toggleInvStatusOverlay()">
-          Status
+          Status płatności
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
         </button>
         <button class="orl-filter-btn" id="sortDataBtn" onclick="sortOrdersBy('date')">
@@ -9240,6 +9245,26 @@
   </div>
 </div>
 
+
+<!-- ORDER STAGE OVERLAY (nowy, tylko screenOrders) -->
+<div class="flt-backdrop" id="orderStageBackdrop" onclick="toggleOrderStageOverlay()"></div>
+<div class="flt-sheet" id="orderStageSheet">
+  <div class="flt-handle"></div>
+  <div class="flt-header">
+    <span class="flt-title">Status realizacji</span>
+    <button class="flt-clear" onclick="document.querySelectorAll('#orderStageSheet .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
+  </div>
+  <div class="flt-section">
+    <div class="flt-chips">
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#ddd8d4;--chip-border:#eaeaea;--chip-text:#323744;">Utworzone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e6f2f3;--chip-border:#a8cdd1;--chip-text:#005f6e;">W realizacji</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eff6ff;--chip-border:#bfdbfe;--chip-text:#1d4ed8;">W dostawie</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f0fdf4;--chip-border:#bbf7d0;--chip-text:#15803d;">Zrealizowane</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fef2f2;--chip-border:#fecaca;--chip-text:#b91c1c;">Anulowane</button>
+    </div>
+  </div>
+  <button class="flt-apply" onclick="toggleOrderStageOverlay()">Zastosuj</button>
+</div>
 
 <!-- INV STATUS OVERLAY -->
 <div class="flt-backdrop" id="invStatusBackdrop" onclick="toggleInvStatusOverlay()"></div>
@@ -11863,6 +11888,13 @@
   function toggleInvStatusOverlay(){
     var b = document.getElementById('invStatusBackdrop');
     var s = document.getElementById('invStatusSheet');
+    var open = s.classList.toggle('is-open');
+    b.classList.toggle('is-open', open);
+  }
+
+  function toggleOrderStageOverlay(){
+    var b = document.getElementById('orderStageBackdrop');
+    var s = document.getElementById('orderStageSheet');
     var open = s.classList.toggle('is-open');
     b.classList.toggle('is-open', open);
   }
