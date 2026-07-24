@@ -8306,6 +8306,31 @@
       <h1 class="od-title" id="ordersPageTitle">Wszystkie zamówienia</h1>
     </div>
 
+    <!-- status summary cards (3.1, 🆕) -->
+    <div id="ordersStatusCards" style="display:flex;flex-direction:column;gap:var(--space-sm);">
+      <div class="checkout-card" id="statCardNieoplacone" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #b45309;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="flt-title" style="font-size:13px;">Nieopłacone</span>
+          <span id="statCardNieoplaconeCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
+        </div>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#fdf3e3;border-color:#e8d4a8;color:#9a6200;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">Zobacz nieopłacone</button>
+      </div>
+      <div class="checkout-card" id="statCardWdostawie" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #1d4ed8;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="flt-title" style="font-size:13px;">W dostawie</span>
+          <span id="statCardWdostawieCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
+        </div>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">Zobacz w dostawie</button>
+      </div>
+      <div class="checkout-card" id="statCardWrealizacji" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #005f6e;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="flt-title" style="font-size:13px;">W realizacji</span>
+          <span id="statCardWrealizacjiCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
+        </div>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#e6f2f3;border-color:#a8cdd1;color:#005f6e;" onclick="openOrdersStatusFilter('orderStageSection','W realizacji')">Zobacz w realizacji</button>
+      </div>
+    </div><!-- /status summary cards -->
+
     <!-- filters card -->
     <div class="checkout-card" id="ordersFiltersCard" style="padding:var(--space-lg);gap:var(--space-sm);">
       <div class="orl-search">
@@ -11646,6 +11671,27 @@
     // ── ORDERS DATA & RENDER ──────────────────────────────────────────────
   var ORDERS_DATA = [
     {
+      id: 'ORD-5902', date: '2026-07-18', dateLabel: '18 lip 2026',
+      statusCls: 'orl-badge-progress', status: 'W realizacji',
+      payCls: 'orl-badge-success', payment: 'Opłacone',
+      location: 'Warszawa – Magazyn Wola', delivery: 'Dostawa kurierska',
+      items: [
+        {name:'Continental EcoContact 6', qty:'4 szt.'}
+      ],
+      total: 1284.00, totalLabel: '1 284,00 zł'
+    },
+    {
+      id: 'ORD-5877', date: '2026-07-10', dateLabel: '10 lip 2026',
+      statusCls: 'orl-badge-progress', status: 'W realizacji',
+      payCls: 'orl-badge-success', payment: 'Opłacone',
+      location: 'Łódź – Magazyn Centralny', delivery: 'Odbiór osobisty',
+      items: [
+        {name:'Michelin Agilis 3', qty:'8 szt.'},
+        {name:'Bridgestone Duravis All Season', qty:'4 szt.'}
+      ],
+      total: 3564.80, totalLabel: '3 564,80 zł'
+    },
+    {
       id: 'ORD-5821', date: '2026-06-12', dateLabel: '12 cze 2026',
       statusCls: 'orl-badge-success', status: 'Zrealizowane',
       payCls: 'orl-badge-success', payment: 'Opłacone',
@@ -11779,6 +11825,26 @@
     }
   }
 
+  // 3.1: 3 картки статусу над фільтрами — реальні counts з ORDERS_DATA, картка
+  // ховається якщо count===0 (щоб не займати місце "мертвим" нулем).
+  function renderOrderStatusCards(){
+    var nieoplacone = ORDERS_DATA.filter(function(o){ return o.payment === 'Nieopłacone'; }).length;
+    var wDostawie = ORDERS_DATA.filter(function(o){ return o.status === 'W dostawie'; }).length;
+    var wRealizacji = ORDERS_DATA.filter(function(o){ return o.status === 'W realizacji'; }).length;
+
+    var cfg = [
+      { cardId: 'statCardNieoplacone', countId: 'statCardNieoplaconeCount', count: nieoplacone },
+      { cardId: 'statCardWdostawie', countId: 'statCardWdostawieCount', count: wDostawie },
+      { cardId: 'statCardWrealizacji', countId: 'statCardWrealizacjiCount', count: wRealizacji }
+    ];
+    cfg.forEach(function(c){
+      var card = document.getElementById(c.cardId);
+      var countEl = document.getElementById(c.countId);
+      if (countEl) countEl.textContent = c.count;
+      if (card) card.style.display = c.count > 0 ? 'flex' : 'none';
+    });
+  }
+
   function renderOrders() {
     var container = document.getElementById('ordersListContainer');
     if (!container) return;
@@ -11794,13 +11860,18 @@
     var isGuestUser = (typeof isGuest !== 'undefined') && isGuest;
     var data = isGuestUser ? [] : ORDERS_DATA.slice();
 
+    var statusCards = document.getElementById('ordersStatusCards');
+
     if (isGuestUser) {
       // Дла гостя: без заголовка сторінки і без картки пошуку/фільтрів — лише empty state
       if (filtersCard) filtersCard.style.display = 'none';
       if (pageTitle) pageTitle.style.display = 'none';
+      if (statusCards) statusCards.style.display = 'none';
     } else {
       if (filtersCard) filtersCard.style.display = '';
       if (pageTitle) pageTitle.style.display = '';
+      if (statusCards) statusCards.style.display = 'flex';
+      renderOrderStatusCards();
     }
 
     if (data.length === 0) {
@@ -11905,6 +11976,17 @@
     var s = document.getElementById('ordersStatusSheet');
     var open = s.classList.toggle('is-open');
     b.classList.toggle('is-open', open);
+  }
+
+  // 3.1: klik na karcie statusu — otwiera wspólny panel Status z odpowiednim
+  // chipem od razu zaznaczonym (samo filtrowanie listy nie jest jeszcze podłączone,
+  // tak samo jak przy ręcznym wyborze chipów w panelu — patrz toggleFltChip).
+  function openOrdersStatusFilter(sectionId, chipLabel){
+    document.querySelectorAll('#' + sectionId + ' .flt-chip').forEach(function(c){
+      if(c.textContent.trim() === chipLabel) c.classList.add('is-selected');
+    });
+    var s = document.getElementById('ordersStatusSheet');
+    if(s && !s.classList.contains('is-open')) toggleOrdersStatusOverlay();
   }
 
   var _ibanEditTarget = null;
