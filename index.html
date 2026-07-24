@@ -9247,10 +9247,11 @@
 <div class="flt-sheet" id="ordersStatusSheet">
   <div class="flt-handle"></div>
   <div class="flt-header">
-    <span class="flt-title">Status realizacji</span>
-    <button class="flt-clear" onclick="document.querySelectorAll('#orderStageSection .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
+    <span class="flt-title">Status</span>
+    <button class="flt-clear" onclick="document.querySelectorAll('#ordersStatusSheet .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
   </div>
   <div class="flt-section" id="orderStageSection">
+    <div class="flt-section-label">Status realizacji</div>
     <div class="flt-chips">
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#ddd8d4;--chip-border:#eaeaea;--chip-text:#323744;">Utworzone</button>
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e6f2f3;--chip-border:#a8cdd1;--chip-text:#005f6e;">W realizacji</button>
@@ -9260,11 +9261,8 @@
     </div>
   </div>
 
-  <div class="flt-header" style="margin-top:var(--space-md);">
-    <span class="flt-title">Status płatności</span>
-    <button class="flt-clear" onclick="document.querySelectorAll('#orderPaymentSection .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
-  </div>
-  <div class="flt-section" id="orderPaymentSection">
+  <div class="flt-section" id="orderPaymentSection" style="margin-top:var(--space-md);">
+    <div class="flt-section-label">Status płatności</div>
     <div class="flt-chips">
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fdf3e3;--chip-border:#e8d4a8;--chip-text:#9a6200;">Nieopłacone</button>
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e8f4ed;--chip-border:#a8d4b8;--chip-text:#1e6b3c;">Opłacone</button>
