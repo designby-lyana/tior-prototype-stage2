@@ -8313,12 +8313,8 @@
         <span>Nr zamówienia lub lokalizacja</span>
       </div>
       <div style="display:flex;gap:var(--space-sm);flex-wrap:wrap;">
-        <button class="orl-filter-btn" onclick="toggleOrderStageOverlay()">
-          Status realizacji
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
-        </button>
-        <button class="orl-filter-btn" onclick="toggleInvStatusOverlay()">
-          Status płatności
+        <button class="orl-filter-btn" onclick="toggleOrdersStatusOverlay()">
+          Status
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
         </button>
         <button class="orl-filter-btn" id="sortDataBtn" onclick="sortOrdersBy('date')">
@@ -9246,15 +9242,15 @@
 </div>
 
 
-<!-- ORDER STAGE OVERLAY (nowy, tylko screenOrders) -->
-<div class="flt-backdrop" id="orderStageBackdrop" onclick="toggleOrderStageOverlay()"></div>
-<div class="flt-sheet" id="orderStageSheet">
+<!-- ORDERS STATUS OVERLAY (nowy, jeden dropdown = 2 sekcje: etap + platnosc, tylko screenOrders) -->
+<div class="flt-backdrop" id="ordersStatusBackdrop" onclick="toggleOrdersStatusOverlay()"></div>
+<div class="flt-sheet" id="ordersStatusSheet">
   <div class="flt-handle"></div>
   <div class="flt-header">
     <span class="flt-title">Status realizacji</span>
-    <button class="flt-clear" onclick="document.querySelectorAll('#orderStageSheet .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
+    <button class="flt-clear" onclick="document.querySelectorAll('#orderStageSection .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
   </div>
-  <div class="flt-section">
+  <div class="flt-section" id="orderStageSection">
     <div class="flt-chips">
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#ddd8d4;--chip-border:#eaeaea;--chip-text:#323744;">Utworzone</button>
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e6f2f3;--chip-border:#a8cdd1;--chip-text:#005f6e;">W realizacji</button>
@@ -9263,7 +9259,21 @@
       <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fef2f2;--chip-border:#fecaca;--chip-text:#b91c1c;">Anulowane</button>
     </div>
   </div>
-  <button class="flt-apply" onclick="toggleOrderStageOverlay()">Zastosuj</button>
+
+  <div class="flt-header" style="margin-top:var(--space-md);">
+    <span class="flt-title">Status płatności</span>
+    <button class="flt-clear" onclick="document.querySelectorAll('#orderPaymentSection .flt-chip').forEach(c=&gt;c.classList.remove('is-selected'))">Wyczyść</button>
+  </div>
+  <div class="flt-section" id="orderPaymentSection">
+    <div class="flt-chips">
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fdf3e3;--chip-border:#e8d4a8;--chip-text:#9a6200;">Nieopłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e8f4ed;--chip-border:#a8d4b8;--chip-text:#1e6b3c;">Opłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fceaea;--chip-border:#e8b0b0;--chip-text:#9b1c1c;">Po terminie</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f0ebf7;--chip-border:#c8b0dc;--chip-text:#3d2468;">Zwrócone</button>
+    </div>
+  </div>
+
+  <button class="flt-apply" onclick="toggleOrdersStatusOverlay()">Zastosuj</button>
 </div>
 
 <!-- INV STATUS OVERLAY -->
@@ -11892,9 +11902,9 @@
     b.classList.toggle('is-open', open);
   }
 
-  function toggleOrderStageOverlay(){
-    var b = document.getElementById('orderStageBackdrop');
-    var s = document.getElementById('orderStageSheet');
+  function toggleOrdersStatusOverlay(){
+    var b = document.getElementById('ordersStatusBackdrop');
+    var s = document.getElementById('ordersStatusSheet');
     var open = s.classList.toggle('is-open');
     b.classList.toggle('is-open', open);
   }
