@@ -8838,7 +8838,7 @@
 
   <div style="padding:32px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;">
 
-    <a class="cart-back" onclick="goBackFromLogin()" style="margin-bottom:0;">‹‹ Powrót</a>
+    <a class="cart-back" id="loginTopBack" onclick="goBackFromLogin()" style="margin-bottom:0;">‹‹ Powrót</a>
 
     <div id="loginFormView">
       <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
@@ -8877,8 +8877,8 @@
     <div id="forgotPasswordView" style="display:none;">
       <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
         <div onclick="backToLogin()" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
-          <span style="font-size:18px;color:#323744;line-height:1;">«</span>
-          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:#323744;">Powrót do logowania</span>
+          <span style="font-size:18px;color:var(--text-muted);line-height:1;">«</span>
+          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:var(--text-muted);">Powrót</span>
         </div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zresetuj hasło</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Podaj adres e-mail przypisany do konta — prześlemy link do zmiany hasła.</div>
@@ -8902,8 +8902,8 @@
     <div id="requestAccessView" style="display:none;">
       <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
         <div onclick="backToLogin()" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
-          <span style="font-size:18px;color:#323744;line-height:1;">«</span>
-          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:#323744;">Powrót do logowania</span>
+          <span style="font-size:18px;color:var(--text-muted);line-height:1;">«</span>
+          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:var(--text-muted);">Powrót</span>
         </div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Uzyskaj dostęp do platformy</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Zostaw dane kontaktowe. Skontaktujemy się z Państwem.</div>
@@ -9907,6 +9907,14 @@
       if(currentLog && currentLog.id && currentLog.id !== 'screenLogin'){
         loginBackTarget = currentLog.id;
       }
+      var lfv = document.getElementById('loginFormView');
+      var fpv = document.getElementById('forgotPasswordView');
+      var rav = document.getElementById('requestAccessView');
+      var ltb = document.getElementById('loginTopBack');
+      if(fpv) fpv.style.display = 'none';
+      if(rav) rav.style.display = 'none';
+      if(lfv) lfv.style.display = 'block';
+      if(ltb) ltb.style.display = 'flex';
     }
     closeAllOverlays();
     ALL_SCREENS.forEach(function(s){
@@ -13619,6 +13627,8 @@ function submitOrder() {
     var forgotView = document.getElementById('forgotPasswordView');
     var formBlock = document.getElementById('forgotFormBlock');
     var success = document.getElementById('forgotSuccess');
+    var topBack = document.getElementById('loginTopBack');
+    if(topBack) topBack.style.display = 'none';
     if(loginView) loginView.style.display = 'none';
     if(forgotView) forgotView.style.display = 'block';
     if(formBlock) formBlock.style.display = 'flex';
@@ -13633,6 +13643,8 @@ function submitOrder() {
     var raView = document.getElementById('requestAccessView');
     var formBlock = document.getElementById('requestAccessFormBlock');
     var success = document.getElementById('requestAccessSuccess');
+    var topBack = document.getElementById('loginTopBack');
+    if(topBack) topBack.style.display = 'none';
     if(loginView) loginView.style.display = 'none';
     if(raView) raView.style.display = 'block';
     if(formBlock) formBlock.style.display = 'flex';
@@ -13678,26 +13690,28 @@ function submitOrder() {
       if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
       return;
     }
+
+    var hasError = false;
+
     if(!emailVal){
-      if(emailErr){ emailErr.textContent = 'Wpisz adres e-mail.'; emailErr.style.display = 'block'; }
       if(emailWrap) emailWrap.style.borderColor = '#dc2626';
-      return;
-    }
-    if(!isValidEmail(emailVal)){
+      hasError = true;
+    } else if(!isValidEmail(emailVal)){
       if(emailErr){ emailErr.textContent = 'Użyj formatu: jan@firma.pl.'; emailErr.style.display = 'block'; }
       if(emailWrap) emailWrap.style.borderColor = '#dc2626';
-      return;
+      hasError = true;
     }
+
     if(!phoneVal){
-      if(phoneErr){ phoneErr.textContent = 'Wpisz numer telefonu.'; phoneErr.style.display = 'block'; }
       if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
-      return;
-    }
-    if(!isValidPhone(phoneVal)){
+      hasError = true;
+    } else if(!isValidPhone(phoneVal)){
       if(phoneErr){ phoneErr.textContent = 'Użyj 9 cyfr, np. 600 000 000.'; phoneErr.style.display = 'block'; }
       if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
-      return;
+      hasError = true;
     }
+
+    if(hasError) return;
 
     if(formBlock) formBlock.style.display = 'none';
     if(success) success.style.display = 'flex';
@@ -13707,9 +13721,11 @@ function submitOrder() {
     var loginView = document.getElementById('loginFormView');
     var forgotView = document.getElementById('forgotPasswordView');
     var raView = document.getElementById('requestAccessView');
+    var topBack = document.getElementById('loginTopBack');
     if(forgotView) forgotView.style.display = 'none';
     if(raView) raView.style.display = 'none';
     if(loginView) loginView.style.display = 'block';
+    if(topBack) topBack.style.display = 'flex';
   }
 
   function clearForgotError(){
