@@ -2259,6 +2259,27 @@
   }
   .adres-input::placeholder{ color:var(--text-placeholder); }
   .adres-input:focus{ border-color:var(--accent-primary); border-width:1.5px; }
+  .adres-phone-group{
+    display:flex; align-items:center;
+    border:1px solid var(--border-default);
+    border-radius:var(--radius-sm);
+    background:var(--bg-input);
+    transition:border-color 140ms ease;
+  }
+  .adres-phone-group:focus-within{ border-color:var(--accent-primary); border-width:1.5px; }
+  .adres-phone-prefix{
+    font-family:var(--font-body); font-size:16px; color:var(--text-muted);
+    flex:none; white-space:nowrap;
+    padding:10px 0 10px var(--space-md);
+    margin-right:var(--space-sm);
+    border-right:1px solid var(--border-default);
+  }
+  .adres-phone-group .adres-input{
+    border:none; background:transparent; border-radius:0;
+    padding:10px var(--space-md) 10px 0;
+    flex:1; min-width:0;
+  }
+  .adres-phone-group .adres-input:focus{ border:none; }
   /* badges */
   .od-badges{ display:flex; gap:var(--space-sm); flex-wrap:wrap; }
   .od-badge{
@@ -8691,7 +8712,7 @@
       </div>
       <div class="firma-field" style="border-bottom:none;padding-bottom:0;">
         <div class="firma-field-title">Osoba kontaktowa</div>
-        <div class="firma-field-value" id="dispFirmaOsoba" style="line-height:1.7;">Jan Kowalski<br>+49 30 123 456<br>jan@company.com</div>
+        <div class="firma-field-value" id="dispFirmaOsoba" style="line-height:1.7;">Jan Kowalski<br>+48 30 123 456<br>jan@company.com</div>
       </div>
     </div>
 
@@ -8898,7 +8919,8 @@
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">NUMER TELEFONU</div>
           <div id="raPhoneWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
-            <input id="raPhone" type="text" oninput="clearRequestAccessErrors()" placeholder="np. +48 600 000 000" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
+            <span style="flex:none;font-family:'Outfit',sans-serif;font-size:16px;color:var(--text-muted);white-space:nowrap;padding-right:8px;border-right:1px solid #bec5c8;">+48</span>
+            <input id="raPhone" type="text" inputmode="tel" oninput="clearRequestAccessErrors()" placeholder="np. 600 000 000" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
           <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj numer telefonu.</div>
         </div>
@@ -9520,7 +9542,10 @@
     </div>
     <div class="adres-field">
       <div class="adres-label">TELEFON</div>
-      <input type="text" class="adres-input" id="firmaTel" value="+49 30 123 456">
+      <div class="adres-phone-group">
+        <span class="adres-phone-prefix">+48</span>
+        <input type="tel" class="adres-input" id="firmaTel" value="30 123 456">
+      </div>
     </div>
     <div class="adres-field">
       <div class="adres-label">E-MAIL</div>
@@ -12117,7 +12142,8 @@
     var krs   = document.getElementById('firmaKRS').value;
     var vat   = document.getElementById('firmaVAT').value;
     var osoba = document.getElementById('firmaOsoba').value;
-    var tel   = document.getElementById('firmaTel').value;
+    var firmaTelLocal = document.getElementById('firmaTel').value.trim();
+    var tel   = firmaTelLocal ? ('+48 ' + firmaTelLocal) : '';
     var email = document.getElementById('firmaEmail').value;
 
     document.getElementById('dispFirmaNazwa').textContent = nazwa;
@@ -13052,7 +13078,7 @@ function submitOrder() {
     document.getElementById('addrInputName').value = a.name;
     document.getElementById('addrInputCompany').value = a.company;
     document.getElementById('addrInputContact').value = a.contactPerson || '';
-    document.getElementById('addrInputPhone').value = a.phone || '';
+    document.getElementById('addrInputPhone').value = (a.phone || '').replace(/^\+48\s*/, '');
     document.getElementById('addrInputStreet').value = a.street;
     var parts = a.city.split(' ');
     document.getElementById('addrInputZip').value = parts[0] || '';
@@ -13071,7 +13097,8 @@ function submitOrder() {
     var name = document.getElementById('addrInputName').value.trim() || 'Nowy adres';
     var company = document.getElementById('addrInputCompany').value.trim() || 'AutoParts Sp. z o.o.';
     var contactPerson = document.getElementById('addrInputContact').value.trim() || '';
-    var phone = document.getElementById('addrInputPhone').value.trim() || '';
+    var addrPhoneLocal = document.getElementById('addrInputPhone').value.trim();
+    var phone = addrPhoneLocal ? ('+48 ' + addrPhoneLocal) : '';
     var street = document.getElementById('addrInputStreet').value.trim() || '';
     var zip = document.getElementById('addrInputZip').value.trim() || '';
     var city = document.getElementById('addrInputCity').value.trim() || '';
@@ -13777,7 +13804,7 @@ function submitOrder() {
     <div class="adres-field"><div class="adres-label">KRAJ</div><input type="text" class="adres-input" id="addrInputCountry" value="Polska"></div>
     <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-sm);">
       <div class="adres-field"><div class="adres-label">OSOBA KONTAKTOWA</div><input type="text" class="adres-input" id="addrInputContact" placeholder="np. Jan Kowalski"></div>
-      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><input type="tel" class="adres-input" id="addrInputPhone" placeholder="+48 000 000 000"></div>
+      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group"><span class="adres-phone-prefix">+48</span><input type="tel" class="adres-input" id="addrInputPhone" placeholder="000 000 000"></div></div>
     </div>
   </div>
   <button class="flt-apply" onclick="saveAddr()" style="margin-top:8px;">Zapisz adres</button>
