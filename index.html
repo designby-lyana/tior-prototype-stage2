@@ -8712,7 +8712,7 @@
       </div>
       <div class="firma-field" style="border-bottom:none;padding-bottom:0;">
         <div class="firma-field-title">Osoba kontaktowa</div>
-        <div class="firma-field-value" id="dispFirmaOsoba" style="line-height:1.7;">Jan Kowalski<br>+48 30 123 456<br>jan@company.com</div>
+        <div class="firma-field-value" id="dispFirmaOsoba" style="line-height:1.7;">Jan Kowalski<br>+48 601234567<br>jan@company.com</div>
       </div>
     </div>
 
@@ -8920,9 +8920,9 @@
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">NUMER TELEFONU</div>
           <div id="raPhoneWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
             <span style="flex:none;font-family:'Outfit',sans-serif;font-size:16px;color:var(--text-muted);white-space:nowrap;padding-right:8px;border-right:1px solid #bec5c8;">+48</span>
-            <input id="raPhone" type="text" inputmode="tel" oninput="clearRequestAccessErrors()" placeholder="np. 600 000 000" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
+            <input id="raPhone" type="text" inputmode="numeric" maxlength="9" oninput="onlyDigits(this,9);clearRequestAccessErrors()" placeholder="np. 600000000" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
-          <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj numer telefonu.</div>
+          <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div>
         </div>
         <button onclick="submitRequestAccess()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Skontaktuj się</button>
         <div style="font-family:'Outfit',sans-serif;font-size:13px;line-height:1.5;color:#6b7280;text-align:center;">Kontynuując, akceptujesz <span onclick="goToRegulamin()" style="text-decoration:underline;cursor:pointer;">Regulamin</span> i <span onclick="goToPolityka()" style="text-decoration:underline;cursor:pointer;">Politykę prywatności</span> OponyToMy.</div>
@@ -9543,10 +9543,11 @@
     </div>
     <div class="adres-field">
       <div class="adres-label">TELEFON</div>
-      <div class="adres-phone-group">
+      <div class="adres-phone-group" id="firmaTelWrap">
         <span class="adres-phone-prefix">+48</span>
-        <input type="tel" class="adres-input" id="firmaTel" value="30 123 456">
+        <input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="firmaTel" value="601234567" oninput="onlyDigits(this,9);clearFirmaTelError()">
       </div>
+      <div id="firmaTelError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div>
     </div>
     <div class="adres-field">
       <div class="adres-label">E-MAIL</div>
@@ -12139,11 +12140,18 @@
   }
 
   function saveDaneFirmy(){
+    var firmaTelLocal = document.getElementById('firmaTel').value.trim();
+    if(firmaTelLocal && !isValidPhone(firmaTelLocal)){
+      var firmaTelErr = document.getElementById('firmaTelError');
+      var firmaTelWrap = document.getElementById('firmaTelWrap');
+      if(firmaTelErr){ firmaTelErr.textContent = PHONE_FORMAT_MSG; firmaTelErr.style.display = 'block'; }
+      if(firmaTelWrap) firmaTelWrap.style.borderColor = '#dc2626';
+      return;
+    }
     var nazwa = document.getElementById('firmaNazwa').value;
     var krs   = document.getElementById('firmaKRS').value;
     var vat   = document.getElementById('firmaVAT').value;
     var osoba = document.getElementById('firmaOsoba').value;
-    var firmaTelLocal = document.getElementById('firmaTel').value.trim();
     var tel   = firmaTelLocal ? ('+48 ' + firmaTelLocal) : '';
     var email = document.getElementById('firmaEmail').value;
 
@@ -13057,6 +13065,7 @@ function submitOrder() {
     ['addrInputName','addrInputCompany','addrInputContact','addrInputPhone','addrInputStreet','addrInputZip','addrInputCity'].forEach(function(f){
       var el = document.getElementById(f); if(el) el.value = '';
     });
+    clearAddrPhoneError();
     var c = document.getElementById('addrInputCountry'); if(c) c.value = 'Polska';
     var phone2 = document.getElementById('phone');
     var s = document.getElementById('addrSheet');
@@ -13079,7 +13088,8 @@ function submitOrder() {
     document.getElementById('addrInputName').value = a.name;
     document.getElementById('addrInputCompany').value = a.company;
     document.getElementById('addrInputContact').value = a.contactPerson || '';
-    document.getElementById('addrInputPhone').value = (a.phone || '').replace(/^\+48\s*/, '');
+    document.getElementById('addrInputPhone').value = (a.phone || '').replace(/^\+48\s*/, '').replace(/\D/g, '');
+    clearAddrPhoneError();
     document.getElementById('addrInputStreet').value = a.street;
     var parts = a.city.split(' ');
     document.getElementById('addrInputZip').value = parts[0] || '';
@@ -13099,6 +13109,13 @@ function submitOrder() {
     var company = document.getElementById('addrInputCompany').value.trim() || 'AutoParts Sp. z o.o.';
     var contactPerson = document.getElementById('addrInputContact').value.trim() || '';
     var addrPhoneLocal = document.getElementById('addrInputPhone').value.trim();
+    if(addrPhoneLocal && !isValidPhone(addrPhoneLocal)){
+      var addrPhoneErr = document.getElementById('addrPhoneError');
+      var addrPhoneWrap = document.getElementById('addrPhoneWrap');
+      if(addrPhoneErr){ addrPhoneErr.textContent = PHONE_FORMAT_MSG; addrPhoneErr.style.display = 'block'; }
+      if(addrPhoneWrap) addrPhoneWrap.style.borderColor = '#dc2626';
+      return;
+    }
     var phone = addrPhoneLocal ? ('+48 ' + addrPhoneLocal) : '';
     var street = document.getElementById('addrInputStreet').value.trim() || '';
     var zip = document.getElementById('addrInputZip').value.trim() || '';
@@ -13516,6 +13533,30 @@ function submitOrder() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
   }
 
+  var PHONE_FORMAT_MSG = 'Nieprawidłowy format numeru telefonu. Przykład: 600000000';
+
+  function isValidPhone(str){
+    return /^\d{9}$/.test(str);
+  }
+
+  function onlyDigits(el, max){
+    el.value = el.value.replace(/\D/g, '').slice(0, max || 9);
+  }
+
+  function clearFirmaTelError(){
+    var wrap = document.getElementById('firmaTelWrap');
+    var err = document.getElementById('firmaTelError');
+    if(err) err.style.display = 'none';
+    if(wrap) wrap.style.borderColor = '';
+  }
+
+  function clearAddrPhoneError(){
+    var wrap = document.getElementById('addrPhoneWrap');
+    var err = document.getElementById('addrPhoneError');
+    if(err) err.style.display = 'none';
+    if(wrap) wrap.style.borderColor = '';
+  }
+
   function clearLoginErrors(){
     var err = document.getElementById('loginError');
     var userErr = document.getElementById('loginUserError');
@@ -13634,7 +13675,11 @@ function submitOrder() {
       hasError = true;
     }
     if(!phoneVal){
-      if(phoneErr) phoneErr.style.display = 'block';
+      if(phoneErr){ phoneErr.textContent = 'Podaj numer telefonu.'; phoneErr.style.display = 'block'; }
+      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      hasError = true;
+    } else if(!isValidPhone(phoneVal)){
+      if(phoneErr){ phoneErr.textContent = PHONE_FORMAT_MSG; phoneErr.style.display = 'block'; }
       if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
       hasError = true;
     }
@@ -13805,7 +13850,7 @@ function submitOrder() {
     <div class="adres-field"><div class="adres-label">KRAJ</div><input type="text" class="adres-input" id="addrInputCountry" value="Polska"></div>
     <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-sm);">
       <div class="adres-field"><div class="adres-label">OSOBA KONTAKTOWA</div><input type="text" class="adres-input" id="addrInputContact" placeholder="np. Jan Kowalski"></div>
-      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group"><span class="adres-phone-prefix">+48</span><input type="tel" class="adres-input" id="addrInputPhone" placeholder="000 000 000"></div></div>
+      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group" id="addrPhoneWrap"><span class="adres-phone-prefix">+48</span><input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="addrInputPhone" placeholder="000000000" oninput="onlyDigits(this,9);clearAddrPhoneError()"></div><div id="addrPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div></div>
     </div>
   </div>
   <button class="flt-apply" onclick="saveAddr()" style="margin-top:8px;">Zapisz adres</button>
