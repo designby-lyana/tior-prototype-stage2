@@ -8924,6 +8924,8 @@
           </div>
           <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div>
         </div>
+        <div id="raFormError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;">Uzupełnij wszystkie pola.</div>
+
         <button onclick="submitRequestAccess()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Skontaktuj się</button>
         <div style="font-family:'Outfit',sans-serif;font-size:13px;line-height:1.5;color:#6b7280;text-align:center;">Kontynuując, akceptujesz <span onclick="goToRegulamin()" style="text-decoration:underline;cursor:pointer;">Regulamin</span> i <span onclick="goToPolityka()" style="text-decoration:underline;cursor:pointer;">Politykę prywatności</span> OponyToMy.</div>
       </div>
@@ -13647,8 +13649,10 @@ function submitOrder() {
     var phoneErr = document.getElementById('raPhoneError');
     var emailWrap = document.getElementById('raEmailWrap');
     var phoneWrap = document.getElementById('raPhoneWrap');
+    var formErr = document.getElementById('raFormError');
     if(emailErr) emailErr.style.display = 'none';
     if(phoneErr) phoneErr.style.display = 'none';
+    if(formErr) formErr.style.display = 'none';
     if(emailWrap) emailWrap.style.borderColor = '#bec5c8';
     if(phoneWrap) phoneWrap.style.borderColor = '#bec5c8';
   }
@@ -13660,30 +13664,41 @@ function submitOrder() {
     var phoneErr = document.getElementById('raPhoneError');
     var emailWrap = document.getElementById('raEmailWrap');
     var phoneWrap = document.getElementById('raPhoneWrap');
+    var formErr = document.getElementById('raFormError');
     var formBlock = document.getElementById('requestAccessFormBlock');
     var success = document.getElementById('requestAccessSuccess');
     var emailVal = email ? email.value.trim() : '';
     var phoneVal = phone ? phone.value.trim() : '';
-    var hasError = false;
+
+    clearRequestAccessErrors();
+
+    if(!emailVal && !phoneVal){
+      if(formErr) formErr.style.display = 'block';
+      if(emailWrap) emailWrap.style.borderColor = '#dc2626';
+      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      return;
+    }
     if(!emailVal){
-      if(emailErr){ emailErr.textContent = 'Podaj adres e-mail.'; emailErr.style.display = 'block'; }
+      if(emailErr){ emailErr.textContent = 'Wpisz adres e-mail.'; emailErr.style.display = 'block'; }
       if(emailWrap) emailWrap.style.borderColor = '#dc2626';
-      hasError = true;
-    } else if(!isValidEmail(emailVal)){
-      if(emailErr){ emailErr.textContent = EMAIL_FORMAT_MSG; emailErr.style.display = 'block'; }
+      return;
+    }
+    if(!isValidEmail(emailVal)){
+      if(emailErr){ emailErr.textContent = 'Użyj formatu: jan@firma.pl.'; emailErr.style.display = 'block'; }
       if(emailWrap) emailWrap.style.borderColor = '#dc2626';
-      hasError = true;
+      return;
     }
     if(!phoneVal){
-      if(phoneErr){ phoneErr.textContent = 'Podaj numer telefonu.'; phoneErr.style.display = 'block'; }
+      if(phoneErr){ phoneErr.textContent = 'Wpisz numer telefonu.'; phoneErr.style.display = 'block'; }
       if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
-      hasError = true;
-    } else if(!isValidPhone(phoneVal)){
-      if(phoneErr){ phoneErr.textContent = PHONE_FORMAT_MSG; phoneErr.style.display = 'block'; }
-      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
-      hasError = true;
+      return;
     }
-    if(hasError) return;
+    if(!isValidPhone(phoneVal)){
+      if(phoneErr){ phoneErr.textContent = 'Użyj 9 cyfr, np. 600 000 000.'; phoneErr.style.display = 'block'; }
+      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      return;
+    }
+
     if(formBlock) formBlock.style.display = 'none';
     if(success) success.style.display = 'flex';
   }
