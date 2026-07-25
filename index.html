@@ -13166,6 +13166,13 @@ function submitOrder() {
   function showTopBanner(title, subtitle){
     var b = document.getElementById('addrAddedBanner');
     if(!b) return;
+    var phoneEl = document.getElementById('phone');
+    if(phoneEl){
+      var r = phoneEl.getBoundingClientRect();
+      b.style.left = r.left + 'px';
+      b.style.width = r.width + 'px';
+      b.style.right = 'auto';
+    }
     var t = document.getElementById('topBannerTitle');
     var s = document.getElementById('topBannerSubtitle');
     if(t) t.textContent = title || '';
