@@ -1272,7 +1272,7 @@
   .cart-summary-row.cart-summary-row-total{
     padding-bottom:var(--space-md);
     margin-bottom:var(--space-xs);
-    border-bottom:2px solid var(--border-default);
+    border-bottom:2px solid var(--border-module);
   }
   .cart-summary-label{
     font-family:var(--font-body); font-weight:500;
@@ -1610,33 +1610,30 @@
 
   .sum-brutto{
     display:flex; align-items:center; justify-content:space-between;
-    padding:var(--space-lg) 0;
-    border-bottom:2px solid var(--border-default);
+    padding:0 0 var(--space-md);
   }
   .sum-brutto-label{
     font-family:var(--font-body); font-weight:500; font-size:14px;
-    color:var(--text-on-light);
+    color:var(--text-muted);
   }
   .sum-brutto-value{
-    font-family:var(--font-body); font-weight:500; font-size:18px;
-    color:#056b4b;
+    font-family:var(--font-body); font-weight:700; font-size:16px;
+    color:#111827;
   }
 
-  .sum-rows{ display:flex; flex-direction:column; gap:0; }
+  .sum-rows{ display:flex; flex-direction:column; gap:var(--space-md); }
   .sum-row{
-    display:flex; align-items:flex-start; gap:2px;
-    padding:var(--space-md) 0;
-    border-bottom:1px solid var(--border-surface);
+    display:flex; align-items:center; gap:2px;
+    padding:0;
   }
-  .sum-row:last-child{ border-bottom:none; }
   .sum-row-label{
-    font-family:var(--font-body); font-weight:400; font-size:16px;
+    font-family:var(--font-body); font-weight:500; font-size:14px;
     color:var(--text-muted); flex:0 0 auto; line-height:18px;
     white-space:nowrap;
   }
   .sum-row-value{
-    font-family:'Plus Jakarta Sans', sans-serif; font-weight:800; font-size:16px;
-    color:var(--text-on-light); flex:1; text-align:right;
+    font-family:var(--font-body); font-weight:400; font-size:16px;
+    color:#111827; flex:1; text-align:right;
     line-height:18px; word-break:break-word;
   }
   .sum-row-value.accent{ color:#056b4b; }
@@ -1715,8 +1712,8 @@
 
 
   /* addr dostawy expandable */
-  .addr-row-wrap{ display:flex; flex-direction:column; border-bottom:1px solid var(--border-surface); }
-  .addr-row-top{ display:flex; align-items:flex-start; gap:2px; padding:var(--space-md) 0; }
+  .addr-row-wrap{ display:flex; flex-direction:column; }
+  .addr-row-top{ display:flex; align-items:flex-start; gap:2px; padding:0; }
   .addr-label{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); flex:0 0 auto; white-space:nowrap; line-height:18px; }
   .addr-value-col{ flex:1; display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:0; }
   .addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
