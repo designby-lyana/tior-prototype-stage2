@@ -1714,7 +1714,7 @@
   .addr-value-col{ flex:1; display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:0; }
   .addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
   .addr-toggle-btn{
-    font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px;
+    font-family:var(--font-body); font-weight:400; font-size:14px;
     color:var(--accent-primary); line-height:18px; text-align:right;
     background:none; border:none; padding:0; cursor:pointer; display:block;
   }
@@ -8016,7 +8016,7 @@
             <span class="addr-label">Adres</span>
             <div class="addr-value-col">
               <span class="addr-name">Magazyn w Warszawie</span>
-              <button class="addr-toggle-btn" id="addrToggle" onclick="toggleAddr()">pokaż</button>
+              <button class="addr-toggle-btn" id="addrToggle" onclick="toggleAddr()">Pokaż</button>
             </div>
           </div>
           <div class="addr-expanded" id="addrExpand">
@@ -11450,7 +11450,7 @@
     var btn   = document.getElementById('addrToggle');
     if(!panel) return;
     var isOpen = panel.classList.toggle('open');
-    btn.textContent = isOpen ? 'ukryj' : 'pokaż';
+    btn.textContent = isOpen ? 'Ukryj' : 'Pokaż';
   }
 
 
