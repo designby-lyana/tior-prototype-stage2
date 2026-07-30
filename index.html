@@ -751,9 +751,9 @@
   .pr-redesign .pr-price-col{ justify-content:space-between; flex:none; align-self:stretch; }
   .pr-redesign .pr-availability{ margin-top:0; }
   .pr-redesign .pr-delivery{ margin-top:0; }
-  /* Guest lock banner: sits above the card, right-aligned, each line unwrapped (reuses .pr-price-lock from other cards) */
-  .pr-redesign .pr-price-lock{ width:100%; margin-bottom: calc(-1 * var(--space-xl)); }
-  .pr-redesign .pr-price-lock .lock-label{ white-space:nowrap; justify-content:flex-end; }
+  /* Guest lock (inside pr-price-col, same slot as price): tight, token-based spacing, right-aligned, one line each */
+  .pr-redesign .pr-price-lock{ width:100%; gap: var(--space-xs); }
+  .pr-redesign .pr-price-lock .lock-label{ white-space:nowrap; justify-content:flex-end; padding: var(--space-xs) var(--space-xs); gap: var(--space-xs); }
   .pr-redesign .pr-price-lock .lock-login{ white-space:nowrap; }
   .pr-redesign .pr-second--redesign{ gap: var(--space-xs); padding: var(--space-sm) var(--space-md); }
   .pr-redesign .pr-attrs-row{ display:flex; align-items:center; justify-content:space-between; }
@@ -3406,10 +3406,6 @@
 
     <div class="results-list" id="resultsList">
 <div class="product-row pr-redesign pr-font-v2">
-      <div class="pr-price-lock">
-        <span class="lock-label">🔒 Cena po zalogowaniu</span>
-        <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
-      </div>
       <div class="pr-top pr-top--flat">
         <div class="pr-info pr-info--redesign">
           <div class="pr-image">
@@ -3434,6 +3430,10 @@
           <div class="pr-price">
             <span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-gross">€104.50</div><span class="chip-tip" style="top:auto;bottom:calc(100% + 6px);left:auto;right:0;">Cena brutto (z VAT)</span></span>
 <span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-netto">€84.96</div><span class="chip-tip" style="bottom:auto;top:calc(100% + 6px);left:auto;right:0;">Cena netto (bez VAT)</span></span>
+          </div>
+          <div class="pr-price-lock">
+            <span class="lock-label">🔒 Cena po zalogowaniu</span>
+            <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
           </div>
           <div class="pr-availability">
             <div class="pr-stock"><span class="stock-dot"></span>112 szt.</div>
