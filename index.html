@@ -370,7 +370,7 @@
   #logoResults{ cursor:pointer; }
 
   /* ---------- RESULTS SCREEN ---------- */
-  .results-content{ padding: 20px var(--space-lg) var(--space-2xl); }
+  .results-content{ padding: var(--space-2xl) var(--space-lg) var(--space-2xl); }
   .results-title{
     font-family:'Plus Jakarta Sans', sans-serif;
     font-weight:700;
@@ -1177,8 +1177,8 @@
 
   /* ── CART SCREEN ─────────────────────────────────── */
   .cart-content{
-    padding: 20px var(--space-lg) var(--space-2xl);
-    display:flex; flex-direction:column; gap:20px;
+    padding: var(--space-2xl) var(--space-lg) var(--space-2xl);
+    display:flex; flex-direction:column; gap:var(--space-lg);
   }
   .cart-back{
     display:flex; align-items:center; gap:6px;
@@ -1191,7 +1191,7 @@
     font-size:20px; line-height:24px; color:var(--text-default);
     margin:0;
   }
-  .cart-header{ display:flex; flex-direction:column; gap:var(--space-xs); }
+  .cart-header{ display:flex; flex-direction:column; gap:0; }
   .cart-clear-all{ font-family:var(--font-body); font-size:14px; color:var(--accent-primary); text-decoration:none; cursor:pointer; flex:none; }
   .cart-clear-all:hover{ color:var(--accent-pressed); }
 
@@ -1380,8 +1380,8 @@
 
   /* ── CHECKOUT SCREEN ─────────────────────────────── */
   .checkout-content{
-    padding: 20px var(--space-lg) var(--space-2xl);
-    display:flex; flex-direction:column; gap:20px;
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    display:flex; flex-direction:column; gap:var(--space-lg);
   }
   .checkout-back{
     font-family:var(--font-body); font-weight:400; font-size:16px;
@@ -1788,7 +1788,7 @@
   }
 
   /* ── ORDER DETAIL ───────────────────────────────── */
-  .od-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .od-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
   .od-title{ font-family:var(--font-mono); font-weight:700; font-size:20px; line-height:24px; letter-spacing:0; color:var(--text-default); margin:0; }
   .od-breadcrumb{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--accent-primary); cursor:pointer; display:inline-flex; align-items:center; gap:var(--space-xs); }
   .od-breadcrumb svg{ width:16px; height:16px; flex:none; }
@@ -2130,7 +2130,7 @@
   .prf-logout:hover{ color:var(--text-default); }
 
   /* ── FIRMA ───────────────────────────────── */
-  .firma-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .firma-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
   .firma-card{
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
@@ -2474,7 +2474,7 @@
   .dok-add-btn svg{ flex:none; }
 
   /* ── ADDRESSES SCREEN ── */
-  .addr-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .addr-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
   .addr-empty{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-3xl) var(--space-xl); display:flex; flex-direction:column; align-items:center; gap:var(--space-lg); text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.08); }
   .addr-empty-icon{ width:48px; height:48px; background:var(--bg-page); border-radius:50%; display:flex; align-items:center; justify-content:center; }
   .addr-empty-title{ font-family:var(--font-body); font-weight:600; font-size:18px; color:var(--text-default); }
@@ -3295,7 +3295,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromResults()" style="cursor:pointer;margin-bottom:var(--space-xs);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromResults()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Wyniki wyszukiwania</h1>
 
     <div class="results-filters-card">
@@ -3406,6 +3406,7 @@
         <span class="lock-label">🔒 Cena po zalogowaniu</span>
         <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
       </div>
+      <div class="pr-stock" style="display:none;">9999 szt.</div><!-- hidden: keeps card first in default availability sort, no visible price/availability shown -->
       <div class="pr-top pr-top--flat">
         <div class="pr-info pr-info--redesign">
           <div class="pr-image">
@@ -7761,7 +7762,7 @@
 
     <!-- Block 1: nav + title -->
     <div class="cart-header">
-      <a class="od-breadcrumb" id="cartBackLink" onclick="goToResults()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do wyników wyszukiwania</a>
+      <a class="cart-back" id="cartBackLink" onclick="goToResults()">‹‹ Powrót do wyników wyszukiwania</a>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h1 class="cart-title">Twój koszyk</h1>
         <a class="cart-clear-all" id="cartClearAllBtn" onclick="openCartClearConfirm()" style="display:none;">Wyczyść koszyk</a>
@@ -7913,7 +7914,7 @@
 
     <!-- back + steps + title -->
     <div>
-      <div class="od-breadcrumb" onclick="goToCart()" style="margin-bottom:var(--space-sm);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do koszyka</div>
+      <div class="checkout-back" onclick="goToCart()">‹‹ Powrót do koszyka</div>
       <div class="checkout-steps">
         <div class="step-circle active">1</div>
         <div class="step-line"></div>
@@ -8009,7 +8010,7 @@
 
     <!-- back + steps + title -->
     <div>
-      <div class="od-breadcrumb" onclick="setScreen('screenCheckout')" style="margin-bottom:var(--space-sm);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do koszyka</div>
+      <div class="checkout-back" onclick="setScreen('screenCheckout')">‹‹ Powrót do koszyka</div>
       <div class="checkout-steps">
         <div class="step-circle done" onclick="setScreen('screenCheckout')">1</div>
         <div class="step-line"></div>
@@ -8080,7 +8081,7 @@
 
     <!-- back + steps + title -->
     <div>
-      <div class="od-breadcrumb" onclick="setScreen('screenCheckout2')" style="margin-bottom:var(--space-sm);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do koszyka</div>
+      <div class="checkout-back" onclick="setScreen('screenCheckout2')">‹‹ Powrót do koszyka</div>
       <div class="checkout-steps">
         <div class="step-circle done" id="co3Step1" onclick="setScreen('screenCheckout')">1</div>
         <div class="step-line"></div>
@@ -8897,9 +8898,12 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
-    <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
-      <div class="od-breadcrumb" onclick="setScreen('screenProfile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
+  <div style="padding:32px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div onclick="setScreen('screenProfile')" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
+        <span style="font-size:18px;color:#323744;line-height:1;">«</span>
+        <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:#323744;">Powrót do danych konta</span>
+      </div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
     </div>
     <div style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;">
@@ -8929,9 +8933,9 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;">
+  <div style="padding:32px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;">
 
-    <a class="od-breadcrumb" id="loginTopBack" onclick="goBackFromLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</a>
+    <a class="cart-back" id="loginTopBack" onclick="goBackFromLogin()" style="margin-bottom:0;">‹‹ Powrót</a>
 
     <div id="loginFormView">
       <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
@@ -8968,8 +8972,11 @@
     </div>
 
     <div id="forgotPasswordView" style="display:none;">
-      <div style="display:flex;flex-direction:column;gap:var(--space-xs);margin-bottom:16px;">
-        <div class="od-breadcrumb" onclick="backToLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
+        <div onclick="backToLogin()" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
+          <span style="font-size:18px;color:var(--text-muted);line-height:1;">«</span>
+          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:var(--text-muted);">Powrót</span>
+        </div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zresetuj hasło</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Podaj adres e-mail przypisany do konta — prześlemy link do zmiany hasła.</div>
       </div>
@@ -8990,8 +8997,11 @@
     </div>
 
     <div id="requestAccessView" style="display:none;">
-      <div style="display:flex;flex-direction:column;gap:var(--space-xs);margin-bottom:16px;">
-        <div class="od-breadcrumb" onclick="backToLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
+        <div onclick="backToLogin()" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
+          <span style="font-size:18px;color:var(--text-muted);line-height:1;">«</span>
+          <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:var(--text-muted);">Powrót</span>
+        </div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Uzyskaj dostęp do platformy</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Zostaw dane kontaktowe. Skontaktujemy się z Państwem.</div>
       </div>
@@ -9040,9 +9050,12 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
-    <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
-      <div class="od-breadcrumb" onclick="setScreen('screenPassword')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
+  <div style="padding:32px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div onclick="setScreen('screenPassword')" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
+        <span style="font-size:18px;color:#323744;line-height:1;">«</span>
+        <span style="font-family:'Outfit',sans-serif;font-size:16px;line-height:18px;color:#323744;">Powrót do danych konta</span>
+      </div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
     </div>
     <div style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;">
@@ -9102,8 +9115,11 @@
     </div>
   </header>
   <div class="addr-content">
-    <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
-      <div class="od-breadcrumb" onclick="setScreen('screenProfile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div onclick="setScreen('screenProfile')" style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;">
+        <span style="font-size:18px;color:var(--text-default);line-height:1;">«</span>
+        <span style="font-family:var(--font-body);font-size:16px;color:var(--text-default);">Powrót do danych konta</span>
+      </div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:var(--text-default);">Adresy dostawy</div>
     </div>
     <div id="addrEmptyState" style="display:none;">
@@ -9201,7 +9217,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:var(--space-xs);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Regulamin</h1>
     <div style="background:#fff;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;box-sizing:border-box;">
 <div style="margin-bottom:28px;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-default);margin-bottom:10px;">1. Postanowienia ogólne</div><p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:var(--text-on-light);margin:0 0 12px;">Niniejszy Regulamin określa zasady korzystania z platformy internetowej OponyToMy, dostępnej pod adresem oponytomy.pl (dalej: „Platforma”), prowadzonej przez OponyToMy Sp. z o.o. z siedzibą w Warszawie, ul. Handlowa 12, 00-001 Warszawa, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0000123456, NIP 5252525252, REGON 123456789 (dalej: „Sprzedawca”).</p>
@@ -9280,7 +9296,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:var(--space-xs);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Polityka prywatności</h1>
     <div style="background:#fff;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;box-sizing:border-box;">
 <div style="margin-bottom:28px;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-default);margin-bottom:10px;">1. Administrator danych</div><p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:var(--text-on-light);margin:0 0 12px;">Administratorem danych osobowych przetwarzanych w związku z korzystaniem z Platformy OponyToMy jest OponyToMy Sp. z o.o. z siedzibą w Warszawie, ul. Handlowa 12, 00-001 Warszawa, NIP 5252525252 (dalej: „Administrator”).</p>
