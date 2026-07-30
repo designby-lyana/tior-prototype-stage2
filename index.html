@@ -753,7 +753,9 @@
   .pr-redesign .pr-attrs-left{ display:flex; align-items:center; gap: var(--space-xs); }
   .pr-redesign .pr-attrs-left .pr-vehicle-icon{ width:28px; height:28px; }
   .pr-redesign .pr-attrs-left svg{ width:28px; height:28px; }
-  .pr-redesign .pr-spec, .pr-redesign .pr-model{ font-weight:400; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  /* pr-spec allowed to wrap on narrow widths (e.g. guest lock squeezes this column) — never truncate tire size info */
+  .pr-redesign .pr-spec{ font-weight:400; white-space:normal; overflow-wrap:break-word; max-width:100%; }
+  .pr-redesign .pr-model{ font-weight:400; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
   .pr-redesign .pr-eu-labels-redesign{ flex-wrap:nowrap; }
   .pr-redesign .pr-price-col{ flex:none; }
   .pr-redesign .pr-availability{ margin-top:0; }
