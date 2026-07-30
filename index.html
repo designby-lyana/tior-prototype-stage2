@@ -1789,9 +1789,10 @@
 
   /* ── ORDER DETAIL ───────────────────────────────── */
   .od-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
-  .od-title{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:20px; line-height:24px; color:var(--text-default); margin:0; }
-  .od-breadcrumb{ font-family:var(--font-body); font-weight:400; font-size:14px; color:var(--text-on-light); cursor:pointer; }
-  .od-breadcrumb:hover{ color:var(--text-default); }
+  .od-title{ font-family:var(--font-mono); font-weight:700; font-size:20px; line-height:24px; letter-spacing:0; color:var(--text-default); margin:0; }
+  .od-breadcrumb{ font-family:var(--font-body); font-weight:500; font-size:14px; color:var(--accent-primary); cursor:pointer; display:inline-flex; align-items:center; gap:4px; }
+  .od-breadcrumb svg{ width:14px; height:14px; flex:none; }
+  .od-breadcrumb:hover{ color:var(--accent-pressed); }
 
   /* ── ORDERS LIST ─────────────────────────────── */
   .orl-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-xl); }
@@ -2003,7 +2004,7 @@
   .flt-suma-input::-webkit-outer-spin-button{ -webkit--webkit-appearance:none;appearance:none; }
 
   /* ── INVOICES ─────────────────────────────── */
-  .inv-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
+  .inv-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
 
   .inv-filter-row{
     display:flex; align-items:center; gap:var(--space-sm);
@@ -3294,7 +3295,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromResults()" style="cursor:pointer;margin-bottom:0;">‹‹ Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromResults()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Wyniki wyszukiwania</h1>
 
     <div class="results-filters-card">
@@ -8176,8 +8177,8 @@
 
   <div class="od-content">
 
-    <div style="display:flex;flex-direction:column;gap:0;">
-      <div class="od-breadcrumb" onclick="setScreen('screenOrders')">‹‹ Wszystkie zamówienia</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div class="od-breadcrumb" onclick="setScreen('screenOrders')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Wszystkie zamówienia</div>
       <h1 class="od-title" id="odTitle">Zamówienie N°5555</h1>
     </div>
 
@@ -8417,28 +8418,28 @@
 
   <div class="inv-content">
 
-    <div style="display:flex;flex-direction:column;gap:0;">
-      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;">‹‹ Powrót do danych konta</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
       <h1 class="od-title" id="ordersPageTitle">Wszystkie zamówienia</h1>
     </div>
 
     <!-- status summary cards (3.1, 🆕) -->
-    <div id="ordersStatusCards" style="display:flex;flex-direction:column;gap:var(--space-sm);">
-      <div class="checkout-card" id="statCardNieoplacone" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #b45309;">
+    <div id="ordersStatusCards" style="display:flex;flex-direction:column;gap:var(--space-md);">
+      <div class="checkout-card" id="statCardNieoplacone" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#b45309;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">Nieopłacone</span>
           <span id="statCardNieoplaconeCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
         </div>
         <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#fdf3e3;border-color:#e8d4a8;color:#9a6200;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">Zobacz nieopłacone</button>
       </div>
-      <div class="checkout-card" id="statCardWdostawie" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #1d4ed8;">
+      <div class="checkout-card" id="statCardWdostawie" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#1d4ed8;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">W dostawie</span>
           <span id="statCardWdostawieCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
         </div>
         <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">Zobacz w dostawie</button>
       </div>
-      <div class="checkout-card" id="statCardWrealizacji" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #005f6e;">
+      <div class="checkout-card" id="statCardWrealizacji" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#005f6e;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">W realizacji</span>
           <span id="statCardWrealizacjiCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
@@ -8505,8 +8506,8 @@
   <div class="inv-content">
 
     <!-- breadcrumb + title -->
-    <div style="display:flex;flex-direction:column;gap:0;">
-      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;">‹‹ Powrót do danych konta</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
       <h1 class="od-title" id="invoicesPageTitle">Faktury</h1>
     </div>
 
@@ -8777,8 +8778,8 @@
 
   <div class="firma-content">
 
-    <div style="display:flex;flex-direction:column;gap:0;">
-      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;">‹‹ Powrót do danych konta</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div class="od-breadcrumb" onclick="setScreen('screenProfile')" style="cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
       <h1 class="od-title">Firma</h1>
     </div>
 
@@ -9215,7 +9216,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;">‹‹ Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Regulamin</h1>
     <div style="background:#fff;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;box-sizing:border-box;">
 <div style="margin-bottom:28px;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-default);margin-bottom:10px;">1. Postanowienia ogólne</div><p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:var(--text-on-light);margin:0 0 12px;">Niniejszy Regulamin określa zasady korzystania z platformy internetowej OponyToMy, dostępnej pod adresem oponytomy.pl (dalej: „Platforma”), prowadzonej przez OponyToMy Sp. z o.o. z siedzibą w Warszawie, ul. Handlowa 12, 00-001 Warszawa, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0000123456, NIP 5252525252, REGON 123456789 (dalej: „Sprzedawca”).</p>
@@ -9294,7 +9295,7 @@
   </header>
 
   <div class="results-content">
-    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;">‹‹ Powrót</div>
+    <div class="od-breadcrumb" onclick="goBackFromLegal()" style="cursor:pointer;margin-bottom:0;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
     <h1 class="results-title">Polityka prywatności</h1>
     <div style="background:#fff;border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:24px;box-sizing:border-box;">
 <div style="margin-bottom:28px;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--text-default);margin-bottom:10px;">1. Administrator danych</div><p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:var(--text-on-light);margin:0 0 12px;">Administratorem danych osobowych przetwarzanych w związku z korzystaniem z Platformy OponyToMy jest OponyToMy Sp. z o.o. z siedzibą w Warszawie, ul. Handlowa 12, 00-001 Warszawa, NIP 5252525252 (dalej: „Administrator”).</p>
