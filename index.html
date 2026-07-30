@@ -748,8 +748,8 @@
   .pr-redesign .eu-pill{ display:flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:var(--radius-xs-v2); background:var(--text-on-light); color:var(--text-inverted); font-family:var(--font-mono); font-size:16px; font-weight:400; line-height:1; box-sizing:border-box; flex:none; }
   .pr-redesign .eu-pill-wide{ padding:0 2px; }
   /* Guest lock banner: sits above the card, right-aligned, each line unwrapped (reuses .pr-price-lock from other cards) */
-  .pr-redesign .pr-price-lock{ width:100%; }
-  .pr-redesign .pr-price-lock .lock-label,
+  .pr-redesign .pr-price-lock{ width:100%; margin-bottom: calc(-1 * var(--space-xl)); }
+  .pr-redesign .pr-price-lock .lock-label{ white-space:nowrap; justify-content:flex-end; }
   .pr-redesign .pr-price-lock .lock-login{ white-space:nowrap; }
   .pr-redesign .pr-second--redesign{ gap: var(--space-xs); padding: var(--space-sm) var(--space-md); }
   .pr-redesign .pr-attrs-row{ display:flex; align-items:center; justify-content:space-between; }
