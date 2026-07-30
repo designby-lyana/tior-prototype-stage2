@@ -372,7 +372,7 @@
   /* ---------- RESULTS SCREEN ---------- */
   .results-content{ padding: 20px var(--space-lg) var(--space-2xl); }
   .results-title{
-    font-family:'Plus Jakarta Sans', sans-serif;
+    font-family:var(--font-mono);
     font-weight:700;
     font-size:20px;
     color: var(--text-on-light);
@@ -1191,7 +1191,7 @@
   }
   .cart-back:hover{ color:var(--text-default); }
   .cart-title{
-    font-family:'Plus Jakarta Sans',sans-serif; font-weight:700;
+    font-family:var(--font-mono); font-weight:700;
     font-size:20px; line-height:24px; color:var(--text-default);
     margin:0;
   }
@@ -1415,8 +1415,8 @@
     margin:0 4px;
   }
   .checkout-title{
-    font-family:var(--font-body); font-weight:700;
-    font-size:24px; color:var(--text-default);
+    font-family:var(--font-mono); font-weight:700;
+    font-size:20px; color:var(--text-default);
     margin:0;
   }
 
@@ -8914,7 +8914,7 @@
   <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
     <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
       <div class="od-breadcrumb" onclick="setScreen('screenProfile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
+      <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
     </div>
     <div style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;">
       <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">HASŁO</span>
@@ -8949,7 +8949,7 @@
 
     <div id="loginFormView">
       <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zaloguj się</div>
+        <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zaloguj się</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Wprowadź dane logowania, aby uzyskać dostęp do konta B2B</div>
       </div>
       <div style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
@@ -8984,7 +8984,7 @@
     <div id="forgotPasswordView" style="display:none;">
       <div style="display:flex;flex-direction:column;gap:var(--space-xs);margin-bottom:16px;">
         <div class="od-breadcrumb" onclick="backToLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zresetuj hasło</div>
+        <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zresetuj hasło</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Podaj adres e-mail przypisany do konta — prześlemy link do zmiany hasła.</div>
       </div>
       <div id="forgotFormBlock" style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
@@ -9006,7 +9006,7 @@
     <div id="requestAccessView" style="display:none;">
       <div style="display:flex;flex-direction:column;gap:var(--space-xs);margin-bottom:16px;">
         <div class="od-breadcrumb" onclick="backToLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Uzyskaj dostęp do platformy</div>
+        <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Uzyskaj dostęp do platformy</div>
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:20px;color:#6b7280;">Zostaw dane kontaktowe. Skontaktujemy się z Państwem.</div>
       </div>
       <div id="requestAccessFormBlock" style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
@@ -9057,7 +9057,7 @@
   <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
     <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
       <div class="od-breadcrumb" onclick="setScreen('screenPassword')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
+      <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
     </div>
     <div style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px;">
       
@@ -9118,7 +9118,7 @@
   <div class="addr-content">
     <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
       <div class="od-breadcrumb" onclick="setScreen('screenProfile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:24px;color:var(--text-default);">Adresy dostawy</div>
+      <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:var(--text-default);">Adresy dostawy</div>
     </div>
     <div id="addrEmptyState" style="display:none;">
       <div class="addr-empty">
