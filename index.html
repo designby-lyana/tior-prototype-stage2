@@ -39,6 +39,7 @@
     --space-sm:8px;
     --space-md:12px;
     --space-lg:16px;
+    --space-page-header:20px;
     --space-xl:24px;
     --space-2xl:32px;
     --space-3xl:40px;
@@ -370,13 +371,13 @@
   #logoResults{ cursor:pointer; }
 
   /* ---------- RESULTS SCREEN ---------- */
-  .results-content{ padding: 20px var(--space-lg) var(--space-2xl); }
+  .results-content{ padding: var(--space-page-header) var(--space-lg) var(--space-2xl); }
   .results-title{
     font-family:var(--font-mono);
     font-weight:700;
     font-size:20px;
     color: var(--text-on-light);
-    margin:0 0 var(--space-lg);
+    margin:0 0 var(--space-page-header);
   }
   .results-filters-card{
     background: transparent;
@@ -1181,8 +1182,8 @@
 
   /* ── CART SCREEN ─────────────────────────────────── */
   .cart-content{
-    padding: 20px var(--space-lg) var(--space-2xl);
-    display:flex; flex-direction:column; gap:20px;
+    padding: var(--space-page-header) var(--space-lg) var(--space-2xl);
+    display:flex; flex-direction:column; gap:var(--space-page-header);
   }
   .cart-back{
     display:flex; align-items:center; gap:6px;
@@ -1384,8 +1385,8 @@
 
   /* ── CHECKOUT SCREEN ─────────────────────────────── */
   .checkout-content{
-    padding: 20px var(--space-lg) var(--space-2xl);
-    display:flex; flex-direction:column; gap:20px;
+    padding: var(--space-page-header) var(--space-lg) var(--space-2xl);
+    display:flex; flex-direction:column; gap:var(--space-page-header);
   }
   .checkout-back{
     font-family:var(--font-body); font-weight:400; font-size:16px;
@@ -1792,7 +1793,7 @@
   }
 
   /* ── ORDER DETAIL ───────────────────────────────── */
-  .od-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .od-content{ padding:var(--space-page-header) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-page-header); }
   .od-title{ font-family:var(--font-mono); font-weight:700; font-size:20px; line-height:24px; letter-spacing:0; color:var(--text-default); margin:0; }
   .od-breadcrumb{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--accent-primary); cursor:pointer; display:inline-flex; align-items:center; gap:var(--space-xs); }
   .od-breadcrumb svg{ width:16px; height:16px; flex:none; }
@@ -2008,7 +2009,7 @@
   .flt-suma-input::-webkit-outer-spin-button{ -webkit--webkit-appearance:none;appearance:none; }
 
   /* ── INVOICES ─────────────────────────────── */
-  .inv-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .inv-content{ padding:var(--space-page-header) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-page-header); }
 
   .inv-filter-row{
     display:flex; align-items:center; gap:var(--space-sm);
@@ -2134,7 +2135,7 @@
   .prf-logout:hover{ color:var(--text-default); }
 
   /* ── FIRMA ───────────────────────────────── */
-  .firma-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .firma-content{ padding:var(--space-page-header) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-page-header); }
   .firma-card{
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
@@ -2478,7 +2479,7 @@
   .dok-add-btn svg{ flex:none; }
 
   /* ── ADDRESSES SCREEN ── */
-  .addr-content{ padding:20px var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:20px; }
+  .addr-content{ padding:var(--space-page-header) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-page-header); }
   .addr-empty{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-3xl) var(--space-xl); display:flex; flex-direction:column; align-items:center; gap:var(--space-lg); text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.08); }
   .addr-empty-icon{ width:48px; height:48px; background:var(--bg-page); border-radius:50%; display:flex; align-items:center; justify-content:center; }
   .addr-empty-title{ font-family:var(--font-body); font-weight:600; font-size:18px; color:var(--text-default); }
@@ -8911,7 +8912,7 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
+  <div style="padding:var(--space-page-header) 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--space-page-header);">
     <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
       <div class="od-breadcrumb" onclick="setScreen('screenProfile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
       <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
@@ -8943,7 +8944,7 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;">
+  <div style="padding:var(--space-page-header) 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:0;max-width:420px;margin:0 auto;">
 
     <a class="od-breadcrumb" id="loginTopBack" onclick="goBackFromLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót</a>
 
@@ -9054,7 +9055,7 @@
     </div>
   </header>
 
-  <div style="padding:20px 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
+  <div style="padding:var(--space-page-header) 24px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:var(--space-page-header);">
     <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
       <div class="od-breadcrumb" onclick="setScreen('screenPassword')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Powrót do danych konta</div>
       <div style="font-family:var(--font-mono);font-weight:700;font-size:20px;line-height:24px;color:#323744;">Zmiana hasła</div>
