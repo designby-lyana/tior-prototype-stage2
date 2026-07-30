@@ -747,7 +747,10 @@
   .pr-redesign .eu-icon{ width:18px; height:18px; color:var(--text-muted); flex:none; }
   .pr-redesign .eu-pill{ display:flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:var(--radius-xs-v2); background:var(--text-on-light); color:var(--text-inverted); font-family:var(--font-mono); font-size:16px; font-weight:400; line-height:1; box-sizing:border-box; flex:none; }
   .pr-redesign .eu-pill-wide{ padding:0 2px; }
-  .pr-redesign .pr-price-col{ justify-content:space-between; }
+  /* Guest lock banner: sits above the card, right-aligned, each line unwrapped (reuses .pr-price-lock from other cards) */
+  .pr-redesign .pr-price-lock{ width:100%; }
+  .pr-redesign .pr-price-lock .lock-label,
+  .pr-redesign .pr-price-lock .lock-login{ white-space:nowrap; }
   .pr-redesign .pr-second--redesign{ gap: var(--space-xs); padding: var(--space-sm) var(--space-md); }
   .pr-redesign .pr-attrs-row{ display:flex; align-items:center; justify-content:space-between; }
   .pr-redesign .pr-attrs-left{ display:flex; align-items:center; gap: var(--space-xs); }
@@ -755,10 +758,6 @@
   .pr-redesign .pr-attrs-left svg{ width:28px; height:28px; }
   .pr-redesign .pr-spec, .pr-redesign .pr-model{ font-weight:400; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
   .pr-redesign .pr-eu-labels-redesign{ flex-wrap:nowrap; }
-  .pr-redesign .pr-price-col{ flex:none; }
-  .pr-redesign .pr-availability{ margin-top:0; }
-  .pr-redesign .pr-price-col{ align-self:stretch; }
-  .pr-redesign .pr-delivery{ margin-top:0; }
   .pr-redesign{ gap: var(--space-xl); padding: var(--space-lg) var(--space-md); }
   .pr-redesign .pr-gross{ font-family:'Plus Jakarta Sans',var(--font-body); font-weight:700; font-size:20px; }
   .pr-redesign .pr-spec{ color: var(--text-on-light); }
@@ -3402,6 +3401,10 @@
 
     <div class="results-list" id="resultsList">
 <div class="product-row pr-redesign pr-font-v2">
+      <div class="pr-price-lock">
+        <span class="lock-label">🔒 Cena po zalogowaniu</span>
+        <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
+      </div>
       <div class="pr-top pr-top--flat">
         <div class="pr-info pr-info--redesign">
           <div class="pr-image">
@@ -3420,20 +3423,6 @@
               <span class="eu-item"><svg class="eu-icon" viewBox="0 0 48 45" fill="currentColor"><g transform="translate(-3.000000,44.982016) scale(0.100000,-0.100000)"><path d="M310 432 c0 -11 17 -29 38 -43 44 -28 82 -98 82 -149 -1 -54 -34 -116 -79 -147 -40 -28 -57 -73 -28 -73 21 0 91 54 114 87 68 98 49 235 -43 311 -44 36 -84 43 -84 14z"></path> <path d="M190 375 c-52 -53 -56 -55 -107 -55 l-53 0 0 -80 0 -80 52 0 c50 0 55 -2 110 -57 l58 -57 0 192 c0 106 -1 192 -3 192 -1 0 -27 -25 -57 -55z"></path> <path d="M310 240 c0 -102 0 -103 20 -85 10 9 24 33 30 51 14 40 0 92 -30 119 -20 18 -20 17 -20 -85z"></path></g></svg><span class="eu-pill eu-pill-wide">67dB</span></span>
             </div>
             </div>
-          </div>
-        </div>
-        <div class="pr-price-col">
-          <div class="pr-price">
-            <span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-gross">€104.50</div><span class="chip-tip" style="top:auto;bottom:calc(100% + 6px);left:auto;right:0;">Cena brutto (z VAT)</span></span>
-<span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-netto">€84.96</div><span class="chip-tip" style="bottom:auto;top:calc(100% + 6px);left:auto;right:0;">Cena netto (bez VAT)</span></span>
-          </div>
-                    <div class="pr-price-lock">
-            <span class="lock-label">🔒 Cena po zalogowaniu</span>
-            <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
-          </div>
-          <div class="pr-availability">
-            <div class="pr-stock"><span class="stock-dot"></span>112 szt.</div>
-<div class="pr-delivery">2 dni</div>
           </div>
         </div>
       </div>
