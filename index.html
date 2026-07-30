@@ -44,6 +44,7 @@
     --space-2xl:32px;
     --space-3xl:40px;
     --font-mono:'JetBrains Mono', monospace;
+    --font-size-sm:14px;
     --font-body:'Outfit', sans-serif;
     --bg-surface-elevated:#ffffff;
     --border-on-surface:rgba(10,10,10,.12);
@@ -1795,8 +1796,8 @@
   /* ── ORDER DETAIL ───────────────────────────────── */
   .od-content{ padding:var(--space-page-header) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-page-header); }
   .od-title{ font-family:var(--font-mono); font-weight:700; font-size:20px; line-height:24px; letter-spacing:0; color:var(--text-default); margin:0; }
-  .od-breadcrumb{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--accent-primary); cursor:pointer; display:inline-flex; align-items:center; gap:var(--space-xs); }
-  .od-breadcrumb svg{ width:16px; height:16px; flex:none; }
+  .od-breadcrumb{ font-family:var(--font-body); font-weight:400; font-size:var(--font-size-sm); color:var(--accent-primary); cursor:pointer; display:inline-flex; align-items:center; gap:var(--space-xs); }
+  .od-breadcrumb svg{ width:var(--font-size-sm); height:var(--font-size-sm); flex:none; }
   .od-breadcrumb:hover{ color:var(--accent-pressed); }
 
   /* ── ORDERS LIST ─────────────────────────────── */
