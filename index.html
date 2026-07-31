@@ -1426,6 +1426,10 @@
     display:flex; flex-direction:column; gap:var(--space-lg);
     box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
+  /* content-card variant: section cards that hold a header + list of fields
+     (Order Detail, Profile "Dane konta") get roomier 24px padding */
+  .checkout-card--content{ padding:var(--space-xl); gap:var(--space-lg); }
+  .checkout-card--no-gap{ gap:0; }
   .section-title{
     display:flex; align-items:center; gap:var(--space-sm);
     font-family:var(--font-mono); font-weight:700; font-size:16px; letter-spacing:0; line-height:15.84px; text-transform:uppercase;
@@ -2139,7 +2143,7 @@
   .firma-card{
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
-    padding:var(--space-lg);
+    padding:var(--space-xl);
     display:flex; flex-direction:column; gap:0;
     box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
@@ -8198,7 +8202,7 @@
     </div>
 
     <!-- SZCZEGÓŁY card -->
-    <div class="checkout-card">
+    <div class="checkout-card checkout-card--content">
       <div class="section-title">SZCZEGÓŁY</div>
 
       <!-- status badges -->
@@ -8285,7 +8289,7 @@
     </div><!-- /SZCZEGÓŁY -->
 
     <!-- PRZEDMIOTY card -->
-    <div class="checkout-card" style="gap:0;">
+    <div class="checkout-card checkout-card--content checkout-card--no-gap">
       <div class="section-title" style="margin-bottom:var(--space-lg);">PRZEDMIOTY</div>
 
       <div id="odItems">
@@ -8355,7 +8359,7 @@
         </div><!-- /PRZEDMIOTY -->
 
     <!-- DOKUMENTY card -->
-    <div class="checkout-card">
+    <div class="checkout-card checkout-card--content">
       <div class="section-title">DOKUMENTY</div>
 
       <!-- Faktura -->
@@ -8712,7 +8716,7 @@
   <div class="prf-content">
 
     <!-- account card -->
-    <div class="checkout-card">
+    <div class="checkout-card checkout-card--content">
       <div class="section-title" style="font-size:14px;letter-spacing:.5px;">DANE KONTA</div>
       <div class="prf-account">
         <div class="prf-avatar">A</div>
