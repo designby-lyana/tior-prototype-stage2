@@ -1430,6 +1430,8 @@
     display:flex; align-items:center; gap:var(--space-sm);
     font-family:var(--font-mono); font-weight:700; font-size:16px; letter-spacing:0; line-height:15.84px; text-transform:uppercase;
     color:var(--text-default);
+    padding-bottom:var(--space-lg);
+    border-bottom:1px solid var(--border-surface);
   }
   .section-title svg{ width:20px; height:20px; flex:none; color:var(--text-muted); }
 
@@ -1567,7 +1569,8 @@
     display:flex; align-items:center; gap:var(--space-sm);
     font-family:var(--font-mono); font-weight:700; font-size:16px; letter-spacing:0; line-height:15.84px; text-transform:uppercase;
     color:var(--text-default);
-    margin-bottom:var(--space-md);
+    padding-bottom:var(--space-lg);
+    border-bottom:1px solid var(--border-surface);
   }
   .pay-section-title svg{ width:20px; height:20px; flex:none; }
 
@@ -1646,7 +1649,7 @@
     display:flex; align-items:center; gap:var(--space-sm);
     font-family:var(--font-mono); font-weight:700; font-size:16px; letter-spacing:0; line-height:15.84px; text-transform:uppercase;
     color:var(--text-default);
-    padding-bottom:var(--space-md);
+    padding-bottom:var(--space-lg);
     border-bottom:1px solid var(--border-surface);
   }
   .sum-section-title svg{ width:18px; height:18px; flex:none; color:var(--accent-primary); }
@@ -2136,7 +2139,7 @@
   .firma-card{
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
-    padding:var(--space-xl);
+    padding:var(--space-lg);
     display:flex; flex-direction:column; gap:0;
     box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
@@ -8195,8 +8198,8 @@
     </div>
 
     <!-- SZCZEGÓŁY card -->
-    <div class="checkout-card" style="padding:var(--space-xl);gap:var(--space-lg);">
-      <div class="section-title" style="padding-bottom:var(--space-lg);border-bottom:1px solid var(--border-surface);">SZCZEGÓŁY</div>
+    <div class="checkout-card">
+      <div class="section-title">SZCZEGÓŁY</div>
 
       <!-- status badges -->
       <div class="od-badges" id="odBadges">
@@ -8282,8 +8285,8 @@
     </div><!-- /SZCZEGÓŁY -->
 
     <!-- PRZEDMIOTY card -->
-    <div class="checkout-card" style="padding:var(--space-xl);gap:0;">
-      <div class="section-title" style="padding-bottom:var(--space-lg);">PRZEDMIOTY</div>
+    <div class="checkout-card" style="gap:0;">
+      <div class="section-title" style="margin-bottom:var(--space-lg);">PRZEDMIOTY</div>
 
       <div id="odItems">
       <!-- item 1 -->
@@ -8352,8 +8355,8 @@
         </div><!-- /PRZEDMIOTY -->
 
     <!-- DOKUMENTY card -->
-    <div class="checkout-card" style="padding:var(--space-xl);gap:var(--space-lg);">
-      <div class="section-title" style="padding-bottom:var(--space-lg);">DOKUMENTY</div>
+    <div class="checkout-card">
+      <div class="section-title">DOKUMENTY</div>
 
       <!-- Faktura -->
       <div class="dok-item">
@@ -8709,7 +8712,7 @@
   <div class="prf-content">
 
     <!-- account card -->
-    <div class="checkout-card" style="padding:var(--space-xl);gap:var(--space-lg);">
+    <div class="checkout-card">
       <div class="section-title" style="font-size:14px;letter-spacing:.5px;">DANE KONTA</div>
       <div class="prf-account">
         <div class="prf-avatar">A</div>
