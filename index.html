@@ -13967,10 +13967,8 @@ function submitOrder() {
       <div class="adres-field"><div class="adres-label">MIASTO</div><input type="text" class="adres-input" id="addrInputCity" placeholder="Warszawa"></div>
     </div>
     <div class="adres-field"><div class="adres-label">KRAJ</div><input type="text" class="adres-input" id="addrInputCountry" value="Polska"></div>
-    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-sm);">
-      <div class="adres-field"><div class="adres-label">OSOBA KONTAKTOWA</div><input type="text" class="adres-input" id="addrInputContact" placeholder="np. Jan Kowalski"></div>
-      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group" id="addrPhoneWrap"><span class="adres-phone-prefix">+48</span><input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="addrInputPhone" placeholder="000000000" oninput="onlyDigits(this,9);clearAddrPhoneError()"></div><div id="addrPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div></div>
-    </div>
+    <div class="adres-field"><div class="adres-label">OSOBA KONTAKTOWA</div><input type="text" class="adres-input" id="addrInputContact" placeholder="np. Jan Kowalski"></div>
+    <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group" id="addrPhoneWrap"><span class="adres-phone-prefix">+48</span><input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="addrInputPhone" placeholder="000000000" oninput="onlyDigits(this,9);clearAddrPhoneError()"></div><div id="addrPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div></div>
   </div>
   <button class="flt-apply" onclick="saveAddr()" style="margin-top:8px;">Zapisz adres</button>
 </div>
