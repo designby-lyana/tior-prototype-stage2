@@ -1228,7 +1228,7 @@
   .btn-cart-guest-primary{
     width:100%; height:48px; background:var(--accent-primary); border:none;
     border-radius:var(--radius-lg); font-family:var(--font-body); font-weight:500;
-    font-size:16px; color:#fffaf2; cursor:pointer;
+    font-size:16px; color:var(--text-inverted); cursor:pointer;
   }
   .btn-cart-guest-secondary{
     width:100%; height:48px; background:none; border:1.5px solid var(--accent-primary);
@@ -1285,7 +1285,7 @@
   .cart-item-price-lock{
     display:flex; align-items:center; gap:6px;
     font-family:var(--font-body); font-size:14px; color:var(--text-muted);
-    background:var(--bg-chip); border-radius:6px; padding:6px 10px; white-space:nowrap;
+    background:var(--bg-chip); border-radius:var(--radius-sm); padding:6px 10px; white-space:nowrap;
   }
 
   /* summary card — Figma: Order Summary/short version */
@@ -1412,14 +1412,14 @@
     margin-bottom:var(--space-sm);
   }
   .step-circle{
-    width:32px; height:32px; border-radius:14px;
+    width:32px; height:32px; border-radius:16px;
     display:flex; align-items:center; justify-content:center;
     font-family:var(--font-mono); font-weight:400; font-size:22px;
     line-height:18px; flex:none; cursor:pointer;
     transition:opacity 140ms ease;
   }
   .step-circle:hover{ opacity:.8; }
-  .step-circle.active{ background:#323744; color:#fffaf2; }
+  .step-circle.active{ background:var(--text-on-light); color:var(--text-inverted); }
   .step-circle.inactive{ background:rgba(11,12,12,0.48); color:#ddd8d4; }
   .step-circle.done{ background:rgba(11,12,12,0.48); color:#ddd8d4; }
   .step-line{
@@ -2496,8 +2496,8 @@
   .addr-trash-wrap{position:relative;display:inline-flex;align-items:center;}
   .addr-trash-wrap .addr-trash-tip{
     display:none;position:absolute;bottom:calc(100% + 8px);right:0;
-    background:#323744;color:#fff;font-family:var(--font-body);font-size:13px;
-    line-height:1.4;padding:7px 10px;border-radius:6px;width:200px;
+    background:var(--text-on-light);color:#fff;font-family:var(--font-body);font-size:13px;
+    line-height:1.4;padding:7px 10px;border-radius:var(--radius-sm);width:200px;
     z-index:9999;pointer-events:none;white-space:normal;
   }
   .addr-trash-wrap:hover .addr-trash-tip{display:block;}
@@ -2531,9 +2531,9 @@
   .chip-tooltip-wrap { position:relative; display:inline-flex; }
   .chip-tooltip-wrap .chip-tip {
     display:none; position:absolute; bottom:calc(100% + 6px); left:0;
-    background:#323744; color:#fff; font-family:var(--font-body);
+    background:var(--chip-tooltip-bg); color:#fff; font-family:var(--font-body);
     font-size:14px; white-space:nowrap; padding:5px 10px;
-    border-radius:6px; z-index:2000; pointer-events:none;
+    border-radius:var(--radius-sm); z-index:2000; pointer-events:none;
     box-shadow:0 2px 8px rgba(0,0,0,.2);
   }
   .chip-tooltip-wrap:hover .chip-tip { display:block; }
