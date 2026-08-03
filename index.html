@@ -32,6 +32,7 @@
     --radius-lg:8px;
     --radius-pill:100px;
     --radius-xs-v2:2px;
+    --radius-input:6px;
     --radius-md:12px;
     --color-season-summer:#FFAA55;
     --color-season-winter:#386D94;
@@ -2359,7 +2360,7 @@
     padding:6px 16px; border-radius:var(--radius-lg); border:none;
   }
   .od-badge.gray{ background:var(--bg-chip); color:var(--text-on-light); }
-  .od-badge.green{ background:#f0f6f4; color:#056b4b; }
+  .od-badge.green{ background:#eef2ee; color:#52725a; } /* Opłacone */
 
   /* note */
   .od-note-label{ display:flex; align-items:center; gap:6px; font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); margin-bottom:2px; }
@@ -8975,7 +8976,7 @@
 
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">LOGIN</div>
-          <div id="loginUserWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+          <div id="loginUserWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="loginUser" type="text" oninput="clearLoginErrors()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
           <div id="loginUserError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Nie znaleziono konta powiązanego z podanym adresem e-mail.</div>
@@ -8986,7 +8987,7 @@
             <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">HASŁO</div>
             <button type="button" onclick="showForgotPassword()" style="background:none;border:none;padding:0;font-family:'Outfit',sans-serif;font-size:14px;color:#005f6e;cursor:pointer;">Zapomniałeś hasła?</button>
           </div>
-          <div id="loginPwdWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+          <div id="loginPwdWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="loginPwd" type="password" oninput="clearLoginErrors()" placeholder="" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
             <button type="button" onclick="toggleField('loginPwd')" id="eye_loginPwd" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
           </div>
@@ -9009,7 +9010,7 @@
       <div id="forgotFormBlock" style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">E-MAIL</div>
-          <div id="forgotEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+          <div id="forgotEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="forgotEmail" type="text" oninput="clearForgotError()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
           <div id="forgotEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj adres e-mail.</div>
@@ -9031,14 +9032,14 @@
       <div id="requestAccessFormBlock" style="background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;">
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">E-MAIL</div>
-          <div id="raEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+          <div id="raEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="raEmail" type="text" oninput="clearRequestAccessErrors()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
           <div id="raEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj adres e-mail.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">NUMER TELEFONU</div>
-          <div id="raPhoneWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+          <div id="raPhoneWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <span style="flex:none;font-family:'Outfit',sans-serif;font-size:16px;color:var(--text-muted);white-space:nowrap;padding-right:8px;border-right:1px solid #bec5c8;">+48</span>
             <input id="raPhone" type="text" inputmode="numeric" maxlength="9" oninput="onlyDigits(this,9);clearRequestAccessErrors()" placeholder="np. 600000000" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
@@ -9090,7 +9091,7 @@
       
       <div style="display:flex;flex-direction:column;gap:4px;">
         <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">NOWE HASŁO</div>
-        <div id="cpwd2Wrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+        <div id="cpwd2Wrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
           <input id="cpwd2" type="password" oninput="checkPwdMatch()" onblur="checkPwdStrength()" placeholder="" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           <button type="button" onclick="toggleField('cpwd2')" id="eye_cpwd2" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
         </div>
@@ -9099,13 +9100,13 @@
       
       <div style="display:flex;flex-direction:column;gap:4px;">
         <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#323744;text-transform:uppercase;">POWTÓRZ NOWE HASŁO</div>
-        <div id="cpwd3Wrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:6px;padding:10px 12px;transition:border-color 160ms;">
+        <div id="cpwd3Wrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
           <input id="cpwd3" type="password" oninput="checkPwdMatch()" placeholder="" style="flex:1;border:none;outline:none;font-size:16px;color:#323744;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           <button type="button" onclick="toggleField('cpwd3')" id="eye_cpwd3" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
         </div>
         <div id="cpwd3Error" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Hasła nie są zgodne.</div>
       </div>
-      <div id="pwdReqs" style="background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:6px;padding:13px 17px;display:flex;flex-direction:column;gap:6px;transition:border-color 300ms ease;">
+      <div id="pwdReqs" style="background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:var(--radius-input);padding:13px 17px;display:flex;flex-direction:column;gap:6px;transition:border-color 300ms ease;">
         <div id="req_len" class="pwd-req" style="display:flex;align-items:center;gap:8px;"><span class="req-icon" style="width:16px;height:16px;flex:none;"></span><span style="font-family:'Outfit',sans-serif;font-size:14px;color:#323744;">Min 8 znaków</span></div>
         <div id="req_upper" class="pwd-req" style="display:flex;align-items:center;gap:8px;"><span class="req-icon" style="width:16px;height:16px;flex:none;"></span><span style="font-family:'Outfit',sans-serif;font-size:14px;color:#323744;">1 wielka litera</span></div>
         <div id="req_digit" class="pwd-req" style="display:flex;align-items:center;gap:8px;"><span class="req-icon" style="width:16px;height:16px;flex:none;"></span><span style="font-family:'Outfit',sans-serif;font-size:14px;color:#323744;">1 cyfra</span></div>
