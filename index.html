@@ -63,6 +63,8 @@
     --status-info:#5a708a;
     --status-info-soft:#eef1f5;
     --status-info-ink:#d3dce6;
+    --focus-ring:0 0 0 3px rgba(0,95,110,.32);
+    --focus-ring-inset:inset 0 0 0 2px rgba(0,95,110,.55);
   }
   html{ scrollbar-width:none; }
   html::-webkit-scrollbar{ display:none; }
@@ -282,7 +284,7 @@
       color:var(--accent-pressed);
     }
   }
-  .chip:focus-visible{outline:2px solid var(--text-default);outline-offset:2px;}
+  .chip:focus-visible{outline:none;box-shadow:var(--focus-ring);}
   /* selected — без tint, тонкий accent-бордер, затверджено 2026-07-09 */
   .chip.is-selected{
     background:var(--bg-chip);
@@ -320,7 +322,7 @@
     100%{ box-shadow:0 0 0 0 rgba(0,95,110,0); }
   }
   .cta.pulse-once{ animation:ctaPulseGlow 900ms ease-out 1; }
-  .cta:focus-visible{outline:2px solid var(--text-default);outline-offset:2px;}
+  .cta:focus-visible{outline:none;box-shadow:var(--focus-ring);}
   /* secondary CTA — той самий радіус/висота системного .cta (12px/48-56px), без заливки (ghost) */
   .cta.cta-secondary{
     background:transparent;
@@ -435,7 +437,7 @@
   }
   .btn-outline:hover{ background:#fff3ee; }
   .btn-outline:active{ background:#ffe7dd; transform:scale(.985); }
-  .btn-outline:focus-visible{ outline:2px solid var(--text-default); outline-offset:2px; }
+  .btn-outline:focus-visible{ outline:none; box-shadow:var(--focus-ring); }
 
   .filter-row{ display:flex; align-items:center; gap: var(--space-md); margin-top: var(--space-md); }
   .ean-toggle{ display:flex; align-items:center; gap: var(--space-sm); font-size:16px; color: var(--text-on-light); cursor:default; flex:none; }
@@ -739,7 +741,7 @@
   }
   .qty-btn:hover{ background:#C8C1BC; }
   .qty-btn:active{ background: var(--accent-pressed); color:#fff; }
-  .qty-btn:focus-visible{ outline:2px solid var(--text-default); outline-offset:1px; }
+  .qty-btn:focus-visible{ outline:none; box-shadow:var(--focus-ring-inset); }
   .qty-value{ flex:1; text-align:center; font-family:var(--font-body); font-size:18px; font-weight:400; line-height:18px; color:var(--text-on-light); background:var(--bg-input); height:100%; display:flex; align-items:center; justify-content:center; }
   .qty-limit-note{
     display:none; font-family:var(--font-body); font-size:13px; line-height:16px;
@@ -2218,7 +2220,7 @@
   }
   .firma-add-btn:hover{ background:rgba(0,95,110,.07); }
   .firma-add-btn:active{ background:rgba(2,75,87,.14); color:var(--accent-pressed); }
-  .firma-add-btn:focus-visible{ outline:2px solid var(--text-default); outline-offset:2px; }
+  .firma-add-btn:focus-visible{ outline:none; box-shadow:var(--focus-ring); }
 
   /* ── DOSTĘPNOŚĆ CHIPS = same as home .chip ── */
   .dost-chip{
