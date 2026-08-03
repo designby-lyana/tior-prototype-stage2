@@ -624,7 +624,7 @@
     height:48px; padding:0 16px;
     background:var(--accent-primary,#005f6e); border:none; border-radius:8px;
     font-family:'Outfit',sans-serif; font-weight:500; font-size:16px;
-    color:#fffaf2; cursor:pointer; white-space:nowrap; flex:none;
+    color:var(--on-accent); cursor:pointer; white-space:nowrap; flex:none;
   }
   .rbb-top-btn svg{ width:18px; height:18px; flex:none; }
 
@@ -975,7 +975,7 @@
   .sort-login-cta{
     display:block; width:100%; margin:0;
     height:40px; border:none; border-radius:var(--radius-sm);
-    background:#005f6e; color:#fffaf2;
+    background:var(--accent-primary); color:var(--on-accent);
     font-family:var(--font-body); font-weight:500; font-size:15px; cursor:pointer;
   }
 
@@ -3412,7 +3412,7 @@
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:#6b7280;">Nie znaleziono opon spełniających podane kryteria. Spróbuj zmienić parametry wyszukiwania.</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;width:100%;">
-        <button onclick="clearResultsSearch()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Wyczyść wyszukiwanie</button>
+        <button onclick="clearResultsSearch()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Wyczyść wyszukiwanie</button>
       </div>
     </div>
 
@@ -7804,7 +7804,7 @@
         <div style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:#6b7280;">Nie masz obecnie żadnych produktów w koszyku.</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;width:100%;">
-        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Szukaj opon</button>
+        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Szukaj opon</button>
         <button onclick="setScreen('screenOrders')" style="width:100%;height:48px;background:#fff;border:1.5px solid #005f6e;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#024b57;cursor:pointer;">Powtórz zamówienie z historii</button>
       </div>
     </div>
@@ -8509,7 +8509,7 @@
         <div id="ordersEmptyText" style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:#6b7280;">Nie masz jeszcze żadnych zamówień.</div>
       </div>
       <div id="ordersEmptyActions" style="display:flex;flex-direction:column;gap:12px;width:100%;">
-        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Szukaj opon</button>
+        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Szukaj opon</button>
       </div>
     </div>
 
@@ -8681,7 +8681,7 @@
         <div id="invoicesEmptyText" style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:#6b7280;">Nie masz jeszcze żadnych faktur.</div>
       </div>
       <div id="invoicesEmptyActions" style="display:flex;flex-direction:column;gap:12px;width:100%;">
-        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Szukaj opon</button>
+        <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Szukaj opon</button>
       </div>
     </div>
 
@@ -8935,7 +8935,7 @@
           <input id="spwd1" type="password" value="Qw3rty!8" style="flex:1;border:none;outline:none;font-size:16px;color:#0d0e13;font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           <button type="button" onclick="toggleField('spwd1')" id="eye_spwd1" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="#9ba3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
         </div>
-        <button onclick="setScreen('screenChangePassword')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Zmień hasło</button>
+        <button onclick="setScreen('screenChangePassword')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zmień hasło</button>
       </div>
     </div>
   </div>
@@ -8988,7 +8988,7 @@
 
         <div id="loginError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;">Wprowadź login i hasło</div>
 
-        <button onclick="attemptLogin()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Zaloguj się</button>
+        <button onclick="attemptLogin()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zaloguj się</button>
       </div>
       <button type="button" onclick="showRequestAccess()" style="display:block;width:100%;text-align:center;background:none;border:none;padding:0;font-family:'Outfit',sans-serif;font-size:14px;color:#6b7280;margin-top:16px;cursor:pointer;">Nie masz konta? <span style="color:#005f6e;text-decoration:underline;">Skontaktuj się z opiekunem klienta</span></button>
     </div>
@@ -9007,7 +9007,7 @@
           </div>
           <div id="forgotEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj adres e-mail.</div>
         </div>
-        <button onclick="submitForgotPassword()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Wyślij link do zmiany hasła</button>
+        <button onclick="submitForgotPassword()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Wyślij link do zmiany hasła</button>
       </div>
       <div id="forgotSuccess" style="display:none;align-items:center;justify-content:center;gap:10px;padding-top:20px;">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10l5 5 11-11" stroke="#1e6b3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -9039,7 +9039,7 @@
         </div>
         <div id="raFormError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;">Uzupełnij wszystkie pola.</div>
 
-        <button onclick="submitRequestAccess()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Skontaktuj się</button>
+        <button onclick="submitRequestAccess()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Skontaktuj się</button>
         <div style="font-family:'Outfit',sans-serif;font-size:13px;line-height:1.5;color:#6b7280;text-align:center;">Kontynuując, akceptujesz <span onclick="goToRegulamin()" style="text-decoration:underline;cursor:pointer;">Regulamin</span> i <span onclick="goToPolityka()" style="text-decoration:underline;cursor:pointer;">Politykę prywatności</span> OponyToMy.</div>
       </div>
       <div id="requestAccessSuccess" style="display:none;align-items:center;justify-content:center;gap:10px;padding-top:20px;">
@@ -9193,7 +9193,7 @@
 
       <!-- Buttons -->
       <div style="width:100%;display:flex;flex-direction:column;gap:16px;">
-        <button onclick="openLastOrder()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Zobacz zamówienie</button>
+        <button onclick="openLastOrder()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zobacz zamówienie</button>
         <button onclick="setScreen('screenResults')" style="width:100%;height:48px;background:#fff;border:1.5px solid #005f6e;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#024b57;cursor:pointer;">Kontynuuj zakupy</button>
       </div>
     </div>
@@ -9390,7 +9390,7 @@
 
       <!-- Buttons -->
       <div style="width:100%;display:flex;flex-direction:column;gap:16px;">
-        <button onclick="goHome()" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Wróć na stronę główną</button>
+        <button onclick="goHome()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Wróć na stronę główną</button>
         <a href="tel:+48782505002" style="width:100%;height:48px;background:#fff;border:1.5px solid #005f6e;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#024b57;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;">Skontaktuj się z opiekunem</a>
       </div>
     </div>
@@ -11960,7 +11960,7 @@
       if (emptyState) emptyState.style.display = 'flex';
       if (emptyTitle) emptyTitle.textContent = 'Zaloguj się, aby zobaczyć faktury';
       if (emptyText) emptyText.textContent = 'Historia faktur jest dostępna po zalogowaniu się na konto firmowe.';
-      if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenLogin\')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Zaloguj się</button>';
+      if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenLogin\')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zaloguj się</button>';
     } else {
       if (filtersCard) filtersCard.style.display = '';
       if (pageTitle) pageTitle.style.display = '';
@@ -12025,11 +12025,11 @@
       if (isGuestUser) {
         if (emptyTitle) emptyTitle.textContent = 'Zaloguj się, aby zobaczyć zamówienia';
         if (emptyText) emptyText.textContent = 'Historia zamówień jest dostępna po zalogowaniu się na konto firmowe.';
-        if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenLogin\')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Zaloguj się</button>';
+        if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenLogin\')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zaloguj się</button>';
       } else {
         if (emptyTitle) emptyTitle.textContent = 'Brak zamówień';
         if (emptyText) emptyText.textContent = 'Nie masz jeszcze żadnych zamówień.';
-        if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenResults\')" style="width:100%;height:48px;background:#005f6e;border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:#fffaf2;cursor:pointer;">Szukaj opon</button>';
+        if (emptyActions) emptyActions.innerHTML = '<button onclick="setScreen(\'screenResults\')" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Szukaj opon</button>';
       }
       return;
     }
@@ -13397,7 +13397,7 @@ function submitOrder() {
       if(actionsRow) actionsRow.style.display = 'none';
       wrap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;padding:32px 16px;text-align:center;gap:16px;">'
         + '<div style="font-family:var(--font-body);font-size:16px;color:var(--text-muted);">Nie masz jeszcze zapisanych adresów.</div>'
-        + '<button onclick="openAddrSheetFromCheckoutEmpty()" style="height:44px;padding:0 24px;background:#005f6e;border:none;border-radius:8px;font-family:var(--font-body);font-weight:500;font-size:16px;color:#fffaf2;cursor:pointer;display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M11.9941 23.9882C18.5556 23.9882 23.9882 18.5439 23.9882 11.9941C23.9882 5.43262 18.5439 0 11.9823 0C5.43262 0 0 5.43262 0 11.9941C0 18.5439 5.44438 23.9882 11.9941 23.9882ZM11.9941 21.9892C6.4439 21.9892 2.01078 17.5443 2.01078 11.9941C2.01078 6.4439 6.43214 1.99902 11.9823 1.99902C17.5326 1.99902 21.9892 6.4439 21.9892 11.9941C21.9892 17.5443 17.5443 21.9892 11.9941 21.9892Z" fill="currentColor"/><path d="M6.53711 11.9933C6.53711 12.5694 6.93692 12.9576 7.53662 12.9576H10.9937V16.4264C10.9937 17.0143 11.3936 17.4259 11.9698 17.4259C12.5577 17.4259 12.9693 17.0262 12.9693 16.4264V12.9576H16.4381C17.0261 12.9576 17.4376 12.5694 17.4376 11.9933C17.4376 11.4054 17.0261 10.9937 16.4381 10.9937H12.9693V7.53666C12.9693 6.93695 12.5577 6.52539 11.9698 6.52539C11.3936 6.52539 10.9937 6.93695 10.9937 7.53666V10.9937H7.53662C6.93692 10.9937 6.53711 11.4054 6.53711 11.9933Z" fill="currentColor"/></svg>Dodaj adres</button>'
+        + '<button onclick="openAddrSheetFromCheckoutEmpty()" style="height:44px;padding:0 24px;background:var(--accent-primary);border:none;border-radius:8px;font-family:var(--font-body);font-weight:500;font-size:16px;color:var(--on-accent);cursor:pointer;display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M11.9941 23.9882C18.5556 23.9882 23.9882 18.5439 23.9882 11.9941C23.9882 5.43262 18.5439 0 11.9823 0C5.43262 0 0 5.43262 0 11.9941C0 18.5439 5.44438 23.9882 11.9941 23.9882ZM11.9941 21.9892C6.4439 21.9892 2.01078 17.5443 2.01078 11.9941C2.01078 6.4439 6.43214 1.99902 11.9823 1.99902C17.5326 1.99902 21.9892 6.4439 21.9892 11.9941C21.9892 17.5443 17.5443 21.9892 11.9941 21.9892Z" fill="currentColor"/><path d="M6.53711 11.9933C6.53711 12.5694 6.93692 12.9576 7.53662 12.9576H10.9937V16.4264C10.9937 17.0143 11.3936 17.4259 11.9698 17.4259C12.5577 17.4259 12.9693 17.0262 12.9693 16.4264V12.9576H16.4381C17.0261 12.9576 17.4376 12.5694 17.4376 11.9933C17.4376 11.4054 17.0261 10.9937 16.4381 10.9937H12.9693V7.53666C12.9693 6.93695 12.5577 6.52539 11.9698 6.52539C11.3936 6.52539 10.9937 6.93695 10.9937 7.53666V10.9937H7.53662C6.93692 10.9937 6.53711 11.4054 6.53711 11.9933Z" fill="currentColor"/></svg>Dodaj adres</button>'
         + '</div>';
       var h1 = document.getElementById('checkoutStep1Hint');
       if(h1) h1.style.display = 'none';
