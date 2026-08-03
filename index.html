@@ -37,6 +37,8 @@
     --color-season-summer:#FFAA55;
     --color-season-winter:#386D94;
     --color-season-allseason:#4A90D9;
+    --danger-primary:#dc2626;
+    --radius-sheet:16px;
     --space-xs:4px;
     --space-sm:8px;
     --space-md:12px;
@@ -1922,7 +1924,7 @@
     position:fixed; bottom:0; left:50%; transform:translateX(-50%) translateY(100%);
     width:390px; max-width:100%;
     background:var(--bg-surface-light);
-    border-radius:16px 16px 0 0;
+    border-radius:var(--radius-sheet) var(--radius-sheet) 0 0;
     padding:var(--space-sm) var(--space-xl) var(--space-2xl);
     z-index:401;
     display:flex; flex-direction:column; gap:var(--space-xl);
@@ -8980,7 +8982,7 @@
           <div id="loginUserWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="loginUser" type="text" oninput="clearLoginErrors()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
-          <div id="loginUserError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Nie znaleziono konta powiązanego z podanym adresem e-mail.</div>
+          <div id="loginUserError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;">Nie znaleziono konta powiązanego z podanym adresem e-mail.</div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -8992,10 +8994,10 @@
             <input id="loginPwd" type="password" oninput="clearLoginErrors()" placeholder="" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
             <button type="button" onclick="toggleField('loginPwd')" id="eye_loginPwd" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
           </div>
-          <div id="loginPwdError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Nieprawidłowe hasło. Proszę spróbować ponownie.</div>
+          <div id="loginPwdError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;">Nieprawidłowe hasło. Proszę spróbować ponownie.</div>
         </div>
 
-        <div id="loginError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;">Wprowadź login i hasło</div>
+        <div id="loginError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);">Wprowadź login i hasło</div>
 
         <button onclick="attemptLogin()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Zaloguj się</button>
       </div>
@@ -9014,7 +9016,7 @@
           <div id="forgotEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="forgotEmail" type="text" oninput="clearForgotError()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
-          <div id="forgotEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj adres e-mail.</div>
+          <div id="forgotEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;">Podaj adres e-mail.</div>
         </div>
         <button onclick="submitForgotPassword()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Wyślij link do zmiany hasła</button>
       </div>
@@ -9036,7 +9038,7 @@
           <div id="raEmailWrap" style="display:flex;align-items:center;gap:8px;border:1.5px solid #bec5c8;border-radius:var(--radius-input);padding:10px 12px;transition:border-color 160ms;">
             <input id="raEmail" type="text" oninput="clearRequestAccessErrors()" placeholder="np. jan.kowalski@firma.pl" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
-          <div id="raEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Podaj adres e-mail.</div>
+          <div id="raEmailError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;">Podaj adres e-mail.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:var(--text-on-light);text-transform:uppercase;">NUMER TELEFONU</div>
@@ -9044,9 +9046,9 @@
             <span style="flex:none;font-family:'Outfit',sans-serif;font-size:16px;color:var(--text-muted);white-space:nowrap;padding-right:8px;border-right:1px solid #bec5c8;">+48</span>
             <input id="raPhone" type="text" inputmode="numeric" maxlength="9" oninput="onlyDigits(this,9);clearRequestAccessErrors()" placeholder="np. 600000000" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           </div>
-          <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div>
+          <div id="raPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;"></div>
         </div>
-        <div id="raFormError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;">Uzupełnij wszystkie pola.</div>
+        <div id="raFormError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);">Uzupełnij wszystkie pola.</div>
 
         <button onclick="submitRequestAccess()" style="width:100%;height:48px;background:var(--accent-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:var(--on-accent);cursor:pointer;">Skontaktuj się</button>
         <div style="font-family:'Outfit',sans-serif;font-size:13px;line-height:1.5;color:var(--text-muted);text-align:center;">Kontynuując, akceptujesz <span onclick="goToRegulamin()" style="text-decoration:underline;cursor:pointer;">Regulamin</span> i <span onclick="goToPolityka()" style="text-decoration:underline;cursor:pointer;">Politykę prywatności</span> OponyToMy.</div>
@@ -9105,7 +9107,7 @@
           <input id="cpwd3" type="password" oninput="checkPwdMatch()" placeholder="" style="flex:1;border:none;outline:none;font-size:16px;color:var(--text-on-light);font-family:'Outfit',sans-serif;background:transparent;padding:0;min-width:0;">
           <button type="button" onclick="toggleField('cpwd3')" id="eye_cpwd3" style="background:none;border:none;outline:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2l18 18" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round"></path><path d="M6.94 6.94A9 9 0 003 11c1.73 3.47 5.1 5.5 8 5.5a8.1 8.1 0 003.06-.61" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.53 9.53A3 3 0 0014 14" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round"></path><path d="M14.85 14.85C13.68 15.6 12.37 16 11 16c-3.87 0-7-3.13-7-5.5 0-1.2.6-2.4 1.58-3.42M11 6c3.87 0 7 3.13 7 5.5 0 .91-.32 1.84-.92 2.71" stroke="var(--text-placeholder)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
         </div>
-        <div id="cpwd3Error" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;">Hasła nie są zgodne.</div>
+        <div id="cpwd3Error" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;">Hasła nie są zgodne.</div>
       </div>
       <div id="pwdReqs" style="background:#f9fafb;border:1.5px solid var(--border-surface);border-radius:var(--radius-input);padding:13px 17px;display:flex;flex-direction:column;gap:6px;transition:border-color 300ms ease;">
         <div id="req_len" class="pwd-req" style="display:flex;align-items:center;gap:8px;"><span class="req-icon" style="width:16px;height:16px;flex:none;"></span><span style="font-family:'Outfit',sans-serif;font-size:14px;color:var(--text-on-light);">Min 8 znaków</span></div>
@@ -9665,7 +9667,7 @@
         <span class="adres-phone-prefix">+48</span>
         <input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="firmaTel" value="601234567" oninput="onlyDigits(this,9);clearFirmaTelError()">
       </div>
-      <div id="firmaTelError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div>
+      <div id="firmaTelError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;"></div>
     </div>
     <div class="adres-field">
       <div class="adres-label">E-MAIL</div>
@@ -12271,7 +12273,7 @@
       var firmaTelErr = document.getElementById('firmaTelError');
       var firmaTelWrap = document.getElementById('firmaTelWrap');
       if(firmaTelErr){ firmaTelErr.textContent = PHONE_FORMAT_MSG; firmaTelErr.style.display = 'block'; }
-      if(firmaTelWrap) firmaTelWrap.style.borderColor = '#dc2626';
+      if(firmaTelWrap) firmaTelWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
     var nazwa = document.getElementById('firmaNazwa').value;
@@ -12899,7 +12901,7 @@ function submitOrder() {
   function togglePwd() { toggleField('spwd1'); }
 
   var CHECK_ICON = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5l4 4 8-9" stroke="#1e6b3c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var CROSS_ICON = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="#dc2626" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  var CROSS_ICON = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="var(--danger-primary)" stroke-width="1.8" stroke-linecap="round"/></svg>';
 
   function getPwdChecks(val){
     var special = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
@@ -12952,7 +12954,7 @@ function submitOrder() {
     var wrap3 = document.getElementById('cpwd3Wrap');
     var showRptErr = rptVal.length > 0 && !matches;
     if(err3)  err3.style.display  = showRptErr ? 'block' : 'none';
-    if(wrap3) wrap3.style.borderColor = showRptErr ? '#dc2626' : (matches ? '#005f6e' : '#bec5c8');
+    if(wrap3) wrap3.style.borderColor = showRptErr ? 'var(--danger-primary)' : (matches ? '#005f6e' : '#bec5c8');
 
     if(btn){
       var ok = pwdValid && matches;
@@ -12969,7 +12971,7 @@ function submitOrder() {
     var pwdValid = chk.len && chk.upper && chk.digit && chk.special;
     var wrap2 = document.getElementById('cpwd2Wrap');
     if(!pwdValid){
-      if(wrap2) wrap2.style.borderColor = '#dc2626';
+      if(wrap2) wrap2.style.borderColor = 'var(--danger-primary)';
       // show cross on unsatisfied, check on satisfied
       setReqIcon('req_len',     chk.len     ? 'check' : 'cross');
       setReqIcon('req_upper',   chk.upper   ? 'check' : 'cross');
@@ -13237,7 +13239,7 @@ function submitOrder() {
       var addrPhoneErr = document.getElementById('addrPhoneError');
       var addrPhoneWrap = document.getElementById('addrPhoneWrap');
       if(addrPhoneErr){ addrPhoneErr.textContent = PHONE_FORMAT_MSG; addrPhoneErr.style.display = 'block'; }
-      if(addrPhoneWrap) addrPhoneWrap.style.borderColor = '#dc2626';
+      if(addrPhoneWrap) addrPhoneWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
     var phone = addrPhoneLocal ? ('+48 ' + addrPhoneLocal) : '';
@@ -13716,26 +13718,26 @@ function submitOrder() {
 
     if(!userVal || !pwdVal){
       if(err) err.style.display = 'block';
-      if(userWrap) userWrap.style.borderColor = !userVal ? '#dc2626' : '#bec5c8';
-      if(pwdWrap) pwdWrap.style.borderColor = !pwdVal ? '#dc2626' : '#bec5c8';
+      if(userWrap) userWrap.style.borderColor = !userVal ? 'var(--danger-primary)' : '#bec5c8';
+      if(pwdWrap) pwdWrap.style.borderColor = !pwdVal ? 'var(--danger-primary)' : '#bec5c8';
       return;
     }
 
     if(!isValidEmail(userVal)){
       if(userErr){ userErr.textContent = EMAIL_FORMAT_MSG; userErr.style.display = 'block'; }
-      if(userWrap) userWrap.style.borderColor = '#dc2626';
+      if(userWrap) userWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
 
     if(userVal.toLowerCase() !== DEMO_LOGIN){
       if(userErr){ userErr.textContent = 'Nie znaleziono konta powiązanego z podanym adresem e-mail.'; userErr.style.display = 'block'; }
-      if(userWrap) userWrap.style.borderColor = '#dc2626';
+      if(userWrap) userWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
 
     if(pwdVal !== DEMO_PASSWORD){
       if(pwdErr) pwdErr.style.display = 'block';
-      if(pwdWrap) pwdWrap.style.borderColor = '#dc2626';
+      if(pwdWrap) pwdWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
 
@@ -13807,28 +13809,28 @@ function submitOrder() {
 
     if(!emailVal && !phoneVal){
       if(formErr) formErr.style.display = 'block';
-      if(emailWrap) emailWrap.style.borderColor = '#dc2626';
-      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      if(emailWrap) emailWrap.style.borderColor = 'var(--danger-primary)';
+      if(phoneWrap) phoneWrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
 
     var hasError = false;
 
     if(!emailVal){
-      if(emailWrap) emailWrap.style.borderColor = '#dc2626';
+      if(emailWrap) emailWrap.style.borderColor = 'var(--danger-primary)';
       hasError = true;
     } else if(!isValidEmail(emailVal)){
       if(emailErr){ emailErr.textContent = 'Użyj formatu: jan@firma.pl.'; emailErr.style.display = 'block'; }
-      if(emailWrap) emailWrap.style.borderColor = '#dc2626';
+      if(emailWrap) emailWrap.style.borderColor = 'var(--danger-primary)';
       hasError = true;
     }
 
     if(!phoneVal){
-      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      if(phoneWrap) phoneWrap.style.borderColor = 'var(--danger-primary)';
       hasError = true;
     } else if(!isValidPhone(phoneVal)){
       if(phoneErr){ phoneErr.textContent = 'Użyj 9 cyfr, np. 600 000 000.'; phoneErr.style.display = 'block'; }
-      if(phoneWrap) phoneWrap.style.borderColor = '#dc2626';
+      if(phoneWrap) phoneWrap.style.borderColor = 'var(--danger-primary)';
       hasError = true;
     }
 
@@ -13865,12 +13867,12 @@ function submitOrder() {
     var emailVal = email ? email.value.trim() : '';
     if(!emailVal){
       if(errEl){ errEl.textContent = 'Podaj adres e-mail.'; errEl.style.display = 'block'; }
-      if(wrap) wrap.style.borderColor = '#dc2626';
+      if(wrap) wrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
     if(!isValidEmail(emailVal)){
       if(errEl){ errEl.textContent = EMAIL_FORMAT_MSG; errEl.style.display = 'block'; }
-      if(wrap) wrap.style.borderColor = '#dc2626';
+      if(wrap) wrap.style.borderColor = 'var(--danger-primary)';
       return;
     }
     if(errEl) errEl.style.display = 'none';
@@ -13985,7 +13987,7 @@ function submitOrder() {
 
 <!-- ADDR SHEET (viewport level) -->
 <div id="addrBackdrop" onclick="closeAddrSheet()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:1000;"></div>
-<div id="addrSheet" style="display:none;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:390px;max-width:100%;background:#fff;border-radius:16px 16px 0 0;z-index:1001;padding:12px 24px 32px;box-sizing:border-box;flex-direction:column;gap:16px;max-height:90vh;overflow-y:auto;">
+<div id="addrSheet" style="display:none;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:390px;max-width:100%;background:#fff;border-radius:var(--radius-sheet) var(--radius-sheet) 0 0;z-index:1001;padding:12px 24px 32px;box-sizing:border-box;flex-direction:column;gap:16px;max-height:90vh;overflow-y:auto;">
   <div style="width:40px;height:4px;background:var(--border-surface);border-radius:2px;margin:0 auto 8px;"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
     <span id="addrSheetTitle" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;text-transform:uppercase;color:var(--text-default);">Nowy adres</span>
@@ -14002,7 +14004,7 @@ function submitOrder() {
     <div class="adres-field"><div class="adres-label">KRAJ</div><input type="text" class="adres-input" id="addrInputCountry" value="Polska"></div>
     <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-sm);">
       <div class="adres-field"><div class="adres-label">OSOBA KONTAKTOWA</div><input type="text" class="adres-input" id="addrInputContact" placeholder="np. Jan Kowalski"></div>
-      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group" id="addrPhoneWrap"><span class="adres-phone-prefix">+48</span><input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="addrInputPhone" placeholder="000000000" oninput="onlyDigits(this,9);clearAddrPhoneError()"></div><div id="addrPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:#dc2626;padding-top:2px;"></div></div>
+      <div class="adres-field"><div class="adres-label">NUMER TELEFONU</div><div class="adres-phone-group" id="addrPhoneWrap"><span class="adres-phone-prefix">+48</span><input type="tel" inputmode="numeric" maxlength="9" class="adres-input" id="addrInputPhone" placeholder="000000000" oninput="onlyDigits(this,9);clearAddrPhoneError()"></div><div id="addrPhoneError" style="display:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--danger-primary);padding-top:2px;"></div></div>
     </div>
   </div>
   <button class="flt-apply" onclick="saveAddr()" style="margin-top:8px;">Zapisz adres</button>
@@ -14011,7 +14013,7 @@ function submitOrder() {
 
 <!-- ADDR PICK SHEET -->
 <div id="addrPickBackdrop" onclick="closeAddrPickSheet()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:1000;"></div>
-<div id="addrPickSheet" style="display:none;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:390px;max-width:100%;background:#fff;border-radius:16px 16px 0 0;z-index:1001;padding:12px 24px 32px;box-sizing:border-box;flex-direction:column;gap:12px;max-height:85vh;overflow-y:auto;">
+<div id="addrPickSheet" style="display:none;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:390px;max-width:100%;background:#fff;border-radius:var(--radius-sheet) var(--radius-sheet) 0 0;z-index:1001;padding:12px 24px 32px;box-sizing:border-box;flex-direction:column;gap:12px;max-height:85vh;overflow-y:auto;">
   <div style="width:40px;height:4px;background:var(--border-surface);border-radius:2px;margin:0 auto 8px;"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
     <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;text-transform:uppercase;color:var(--text-default);">Wybierz adres</span>
@@ -14047,7 +14049,7 @@ function submitOrder() {
     <p style="font-size:15px;color:var(--text-muted);line-height:1.5;margin:0;">Po usunięciu wybierz nowy adres domyślny.</p>
     <div style="display:flex;gap:12px;">
       <button onclick="closeAddrConfirm()" style="flex:1;height:44px;background:none;border:1px solid var(--border-default);border-radius:8px;font-family:\'Outfit\',sans-serif;font-size:16px;color:var(--text-default);cursor:pointer;">Anuluj</button>
-      <button onclick="confirmDeleteAddr()" style="flex:1;height:44px;background:#dc2626;border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-size:16px;color:#fff;cursor:pointer;font-weight:500;">Usuń</button>
+      <button onclick="confirmDeleteAddr()" style="flex:1;height:44px;background:var(--danger-primary);border:none;border-radius:8px;font-family:\'Outfit\',sans-serif;font-size:16px;color:#fff;cursor:pointer;font-weight:500;">Usuń</button>
     </div>
   </div>
 </div>
