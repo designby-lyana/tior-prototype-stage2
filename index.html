@@ -1857,16 +1857,19 @@
   .orl-badges{ display:flex; gap:var(--space-sm); flex-wrap:wrap; }
   .orl-badge{
     font-family:var(--font-body); font-size:14px; font-weight:400;
-    padding:4px 12px; border-radius:var(--radius-lg);
+    padding:4px 12px; border-radius:var(--radius-pill);
     border:1px solid transparent;
   }
-  .orl-badge-neutral{ background:var(--bg-chip); color:var(--text-on-light); border-color:var(--border-default); }
-  .orl-badge-warning{ background:#fff8e6; color:#b45309; border-color:#fcd34d; }
-  .orl-badge-transit{ background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; }
-  .orl-badge-success{ background:#f0fdf4; color:#15803d; border-color:#bbf7d0; }
-  .orl-badge-cancelled{ background:#fef2f2; color:#b91c1c; border-color:#fecaca; }
-  .orl-badge-return{ background:#faf5ff; color:#7e22ce; border-color:#e9d5ff; }
-  .orl-badge-progress{ background:#e6f2f3; color:#005f6e; border-color:#a8cdd1; } /* 🆕 W realizacji (3.1) */
+  /* Узгоджена pill-палітра статусів, 9 статусів (design audit п.10-11, 2026-08-03) */
+  .orl-badge-neutral{ background:#eeeeec; color:#5a5f6b; border-color:#ddd8d4; } /* Utworzone */
+  .orl-badge-progress{ background:#eef2f2; color:#557a80; border-color:#d3dfe0; } /* W realizacji */
+  .orl-badge-transit{ background:#eef1f5; color:#5a708a; border-color:#d3dce6; } /* W dostawie */
+  .orl-badge-success{ background:#eef4ee; color:#4a7a52; border-color:#d6e5d6; } /* Zrealizowane */
+  .orl-badge-cancelled{ background:#f6eeee; color:#a34a4a; border-color:#e3cfcf; } /* Anulowane */
+  .orl-badge-return{ background:#f2eef5; color:#6b5580; border-color:#dccfe3; } /* Zwrócone */
+  .orl-badge-warning{ background:#f6f0e6; color:#8a6a3d; border-color:#e3d4b8; } /* Nieopłacone */
+  .orl-badge-paid{ background:#eef2ee; color:#52725a; border-color:#d6e0d6; } /* Opłacone */
+  .orl-badge-overdue{ background:#f6eded; color:#95524f; border-color:#e6d2d2; } /* Po terminie */
 
   .orl-location{ padding:var(--space-sm) 0; border-top:1px solid var(--border-surface); }
   .orl-location-name{ font-family:var(--font-body); font-weight:700; font-size:16px; color:var(--text-default); }
@@ -8445,26 +8448,26 @@
 
     <!-- status summary cards (3.1, 🆕) -->
     <div id="ordersStatusCards" style="display:flex;flex-direction:column;gap:var(--space-md);">
-      <div class="checkout-card" id="statCardNieoplacone" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#b45309;border-radius:0;"></span>
+      <div class="checkout-card" id="statCardNieoplacone" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#8a6a3d;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">Nieopłacone</span>
           <span id="statCardNieoplaconeCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
         </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#fdf3e3;border-color:#e8d4a8;color:#9a6200;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">Zobacz nieopłacone</button>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#f6f0e6;border-color:#e3d4b8;color:#8a6a3d;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">Zobacz nieopłacone</button>
       </div>
-      <div class="checkout-card" id="statCardWdostawie" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#1d4ed8;border-radius:0;"></span>
+      <div class="checkout-card" id="statCardWdostawie" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#5a708a;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">W dostawie</span>
           <span id="statCardWdostawieCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
         </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">Zobacz w dostawie</button>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eef1f5;border-color:#d3dce6;color:#5a708a;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">Zobacz w dostawie</button>
       </div>
-      <div class="checkout-card" id="statCardWrealizacji" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#005f6e;border-radius:0;"></span>
+      <div class="checkout-card" id="statCardWrealizacji" style="position:relative;overflow:hidden;padding:var(--space-lg);padding-left:calc(var(--space-lg) + 4px);gap:var(--space-md);"><span style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#557a80;border-radius:0;"></span>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span class="flt-title" style="font-size:13px;">W realizacji</span>
           <span id="statCardWrealizacjiCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
         </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#e6f2f3;border-color:#a8cdd1;color:#005f6e;" onclick="openOrdersStatusFilter('orderStageSection','W realizacji')">Zobacz w realizacji</button>
+        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eef2f2;border-color:#d3dfe0;color:#557a80;" onclick="openOrdersStatusFilter('orderStageSection','W realizacji')">Zobacz w realizacji</button>
       </div>
     </div><!-- /status summary cards -->
 
@@ -8606,7 +8609,7 @@
           </div>
         </div>
         <div class="inv-row-bottom">
-          <span class="orl-badge orl-badge-success">Opłacone</span>
+          <span class="orl-badge orl-badge-paid">Opłacone</span>
           <span class="inv-address">Warszawa – Magazyn Wola</span>
         </div>
       </div>
@@ -8632,7 +8635,7 @@
           </div>
         </div>
         <div class="inv-row-bottom">
-          <span class="orl-badge orl-badge-success">Opłacone</span>
+          <span class="orl-badge orl-badge-paid">Opłacone</span>
           <span class="inv-address">Warszawa – Magazyn Wola</span>
         </div>
       </div>
@@ -9404,21 +9407,21 @@
   <div class="flt-section" id="orderStageSection">
     <div class="flt-section-label">Status realizacji</div>
     <div class="flt-chips">
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#ddd8d4;--chip-border:#eaeaea;--chip-text:#323744;">Utworzone</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e6f2f3;--chip-border:#a8cdd1;--chip-text:#005f6e;">W realizacji</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eff6ff;--chip-border:#bfdbfe;--chip-text:#1d4ed8;">W dostawie</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f0fdf4;--chip-border:#bbf7d0;--chip-text:#15803d;">Zrealizowane</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fef2f2;--chip-border:#fecaca;--chip-text:#b91c1c;">Anulowane</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eeeeec;--chip-border:#ddd8d4;--chip-text:#5a5f6b;">Utworzone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eef2f2;--chip-border:#d3dfe0;--chip-text:#557a80;">W realizacji</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eef1f5;--chip-border:#d3dce6;--chip-text:#5a708a;">W dostawie</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eef4ee;--chip-border:#d6e5d6;--chip-text:#4a7a52;">Zrealizowane</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f6eeee;--chip-border:#e3cfcf;--chip-text:#a34a4a;">Anulowane</button>
     </div>
   </div>
 
   <div class="flt-section" id="orderPaymentSection" style="margin-top:var(--space-md);">
     <div class="flt-section-label">Status płatności</div>
     <div class="flt-chips">
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fdf3e3;--chip-border:#e8d4a8;--chip-text:#9a6200;">Nieopłacone</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e8f4ed;--chip-border:#a8d4b8;--chip-text:#1e6b3c;">Opłacone</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fceaea;--chip-border:#e8b0b0;--chip-text:#9b1c1c;">Po terminie</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f0ebf7;--chip-border:#c8b0dc;--chip-text:#3d2468;">Zwrócone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f6f0e6;--chip-border:#e3d4b8;--chip-text:#8a6a3d;">Nieopłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eef2ee;--chip-border:#d6e0d6;--chip-text:#52725a;">Opłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f6eded;--chip-border:#e6d2d2;--chip-text:#95524f;">Po terminie</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f2eef5;--chip-border:#dccfe3;--chip-text:#6b5580;">Zwrócone</button>
     </div>
   </div>
 
@@ -9435,10 +9438,10 @@
   </div>
   <div class="flt-section">
     <div class="flt-chips">
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fdf3e3;--chip-border:#e8d4a8;--chip-text:#9a6200;">Nieopłacone</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#e8f4ed;--chip-border:#a8d4b8;--chip-text:#1e6b3c;">Opłacone</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#fceaea;--chip-border:#e8b0b0;--chip-text:#9b1c1c;">Po terminie</button>
-      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f0ebf7;--chip-border:#c8b0dc;--chip-text:#3d2468;">Zwrócone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f6f0e6;--chip-border:#e3d4b8;--chip-text:#8a6a3d;">Nieopłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#eef2ee;--chip-border:#d6e0d6;--chip-text:#52725a;">Opłacone</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f6eded;--chip-border:#e6d2d2;--chip-text:#95524f;">Po terminie</button>
+      <button class="flt-chip" onclick="toggleFltChip(this)" style="--chip-bg:#f2eef5;--chip-border:#dccfe3;--chip-text:#6b5580;">Zwrócone</button>
     </div>
   </div>
   <button class="flt-apply" onclick="toggleInvStatusOverlay()">Zastosuj</button>
@@ -11811,7 +11814,7 @@
     {
       id: 'ORD-5902', date: '2026-07-18', dateLabel: '18 lip 2026',
       statusCls: 'orl-badge-progress', status: 'W realizacji',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Warszawa – Magazyn Wola', delivery: 'Dostawa kurierska',
       items: [
         {name:'Continental EcoContact 6', qty:'4 szt.'}
@@ -11821,7 +11824,7 @@
     {
       id: 'ORD-5877', date: '2026-07-10', dateLabel: '10 lip 2026',
       statusCls: 'orl-badge-progress', status: 'W realizacji',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Łódź – Magazyn Centralny', delivery: 'Odbiór osobisty',
       items: [
         {name:'Michelin Agilis 3', qty:'8 szt.'},
@@ -11832,7 +11835,7 @@
     {
       id: 'ORD-5821', date: '2026-06-12', dateLabel: '12 cze 2026',
       statusCls: 'orl-badge-success', status: 'Zrealizowane',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Kraków \u2013 Magazyn Południe', delivery: 'Dostawa kurierska',
       items: [
         {name:'Michelin Pilot Sport 5', qty:'4 szt.'},
@@ -11843,7 +11846,7 @@
     {
       id: 'ORD-5798', date: '2026-05-28', dateLabel: '28 maj 2026',
       statusCls: 'orl-badge-transit', status: 'W dostawie',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Warszawa \u2013 Magazyn Wola', delivery: 'Odbiór osobisty',
       items: [
         {name:'Continental PremiumContact 7', qty:'4 szt.'},
@@ -11855,7 +11858,7 @@
     {
       id: 'ORD-5761', date: '2026-04-15', dateLabel: '15 kwi 2026',
       statusCls: 'orl-badge-success', status: 'Zrealizowane',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Wrocław \u2013 Magazyn Zachód', delivery: 'Dostawa kurierska',
       items: [
         {name:'Pirelli P Zero PZ4', qty:'4 szt.'},
@@ -11887,7 +11890,7 @@
     {
       id: 'ORD-5680', date: '2026-01-08', dateLabel: '8 sty 2026',
       statusCls: 'orl-badge-success', status: 'Zrealizowane',
-      payCls: 'orl-badge-success', payment: 'Opłacone',
+      payCls: 'orl-badge-paid', payment: 'Opłacone',
       location: 'Katowice \u2013 Magazyn Śląsk', delivery: 'Dostawa kurierska',
       items: [
         {name:'Yokohama Advan Sport V107', qty:'4 szt.'},
