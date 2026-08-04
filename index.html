@@ -863,6 +863,17 @@
   .pr-font-v2 .pr-stock{ transform: translateY(2px); }
   /* ===== KONIEC NOWEJ FUNKCJI: еталонна картка товару ===== */
 
+  /* ===== NOWA FUNKCJA (04.08.2026, Ляна): видимість картки №2 (дубліката) через
+     клас, а не inline style — щоб пережити runResultsSearch()/пагінацію, які
+     регулярно роблять card.style.display='' для ВСІХ .product-row (детальніше —
+     коментар біля самої картки №2 в HTML). !important з обох боків гарантує, що
+     жодна зовнішня логіка результатів не поверне картку до "видно"/"приховано"
+     випадково. */
+  .ref-card-twin{ display:none !important; }
+  .ref-card-twin.is-revealed{ display:flex !important; }
+  /* ===== KONIEC NOWEJ FUNKCJI: видимість картки №2 ===== */
+
+
   /* ── FIELD interactive state ─────────────────── */
   .field{ cursor:pointer; }
   .field.dd-open .field-chevron{ transform:rotate(180deg); }
@@ -3554,12 +3565,15 @@
     <!-- ===== KONIEC NOWEJ FUNKCJI: еталонна картка товару ===== -->
     <!-- ===================================================================
          NOWA FUNKCJA (04.08.2026, Ляна): картка №2 — ДУБЛІКАТ еталонної картки №1
-         (Nokian WetProof), 1:1 та сама розмітка/дані. За замовчуванням прихована
-         (display:none) — з'являється одразу під карткою №1 по кліку на іконки
-         "авто + сезон" в картці №1 (див. toggleRefCardTwin() в JS, класи
-         pr-attrs-left/id="refCardAttrsToggle"). Повторний клік — ховає назад.
+         (Nokian WetProof), 1:1 та сама розмітка/дані. Клас .ref-card-twin ховає
+         картку через CSS (display:none !important) — НЕ inline style, бо
+         runResultsSearch()/пагінація періодично роблять card.style.display=''
+         для ВСІХ .product-row (це й ламало inline-based приховування). Клас
+         .is-revealed (JS toggleRefCardTwin(), тригер — pr-attrs-left картки №1,
+         id="refCardAttrsToggle") показує картку назад тим самим !important-рівнем
+         специфічності, тож зовнішня логіка результатів її більше не чіпає.
          =================================================================== -->
-<div class="product-row pr-redesign pr-font-v2" id="refCardTwin" style="display:none;">
+<div class="product-row pr-redesign pr-font-v2 ref-card-twin">
       <div class="pr-top pr-top--flat">
         <div class="pr-info pr-info--redesign">
           <div class="pr-image">
@@ -12487,7 +12501,13 @@
       if(count) count.style.display = '';
       var allCards = document.querySelectorAll('#resultsList .product-row');
       var productCount = 0;
-      allCards.forEach(function(c){ if(c.style.display !== 'none') productCount++; });
+      /* NOWA FUNKCJA (04.08.2026, Ляна): картка №2 (.ref-card-twin) ховається класом,
+         а не inline style (див. коментар біля .ref-card-twin в CSS) — тому рахуємо її
+         прихованою, якщо вона не .is-revealed, окремо від інших карток. */
+      allCards.forEach(function(c){
+        var hiddenByTwinClass = c.classList.contains('ref-card-twin') && !c.classList.contains('is-revealed');
+        if(c.style.display !== 'none' && !hiddenByTwinClass) productCount++;
+      });
       if(count) count.textContent = productCount + (productCount === 1 ? ' produkt' : productCount % 10 >= 2 && productCount % 10 <= 4 && (productCount % 100 < 10 || productCount % 100 >= 20) ? ' produkty' : ' produktów');
       if(clearBtn) clearBtn.textContent = remaining === 1 ? 'Wyczyść filtr' : 'Wyczyść filtry';
     }
@@ -12500,16 +12520,27 @@
 
   /* ===== NOWA FUNKCJA (04.08.2026, Ляна): клік на іконки "авто + сезон" в еталонній
      картці №1 (Nokian) показує/ховає її дублікат — картку №2 — одразу під нею в
-     #resultsList. Дублікат від початку в DOM зі style="display:none", тут лише
-     перемикаємо display. addToCart/qty-stepper для картки №2 працюють без змін —
-     вони прив'язані через .closest('.product-row') / глобальний qty-stepper-init,
-     що вже проходить по всіх .qty-stepper на сторінці незалежно від видимості. */
+     #resultsList. НЕ шукаємо картку №2 через getElementById: пагінація
+     (buildResultsCard) клонує картки з пулу і явно зрізає id з кожного клону
+     (node.removeAttribute('id')) — тож id="refCardTwin" живе лише в статичному
+     HTML до першого відкриття екрана результатів, а далі зникає. Замість цього
+     йдемо від клікнутого елемента до його картки (.closest) і беремо
+     .nextElementSibling — картка №2 завжди йде одразу за карткою №1 в пулі/DOM
+     (стабільне сортування Array.sort зберігає їхній відносний порядок навіть
+     після зміни сортування, бо в обох однакова ціна/значення поля). Якщо з
+     якоїсь причини сусід не картка №2 — запасний варіант: перший .ref-card-twin
+     на сторінці. Показ/приховання — через клас .is-revealed (CSS, !important),
+     а не inline style — деталі в коментарі біля .ref-card-twin в CSS. */
   function toggleRefCardTwin(iconsEl){
-    var twin = document.getElementById('refCardTwin');
+    var card1 = iconsEl ? iconsEl.closest('.product-row') : null;
+    var twin = card1 ? card1.nextElementSibling : null;
+    if(!twin || !twin.classList || !twin.classList.contains('ref-card-twin')){
+      twin = document.querySelector('.ref-card-twin');
+    }
     if(!twin) return;
-    var isHidden = (twin.style.display === 'none' || !twin.style.display);
-    twin.style.display = isHidden ? '' : 'none';
-    if(iconsEl) iconsEl.classList.toggle('is-active', isHidden);
+    var willShow = !twin.classList.contains('is-revealed');
+    twin.classList.toggle('is-revealed', willShow);
+    if(iconsEl) iconsEl.classList.toggle('is-active', willShow);
   }
   /* ===== KONIEC NOWEJ FUNKCJI: toggleRefCardTwin ===== */
 
