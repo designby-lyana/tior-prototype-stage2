@@ -884,14 +884,28 @@
      sprzedaży", bo tylko on ma klasę .pr-price — reszta (тайл "Twoja cena",
      етикетки, тултіпи) потребує окремого правила нижче).
      =================================================================== */
-  .pr-price-b2b{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--space-sm); }
+  .pr-price-b2b{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--space-sm); max-width:100%; }
   #screenResults.guest-mode .pr-price-b2b{ display:none; }
-  .pr-price-b2b-tile{ display:flex; flex-direction:column; align-items:flex-end; gap:2px; }
+  .pr-price-b2b-tile{ display:flex; flex-direction:column; align-items:flex-end; gap:2px; max-width:100%; }
+  /* NOWA FUNKCJA (04.08.2026, Ляна): прибрано white-space:nowrap з лейбла — з ним
+     довший текст ("Cena sprzedaży" + іконка i) не влазив у виділені price-col
+     max-width:112px і розпирав колонку, через що "225/45 R17 94Y" зліва переносився
+     на 2 рядки (задача з макета — тримати розмір в один рядок якомога довше). Тепер
+     лейбл сам переноситься на 2 рядки за потреби (min-width:0 дозволяє стиснутись),
+     а не розпирає картку. */
   .pr-price-b2b-tile-label{
-    position:relative; display:flex; align-items:center; gap:4px;
-    font-family:var(--font-body); font-size:13px; color:var(--text-muted); white-space:nowrap;
+    position:relative; display:flex; align-items:center; gap:4px; min-width:0; max-width:100%;
+    font-family:var(--font-body); font-size:13px; color:var(--text-muted); text-align:right;
   }
   .pr-price-b2b-nums{ display:flex; flex-direction:column; align-items:flex-end; gap:0; }
+  /* NOWA FUNKCJA (04.08.2026, Ляна): за проханням — ховаємо блоки з netto ціною
+     на картці №2 (обидва тайли), лишаємо тільки більшу/brutto ціну (pr-gross). */
+  .pr-price-b2b-nums .pr-netto{ display:none; }
+  /* NOWA FUNKCJA (04.08.2026, Ляна): гарантований відступ між блоком цін і
+     Naличність/Доставка (замість "space-between" у фіксованому 120px-боксі, що
+     на новому, вищому за старий, B2B-блоці цін стискався мало не до нуля).
+     --space-md — той самий крок шкали, що й padding .pr-second--redesign. */
+  .pr-price-col.pr-price-col-b2b{ justify-content:flex-start; gap:var(--space-md); }
   /* (i)-іконка: тап відкриває тултіп-розрахунок. На тачі :hover ненадійний,
      тож перемикаємо клас .is-open замість CSS-hover (на відміну від .chip-tip). */
   .pr-price-b2b-info{
@@ -3658,7 +3672,7 @@
             </div>
           </div>
         </div>
-        <div class="pr-price-col">
+        <div class="pr-price-col pr-price-col-b2b">
           <!-- ===================================================================
                NOWA FUNKCJA (04.08.2026, Ляна): B2B ceny — "Twoja cena" (koszt zakupu
                po zniżce) + "Cena sprzedaży" (cena dla klienta końcowego, z marżą).
@@ -3697,16 +3711,19 @@
                 <span class="pr-price-b2b-label-full">Cena sprzedaży</span>
                 <span class="pr-price-b2b-label-short">Cena</span>
                 <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
+                <!-- NOWA FUNKCJA (04.08.2026, Ляна): та сама правка, що й на "Twoja cena" —
+                     brutto (вища ціна) першою/болдом, netto (нижча) другою/сірим; тому й
+                     "strong" рядок тултіпа тепер Selling gross (=видиме число), а не netto. -->
                 <div class="pr-price-b2b-tip">
                   <div class="pr-price-b2b-tip-row"><span>Purchase price</span><span>€80.71</span></div>
                   <div class="pr-price-b2b-tip-row"><span>Margin 15%</span><span>+€12.11</span></div>
-                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Selling net</span><span>€92.82</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Selling gross</span><span>€114.17</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Selling gross</span><span>€114.17</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Selling net</span><span>€92.82</span></div>
                 </div>
               </div>
               <div class="pr-price-b2b-nums pr-price">
-                <div class="pr-gross">€92.82</div>
-                <div class="pr-netto">€114.17</div>
+                <div class="pr-gross">€114.17</div>
+                <div class="pr-netto">€92.82</div>
               </div>
             </div>
           </div>
