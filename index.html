@@ -857,6 +857,10 @@
      піксель). Це НЕ стосується transform:translateY(4px) вище — той про окрему,
      косметичну підгонку, а не про базовий layout-відступ. */
   .pr-font-v2 .pr-delivery{ margin-top: var(--space-xs); }
+  /* NOWA FUNKCJA (04.08.2026, Ляна): за проханням — мінімально зменшуємо відступ
+     Наявність->Доставка ЛИШЕ на картці №2 (картка №1/решта карток — без змін,
+     var(--space-xs)=4px лишається базовим значенням). */
+  .ref-card-twin .pr-delivery{ margin-top: 2px; }
   /* "Наявність" (112 szt.) на 2px вища за "модель" (WetProof) в лівій колонці.
      Зсуваємо лише stock-рядок transform-ом (той самий прийом, що й вище для delivery) —
      не чіпає layout/margin, тому "доставка" нижче лишається на своєму місці. */
@@ -906,15 +910,15 @@
      на новому, вищому за старий, B2B-блоці цін стискався мало не до нуля).
      --space-md — той самий крок шкали, що й padding .pr-second--redesign. */
   .pr-price-col.pr-price-col-b2b{ justify-content:flex-start; gap:var(--space-md); }
-  /* (i)-іконка: тап відкриває тултіп-розрахунок. На тачі :hover ненадійний,
-     тож перемикаємо клас .is-open замість CSS-hover (на відміну від .chip-tip). */
-  .pr-price-b2b-info{
-    display:flex; align-items:center; justify-content:center; flex:none;
-    width:16px; height:16px; border-radius:50%; border:1px solid var(--text-muted);
-    font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--text-muted);
+  /* NOWA FUNKCJA (04.08.2026, Ляна): (i)-іконку прибрано за проханням — тап тепер
+     на самому лейблі (.pr-price-b2b-tap). Пунктирне підкреслення — єдиний натяк,
+     що елемент інтерактивний (замість іконки). На тачі :hover ненадійний, тож
+     і далі перемикаємо клас .is-open, не :hover. */
+  .pr-price-b2b-tap{
     cursor:pointer; user-select:none;
+    border-bottom:1px dotted var(--text-muted); padding-bottom:1px;
   }
-  .pr-price-b2b-info:active{ background:var(--bg-chip); }
+  .pr-price-b2b-tap:active{ opacity:.7; }
   /* NOWA FUNKCJA (04.08.2026, Ляна): width:max-content + nowrap на рядках —
      жоден рядок тултіпа (напр. "Your price brutto (-5%)") більше не переноситься
      на 2 рядки, ширина підлаштовується під найдовший рядок автоматично. */
@@ -3687,18 +3691,16 @@
                =================================================================== -->
           <div class="pr-price-b2b">
             <div class="pr-price-b2b-tile pr-price-b2b-own">
-              <div class="pr-price-b2b-tile-label">
+              <!-- NOWA FUNKCJA (04.08.2026, Ляна): забрали окрему (i)-іконку — тап
+                   тепер на самому лейблі. Тултіп польською. -->
+              <div class="pr-price-b2b-tile-label pr-price-b2b-tap" onclick="togglePriceTip(this); event.stopPropagation();" role="button" tabindex="0" aria-label="Jak liczona cena">
                 <span>Twoja cena</span>
-                <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
-                <!-- NOWA FUNKCJA (04.08.2026, Ляна): за проханням — вища ціна (brutto)
-                     першою/болдом, нижча (netto) другою/сірим; тултіп розбито на base
-                     price brutto/netto + discount, роздільник, Your price brutto/netto. -->
-                <div class="pr-price-b2b-tip">
-                  <div class="pr-price-b2b-tip-row"><span>Base price brutto</span><span>€104.50</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Base price netto</span><span>€84.96</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Discount</span><span>5%</span></div>
-                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Your price brutto (-5%)</span><span>€99.27</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Your price netto (-5%)</span><span>€80.71</span></div>
+                <div class="pr-price-b2b-tip" onclick="event.stopPropagation();">
+                  <div class="pr-price-b2b-tip-row"><span>Cena bazowa brutto</span><span>€104.50</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Cena bazowa netto</span><span>€84.96</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Rabat</span><span>5%</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Twoja cena brutto (-5%)</span><span>€99.27</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Twoja cena netto (-5%)</span><span>€80.71</span></div>
                 </div>
               </div>
               <div class="pr-price-b2b-nums">
@@ -3707,18 +3709,14 @@
               </div>
             </div>
             <div class="pr-price-b2b-tile pr-price-b2b-sell">
-              <div class="pr-price-b2b-tile-label">
+              <div class="pr-price-b2b-tile-label pr-price-b2b-tap" onclick="togglePriceTip(this); event.stopPropagation();" role="button" tabindex="0" aria-label="Jak liczona cena">
                 <span class="pr-price-b2b-label-full">Cena sprzedaży</span>
                 <span class="pr-price-b2b-label-short">Cena</span>
-                <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
-                <!-- NOWA FUNKCJA (04.08.2026, Ляна): та сама правка, що й на "Twoja cena" —
-                     brutto (вища ціна) першою/болдом, netto (нижча) другою/сірим; тому й
-                     "strong" рядок тултіпа тепер Selling gross (=видиме число), а не netto. -->
-                <div class="pr-price-b2b-tip">
-                  <div class="pr-price-b2b-tip-row"><span>Purchase price</span><span>€80.71</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Margin 15%</span><span>+€12.11</span></div>
-                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Selling gross</span><span>€114.17</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Selling net</span><span>€92.82</span></div>
+                <div class="pr-price-b2b-tip" onclick="event.stopPropagation();">
+                  <div class="pr-price-b2b-tip-row"><span>Cena zakupu</span><span>€80.71</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Marża</span><span>15%</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Cena sprzedaży brutto</span><span>€114.17</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Cena sprzedaży netto</span><span>€92.82</span></div>
                 </div>
               </div>
               <div class="pr-price-b2b-nums pr-price">
@@ -12675,13 +12673,13 @@
 
   /* ===================================================================
      NOWA FUNKCJA (04.08.2026, Ляна): B2B ceny на картці №2 — тултіпи-розрахунки
-     ((i)-іконка, тап) + глобальний тумблер "Ukryj cenę" (панель фільтрів).
-     Тултіп — керування класом .is-open (не :hover, на дотику ненадійно).
-     Клік будь-де поза відкритим тултіпом — закриває його (document-listener,
-     навішується один раз при завантаженні сторінки).
+     (тап на лейблі ціни, без окремої (i)-іконки) + глобальний тумблер "Ukryj cenę"
+     (панель фільтрів). Тултіп — керування класом .is-open (не :hover, на дотику
+     ненадійно). Клік будь-де поза відкритим тултіпом — закриває його
+     (document-listener, навішується один раз при завантаженні сторінки).
      =================================================================== */
-  function togglePriceTip(infoEl){
-    var tip = infoEl ? infoEl.parentElement.querySelector('.pr-price-b2b-tip') : null;
+  function togglePriceTip(labelEl){
+    var tip = labelEl ? labelEl.querySelector('.pr-price-b2b-tip') : null;
     if(!tip) return;
     var willOpen = !tip.classList.contains('is-open');
     // закриваємо всі інші відкриті тултіпи на сторінці перед відкриттям цього
@@ -12691,7 +12689,7 @@
     tip.classList.toggle('is-open', willOpen);
   }
   document.addEventListener('click', function(e){
-    if(e.target.closest && e.target.closest('.pr-price-b2b-info')) return;
+    if(e.target.closest && e.target.closest('.pr-price-b2b-tap')) return;
     document.querySelectorAll('.pr-price-b2b-tip.is-open').forEach(function(t){ t.classList.remove('is-open'); });
   });
 
