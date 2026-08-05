@@ -3673,16 +3673,20 @@
               <div class="pr-price-b2b-tile-label">
                 <span>Twoja cena</span>
                 <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
+                <!-- NOWA FUNKCJA (04.08.2026, Ляна): за проханням — вища ціна (brutto)
+                     першою/болдом, нижча (netto) другою/сірим; тултіп розбито на base
+                     price brutto/netto + discount, роздільник, Your price brutto/netto. -->
                 <div class="pr-price-b2b-tip">
-                  <div class="pr-price-b2b-tip-row"><span>Base price</span><span>€84.96</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Discount 5%</span><span>−€4.25</span></div>
-                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Your price</span><span>€80.71</span></div>
-                  <div class="pr-price-b2b-tip-row"><span>Gross price</span><span>€99.27</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Base price brutto</span><span>€104.50</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Base price netto</span><span>€84.96</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Discount</span><span>5%</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Your price brutto (-5%)</span><span>€99.27</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Your price netto (-5%)</span><span>€80.71</span></div>
                 </div>
               </div>
               <div class="pr-price-b2b-nums">
-                <div class="pr-gross">€80.71</div>
-                <div class="pr-netto">€99.27</div>
+                <div class="pr-gross">€99.27</div>
+                <div class="pr-netto">€80.71</div>
               </div>
             </div>
             <div class="pr-price-b2b-tile pr-price-b2b-sell">
