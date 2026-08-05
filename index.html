@@ -873,6 +873,53 @@
   .ref-card-twin.is-revealed{ display:flex !important; }
   /* ===== KONIEC NOWEJ FUNKCJI: видимість картки №2 ===== */
 
+  /* ===================================================================
+     NOWA FUNKCJA (04.08.2026, Ляна): B2B ceny — "Twoja cena" (koszt zakupu ze
+     zniżką) + "Cena sprzedaży" (cena z marżą dla klienta końcowego). Widoczne
+     TYLKO na karcie №2 (.ref-card-twin) na razie — reszta kart zachowuje stary
+     .pr-price. Guest-stan (.pr-price-lock) BEZ ZMIAN — dopisano tylko
+     .pr-price-b2b do tych samych reguł #screenResults.guest-mode, żeby cały
+     nowy blok też chował się dla gościa (stary #screenResults.guest-mode
+     .pr-price{display:none} łapie tylko wewnętrzny numeryczny blok "Cena
+     sprzedaży", bo tylko on ma klasę .pr-price — reszta (тайл "Twoja cena",
+     етикетки, тултіпи) потребує окремого правила нижче).
+     =================================================================== */
+  .pr-price-b2b{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--space-sm); }
+  #screenResults.guest-mode .pr-price-b2b{ display:none; }
+  .pr-price-b2b-tile{ display:flex; flex-direction:column; align-items:flex-end; gap:2px; }
+  .pr-price-b2b-tile-label{
+    position:relative; display:flex; align-items:center; gap:4px;
+    font-family:var(--font-body); font-size:13px; color:var(--text-muted); white-space:nowrap;
+  }
+  .pr-price-b2b-nums{ display:flex; flex-direction:column; align-items:flex-end; gap:0; }
+  /* (i)-іконка: тап відкриває тултіп-розрахунок. На тачі :hover ненадійний,
+     тож перемикаємо клас .is-open замість CSS-hover (на відміну від .chip-tip). */
+  .pr-price-b2b-info{
+    display:flex; align-items:center; justify-content:center; flex:none;
+    width:16px; height:16px; border-radius:50%; border:1px solid var(--text-muted);
+    font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--text-muted);
+    cursor:pointer; user-select:none;
+  }
+  .pr-price-b2b-info:active{ background:var(--bg-chip); }
+  .pr-price-b2b-tip{
+    display:none; position:absolute; top:calc(100% + 6px); right:0; z-index:5;
+    min-width:200px; background:var(--text-on-light); color:var(--text-inverted);
+    border-radius:var(--radius-chip, 6px); padding:10px 12px; box-shadow:var(--shadow-2, 0 4px 12px rgba(0,0,0,.18));
+    font-family:var(--font-body); font-size:14px; white-space:normal; text-align:left;
+  }
+  .pr-price-b2b-tip.is-open{ display:block; }
+  .pr-price-b2b-tip-row{ display:flex; justify-content:space-between; gap:16px; padding:2px 0; }
+  .pr-price-b2b-tip-row.pr-price-b2b-tip-strong{
+    font-weight:700; border-top:1px solid rgba(255,255,255,.25); margin-top:2px; padding-top:6px;
+  }
+  /* Заголовок "Cena sprzedaży" -> "Cena" — тільки коли ввімкнено глобальний
+     тумблер "Ukryj Twoją cenę" (панель фільтрів, задача №4). */
+  .pr-price-b2b-label-short{ display:none; }
+  #screenResults.hide-own-price .pr-price-b2b-own{ display:none; }
+  #screenResults.hide-own-price .pr-price-b2b-label-full{ display:none; }
+  #screenResults.hide-own-price .pr-price-b2b-label-short{ display:inline; }
+  /* ===== KONIEC NOWEJ FUNKCJI: B2B ceny (Twoja cena / Cena sprzedaży) ===== */
+
 
   /* ── FIELD interactive state ─────────────────── */
   .field{ cursor:pointer; }
@@ -3420,9 +3467,23 @@
             <div class="sort-panel" id="sortPanel"></div>
           </div>
           </div><!-- /filter-bar-group -->
-          <div class="ean-toggle" id="eanToggle" style="cursor:pointer;margin-left:auto;" onclick="eanOn=!eanOn;updateEanDisplay();event.stopPropagation();">
+          <div style="display:flex;align-items:center;gap:var(--space-md);margin-left:auto;">
+          <div class="ean-toggle" id="eanToggle" style="cursor:pointer;" onclick="eanOn=!eanOn;updateEanDisplay();event.stopPropagation();">
             <span>EAN</span>
             <span class="toggle" id="eanKnob" style="background:var(--text-muted);"><span class="toggle-knob" style="right:auto;left:1px;"></span></span>
+          </div>
+          <!-- ===================================================================
+               NOWA FUNKCJA (04.08.2026, Ляна): глобальний тумблер "Ukryj cenę zakupu"
+               (задача №4 з плану B2B-цін). Ховає тайл "Twoja cena" на всіх картках,
+               де є новий блок .pr-price-b2b (поки — лише картка №2), і спрощує
+               заголовок "Cena sprzedaży" -> "Cena". Той самий візуальний патерн
+               (.ean-toggle/.toggle/.toggle-knob), що й EAN-тумблер поруч.
+               =================================================================== -->
+          <div class="ean-toggle" id="hideOwnPriceToggle" style="cursor:pointer;" onclick="toggleHideOwnPrice();event.stopPropagation();" title="Ukryj Twoją cenę zakupu przed klientem">
+            <span>Ukryj cenę</span>
+            <span class="toggle" id="hideOwnPriceKnob" style="background:var(--text-muted);"><span class="toggle-knob" style="right:auto;left:1px;"></span></span>
+          </div>
+          <!-- ===== KONIEC NOWEJ FUNKCJI: тумблер "Ukryj cenę" ===== -->
           </div>
         </div><!-- /filter-bar -->
 
@@ -3595,10 +3656,54 @@
           </div>
         </div>
         <div class="pr-price-col">
-          <div class="pr-price">
-            <span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-gross">€104.50</div><span class="chip-tip" style="top:auto;bottom:calc(100% + 6px);left:auto;right:0;">Cena brutto (z VAT)</span></span>
-<span class="chip-tooltip-wrap" style="display:flex;justify-content:flex-end;"><div class="pr-netto">€84.96</div><span class="chip-tip" style="bottom:auto;top:calc(100% + 6px);left:auto;right:0;">Cena netto (bez VAT)</span></span>
+          <!-- ===================================================================
+               NOWA FUNKCJA (04.08.2026, Ляна): B2B ceny — "Twoja cena" (koszt zakupu
+               po zniżce) + "Cena sprzedaży" (cena dla klienta końcowego, z marżą).
+               Zastępuje stary jednolity .pr-price WYŁĄCZNIE na karcie №2 (karta №1 —
+               eталонна — і всі решта карток лишаються без змін). Widoczne tylko dla
+               zalogowanego — guest-stan (.pr-price-lock) i #screenResults.guest-mode
+               nie змінені, лише додано .pr-price-b2b до тих самих guest-mode правил
+               (CSS блок нижче). Клас .pr-price лишили ТІЛЬКИ на числовому блоці
+               "Cena sprzedaży" — саме його читає addToCart() (card.querySelector
+               ('.pr-price')) для суми в кошику; "Twoja cena" — це власна закупівельна
+               ціна продавця, вона НЕ повинна потрапляти в суму замовлення клієнта.
+               =================================================================== -->
+          <div class="pr-price-b2b">
+            <div class="pr-price-b2b-tile pr-price-b2b-own">
+              <div class="pr-price-b2b-tile-label">
+                <span>Twoja cena</span>
+                <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
+                <div class="pr-price-b2b-tip">
+                  <div class="pr-price-b2b-tip-row"><span>Base price</span><span>€84.96</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Discount 5%</span><span>−€4.25</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Your price</span><span>€80.71</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Gross price</span><span>€99.27</span></div>
+                </div>
+              </div>
+              <div class="pr-price-b2b-nums">
+                <div class="pr-gross">€80.71</div>
+                <div class="pr-netto">€99.27</div>
+              </div>
+            </div>
+            <div class="pr-price-b2b-tile pr-price-b2b-sell">
+              <div class="pr-price-b2b-tile-label">
+                <span class="pr-price-b2b-label-full">Cena sprzedaży</span>
+                <span class="pr-price-b2b-label-short">Cena</span>
+                <span class="pr-price-b2b-info" onclick="event.stopPropagation(); togglePriceTip(this);" role="button" tabindex="0" aria-label="Jak liczona cena">i</span>
+                <div class="pr-price-b2b-tip">
+                  <div class="pr-price-b2b-tip-row"><span>Purchase price</span><span>€80.71</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Margin 15%</span><span>+€12.11</span></div>
+                  <div class="pr-price-b2b-tip-row pr-price-b2b-tip-strong"><span>Selling net</span><span>€92.82</span></div>
+                  <div class="pr-price-b2b-tip-row"><span>Selling gross</span><span>€114.17</span></div>
+                </div>
+              </div>
+              <div class="pr-price-b2b-nums pr-price">
+                <div class="pr-gross">€92.82</div>
+                <div class="pr-netto">€114.17</div>
+              </div>
+            </div>
           </div>
+          <!-- ===== KONIEC NOWEJ FUNKCJI: B2B ceny (Twoja cena / Cena sprzedaży) ===== -->
                     <div class="pr-price-lock">
             <span class="lock-label">🔒 Cena po zalogowaniu</span>
             <button class="lock-login" onclick="setScreen('screenLogin')">Zaloguj się →</button>
@@ -12543,6 +12648,45 @@
     if(iconsEl) iconsEl.classList.toggle('is-active', willShow);
   }
   /* ===== KONIEC NOWEJ FUNKCJI: toggleRefCardTwin ===== */
+
+  /* ===================================================================
+     NOWA FUNKCJA (04.08.2026, Ляна): B2B ceny на картці №2 — тултіпи-розрахунки
+     ((i)-іконка, тап) + глобальний тумблер "Ukryj cenę" (панель фільтрів).
+     Тултіп — керування класом .is-open (не :hover, на дотику ненадійно).
+     Клік будь-де поза відкритим тултіпом — закриває його (document-listener,
+     навішується один раз при завантаженні сторінки).
+     =================================================================== */
+  function togglePriceTip(infoEl){
+    var tip = infoEl ? infoEl.parentElement.querySelector('.pr-price-b2b-tip') : null;
+    if(!tip) return;
+    var willOpen = !tip.classList.contains('is-open');
+    // закриваємо всі інші відкриті тултіпи на сторінці перед відкриттям цього
+    document.querySelectorAll('.pr-price-b2b-tip.is-open').forEach(function(t){
+      if(t !== tip) t.classList.remove('is-open');
+    });
+    tip.classList.toggle('is-open', willOpen);
+  }
+  document.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('.pr-price-b2b-info')) return;
+    document.querySelectorAll('.pr-price-b2b-tip.is-open').forEach(function(t){ t.classList.remove('is-open'); });
+  });
+
+  function toggleHideOwnPrice(){
+    var scr = document.getElementById('screenResults');
+    var knob = document.getElementById('hideOwnPriceKnob');
+    if(!scr) return;
+    var isOn = scr.classList.toggle('hide-own-price');
+    if(knob){
+      knob.style.background = isOn ? 'var(--accent-primary)' : 'var(--text-muted)';
+      var k = knob.querySelector('.toggle-knob');
+      if(k){
+        k.style.right = isOn ? '1px' : 'auto';
+        k.style.left  = isOn ? 'auto' : '1px';
+        k.style.borderColor = isOn ? 'var(--accent-primary)' : 'rgba(0,0,0,.1)';
+      }
+    }
+  }
+  /* ===== KONIEC NOWEJ FUNKCJI: B2B ceny — тултіпи + тумблер "Ukryj cenę" ===== */
 
   function addToCart(btn){
     var card = btn ? btn.closest('.product-row') : null;
