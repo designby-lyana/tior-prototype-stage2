@@ -901,14 +901,17 @@
     cursor:pointer; user-select:none;
   }
   .pr-price-b2b-info:active{ background:var(--bg-chip); }
+  /* NOWA FUNKCJA (04.08.2026, Ляна): width:max-content + nowrap на рядках —
+     жоден рядок тултіпа (напр. "Your price brutto (-5%)") більше не переноситься
+     на 2 рядки, ширина підлаштовується під найдовший рядок автоматично. */
   .pr-price-b2b-tip{
     display:none; position:absolute; top:calc(100% + 6px); right:0; z-index:5;
-    min-width:200px; background:var(--text-on-light); color:var(--text-inverted);
+    width:max-content; max-width:calc(100vw - 48px); background:var(--text-on-light); color:var(--text-inverted);
     border-radius:var(--radius-chip, 6px); padding:10px 12px; box-shadow:var(--shadow-2, 0 4px 12px rgba(0,0,0,.18));
     font-family:var(--font-body); font-size:14px; white-space:normal; text-align:left;
   }
   .pr-price-b2b-tip.is-open{ display:block; }
-  .pr-price-b2b-tip-row{ display:flex; justify-content:space-between; gap:16px; padding:2px 0; }
+  .pr-price-b2b-tip-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:2px 0; white-space:nowrap; }
   .pr-price-b2b-tip-row.pr-price-b2b-tip-strong{
     font-weight:700; border-top:1px solid rgba(255,255,255,.25); margin-top:2px; padding-top:6px;
   }
