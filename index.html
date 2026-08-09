@@ -3618,9 +3618,10 @@
 
       <!-- results toolbar: count + applied filters + sort/EAN — один логічний блок -->
       <div style="display:flex;flex-direction:column;gap:var(--space-sm);margin-top:var(--space-lg);">
-        <span class="results-count" id="resultsCount" style="display:none;">24 produkty</span>
-        <div class="applied-filters" id="appliedFilters" style="display:none;">
-          <button class="clear-all" id="clearAllBtn" onclick="clearAllFilters()" style="display:none;">Wyczyść filtr</button>
+        <span class="results-count" id="resultsCount">24 produkty</span>
+        <div class="applied-filters" id="appliedFilters">
+          <span class="filter-pill" data-key="sezon">All seasons <button class="pill-remove" aria-label="Usuń">×</button></span>
+          <button class="clear-all" id="clearAllBtn" onclick="clearAllFilters()">Wyczyść filtr</button>
         </div>
         <div class="filter-bar" style="justify-content:flex-end;">
           <div class="sort-trigger-wrap">
