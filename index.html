@@ -350,6 +350,19 @@
   .card.is-expanded .accordion-trigger{color:var(--text-muted);}
   .card.is-expanded .accordion-trigger svg{transform:rotate(180deg);}
 
+  /* ЗМІНА ІСНУЮЧОГО ФУНКЦІОНАЛУ (09.08.2026, Ляна): тригер "Wyszukiwanie zaawansowane"
+     на сторінці РЕЗУЛЬТАТІВ має вигляд з референс-файлу — притиснутий праворуч,
+     без нижньої лінії (border-bottom), тонший шрифт. Домашню вкладку (.accordion-trigger
+     за замовчуванням, id=accordionTrigger) не чіпаємо — оверрайд лише через #accordionTriggerRes. */
+  #accordionTriggerRes{
+    justify-content:flex-end;
+    gap:var(--space-xs);
+    padding:0 0 calc(var(--space-sm) + 2px) 0;
+    border-bottom:none;
+    font-weight:400;
+    color:var(--text-muted);
+  }
+
   .advanced-wrap{
     display:grid;
     grid-template-rows:0fr;
