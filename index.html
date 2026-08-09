@@ -3468,30 +3468,161 @@
 
   <div class="results-content">
     <div class="od-breadcrumb" onclick="goBackFromResults()" style="cursor:pointer;margin-bottom:0;">‹‹ Powrót</div>
+    <!-- ===================================================================
+         ЗМІНА ІСНУЮЧОГО ФУНКЦІОНАЛУ (09.08.2026, Ляна): панель фільтрів сторінки
+         результатів перенесена 1:1 з коду "фільтри з головної на результатах.html"
+         (проєктний файл) замість грід-панелі "Filtry" (chip-тригери в 3 колонки).
+         Нове: поля рядками (Rozmiar / Typ+Sezon / EU label / Segment+Marka / Model+EAN),
+         чипи Run Flat/XL/RF/Dostawa do 48h, акордеон "Wyszukiwanie zaawansowane"
+         (Homologacja/DOT/Nośność/Prędkość/Ochrona felgi), сортування й тумблер EAN
+         перенесені вниз картки. Прибрано: пошукове поле (resultsSearchWrap) і кнопку
+         "Filtry" — фільтри тепер завжди розгорнуті, окремого collapse-стану нема.
+         CTA "Pokaż opony" за замовчуванням прихований (display:none) і з'являється
+         лише після першого кліку по будь-якому полю/чипу/акордеону (див. інлайн-скрипт
+         нижче, #resultsFiltersWrap). Ідентифікатори filtersCard/accordionTrigger/
+         advancedWrap перейменовані на *Res, бо ці id вже зайняті домашньою вкладкою
+         "Filtry" — без цього клік по акордеону сторінки результатів не спрацьовував би.
+         =================================================================== -->
     <h1 class="results-title">Wyniki wyszukiwania</h1>
 
-    <div class="results-filters-card">
+    <div class="results-filters-card" id="resultsFiltersWrap" style="padding-bottom:0;gap:0;">
 
       <div style="display:flex;flex-direction:column;gap:var(--space-xs);">
 
-        <div class="filter-bar">
-          <div class="filter-bar-group">
-          <div class="results-search-wrap">
-            <div class="results-search-input" id="resultsSearchWrap" onclick="expandResultsSearch()">
-              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.3-4.3"></path></svg>
-              <input type="text" id="resultsSearchField" placeholder="Rozmiar, marka, model lub EAN" class="results-search-field" onfocus="expandResultsSearch()" onblur="handleResultsSearchBlur()" oninput="document.getElementById('resultsSearchWrap').classList.toggle('has-text', this.value.length>0)" onkeydown="if(event.key==='Enter'){event.preventDefault();submitResultsSearch();}">
-              <button type="button" class="results-search-clear" aria-label="Wyczyść" onmousedown="event.preventDefault();" onclick="event.stopPropagation(); clearResultsSearch();">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        <div class="card" id="filtersCardRes" style="border-radius:0;box-shadow:none;border:none;background:transparent;margin:0;padding:0 0 8px 0;gap:8px;">
+
+          <div class="rozmiar-block">
+            <div class="size-row" id="sizeRow">
+            <div class="field" id="rozmiar1Field" data-dd-key="rozmiar" onclick="openDropdown('rozmiar', this)">
+              <div class="field-label-row">
+                <span class="field-label">Rozmiar</span>
+                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                <button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+              </div>
+            </div>
+            <span class="chip-tooltip-wrap"><button class="rozmiar-add-btn" id="rozmiarAddBtnHome" onclick="toggleRozmiar2(this)" aria-label="Dodaj drugi rozmiar"><svg class="plus-default" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"></path></svg><svg class="plus-hover" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v10M7 12h10" stroke-linecap="round"></path></svg></button><span class="chip-tip">Dodaj drugi rozmiar</span></span>
+            <div class="field" id="rozmiar2Field" data-dd-key="rozmiar" onclick="openDropdown('rozmiar', this)" style="display:none;">
+              <div class="field-label-row">
+                <span class="field-label">Rozmiar</span>
+                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                <button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+              </div>
+            </div>
+            <span class="chip-tooltip-wrap"><button class="rozmiar-remove-btn" id="rozmiarRemoveBtnHome" style="display:none;" onclick="hideRozmiar2(this)" aria-label="Usuń drugi rozmiar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><span class="chip-tip">Usuń drugi rozmiar</span></span>
+            </div>
+          </div>
+
+          <div class="row two-col">
+            <div class="field" data-dd-key="typ" onclick="openDropdown('typ', this)">
+              <div class="field-label-row"><span class="field-label">Typ</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            </div>
+            <div class="field" data-dd-key="sezon" onclick="openDropdown('sezon', this)">
+              <div class="field-label-row"><span class="field-label">Sezon</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field" id="euLabelField" onclick="openEuDropdown(this)">
+              <div class="field-label-row">
+                <span class="field-label" id="euLabelText">
+                  <span class="eu-hint-icons" style="display:inline-flex;align-items:center;gap:4px;color:var(--text-on-light);flex:none;">
+                    <svg viewBox="0 0 48 45" width="19.2" height="18" style="width:18px;height:18px;flex:none;" fill="currentColor"><g transform="translate(-6.000000,43.000000) scale(0.100000,-0.100000)"><path d="M72 418 c-9 -9 -12 -68 -12 -205 l0 -193 120 0 120 0 0 85 c0 69 3 85 15 85 12 0 15 -14 15 -63 0 -75 18 -107 59 -107 53 0 61 23 61 166 l0 130 -53 52 c-40 39 -56 49 -64 41 -9 -9 -6 -17 12 -31 l25 -19 -22 -30 c-21 -28 -21 -32 -7 -57 10 -19 24 -28 47 -30 l32 -3 0 -83 c0 -61 -4 -87 -15 -96 -24 -20 -35 -1 -35 61 0 73 -12 99 -45 99 -25 0 -25 1 -25 86 0 123 -1 124 -118 124 -63 0 -102 -4 -110 -12z m178 -88 l0 -60 -70 0 -70 0 0 60 0 60 70 0 70 0 0 -60z m157 -26 c8 -21 -13 -42 -28 -27 -13 13 -5 43 11 43 6 0 13 -7 17 -16z"></path></g></svg>
+                    <svg viewBox="0 0 48 45" width="19.2" height="18" style="width:18px;height:18px;flex:none;" fill="currentColor"><g transform="translate(-0.172266,43.078208) scale(0.100000,-0.100000)"><path d="M113 414 c-48 -24 -101 -87 -109 -129 -10 -54 10 -107 56 -149 37 -34 44 -36 105 -36 l65 0 0 56 c0 73 24 70 28 -4 3 -50 4 -52 33 -52 26 0 29 3 29 30 0 20 5 30 15 30 10 0 15 -10 15 -30 0 -27 3 -30 31 -30 43 0 99 56 99 99 0 40 -50 97 -98 112 -26 8 -42 20 -52 42 -33 70 -139 99 -217 61z m57 -234 c0 -53 -3 -70 -14 -70 -19 0 -26 22 -26 79 0 50 5 61 27 61 10 0 13 -18 13 -70z"></path> <path d="M230 74 c0 -17 22 -14 28 4 2 7 -3 12 -12 12 -9 0 -16 -7 -16 -16z"></path> <path d="M320 55 c0 -24 5 -35 15 -35 10 0 15 11 15 35 0 24 -5 35 -15 35 -10 0 -15 -11 -15 -35z"></path></g></svg>
+                    <svg viewBox="0 0 48 45" width="19.2" height="18" style="width:18px;height:18px;flex:none;" fill="currentColor"><g transform="translate(-3.000000,44.982016) scale(0.100000,-0.100000)"><path d="M310 432 c0 -11 17 -29 38 -43 44 -28 82 -98 82 -149 -1 -54 -34 -116 -79 -147 -40 -28 -57 -73 -28 -73 21 0 91 54 114 87 68 98 49 235 -43 311 -44 36 -84 43 -84 14z"></path> <path d="M190 375 c-52 -53 -56 -55 -107 -55 l-53 0 0 -80 0 -80 52 0 c50 0 55 -2 110 -57 l58 -57 0 192 c0 106 -1 192 -3 192 -1 0 -27 -25 -57 -55z"></path> <path d="M310 240 c0 -102 0 -103 20 -85 10 9 24 33 30 51 14 40 0 92 -30 119 -20 18 -20 17 -20 -85z"></path></g></svg>
+                  </span>
+                  <span class="eu-icons" id="euIconsSpan" style="display:none;"></span>
+                  <span class="eu-default-text" id="euDefaultText">EU label</span><span class="eu-values-text" id="euValuesText" style="display:none;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:14px;letter-spacing:0;text-transform:none;color:#0d0e13;"></span>
+                </span>
+                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                <button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row two-col">
+            <div class="field" data-dd-key="segment" onclick="openDropdown('segment', this)">
+              <div class="field-label-row"><span class="field-label">Segment</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            </div>
+            <div class="field" data-dd-key="marka" onclick="openDropdown('marka', this)">
+              <div class="field-label-row"><span class="field-label">Marka</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            </div>
+          </div>
+
+          <div class="row two-col">
+            <div class="field" data-dd-key="model" onclick="openDropdown('model', this)">
+              <div class="field-label-row"><span class="field-label">Model</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+            </div>
+            <div class="field" data-dd-key="ean" onclick="openDropdown('ean', this)">
+              <div class="field-label-row">
+                <span class="field-label">EAN</span>
+                <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                <button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść" style="display:none;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="chips-row">
+              <button class="chip" data-name="Run Flat">Run Flat</button>
+              <button class="chip" data-name="XL">XL</button>
+              <button class="chip" data-name="RF">RF</button>
+              <button class="chip" data-name="Dostawa do 48h">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h11v8H2zM13 11h4l4 3v1h-8z"></path><circle cx="6" cy="17" r="1.6"></circle><circle cx="17" cy="17" r="1.6"></circle></svg>
+                Dostawa do 48h
               </button>
             </div>
           </div>
-          <div class="filter-bar-left">
-            <button class="mini-trigger" onclick="toggleMoreFilters()">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="flex:none;"><line x1="3" y1="6" x2="21" y2="6"></line><circle cx="15" cy="6" r="2.2" fill="currentColor" stroke="none"></circle><line x1="3" y1="12" x2="21" y2="12"></line><circle cx="9" cy="12" r="2.2" fill="currentColor" stroke="none"></circle><line x1="3" y1="18" x2="21" y2="18"></line><circle cx="17" cy="18" r="2.2" fill="currentColor" stroke="none"></circle></svg>
-              Filtry
-              <svg class="field-chevron" id="moreFiltersChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform 220ms ease;"><path d="M6 9l6 6 6-6"></path></svg>
+
+          <div class="row">
+            <button class="accordion-trigger" id="accordionTriggerRes" aria-expanded="false" aria-controls="advancedWrapRes">
+              Wyszukiwanie zaawansowane
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
           </div>
+
+          <div class="advanced-wrap" id="advancedWrapRes">
+            <div class="advanced-inner">
+              <div class="advanced-inner-pad">
+                <div class="two-col">
+                  <div class="field" data-dd-key="homologacja" onclick="openDropdown('homologacja', this)">
+                    <div class="field-label-row"><span class="field-label">Homologacja</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+                  </div>
+                  <div class="field" data-dd-key="dot" onclick="openDropdown('dot', this)">
+                    <div class="field-label-row">
+                      <span class="field-label">DOT</span>
+                      <svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                      <button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="two-col">
+                  <div class="field" data-dd-key="nosnosc" onclick="openDropdown('nosnosc', this)">
+                    <div class="field-label-row"><span class="field-label">Nośność</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+                  </div>
+                  <div class="field" data-dd-key="predkosc" onclick="openDropdown('predkosc', this)">
+                    <div class="field-label-row"><span class="field-label">Prędkość</span><svg class="field-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><button class="field-clear" onclick="clearField(event,this)" aria-label="Wyczyść"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"></path></svg></button></div>
+                  </div>
+                </div>
+                <div class="chips-row">
+                  <button class="chip" data-name="Ochrona felgi">Ochrona felgi</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /filtersCardRes -->
+
+        <button class="cta cta-secondary results-find-btn" id="resultsFindBtnRes" style="margin-top:var(--space-xs);display:none;" onclick="runResultsSearch()">Pokaż opony</button>
+
+      </div><!-- /top-group -->
+
+      <!-- results toolbar: count + applied filters + sort/EAN — один логічний блок -->
+      <div style="display:flex;flex-direction:column;gap:var(--space-sm);margin-top:var(--space-lg);">
+        <span class="results-count" id="resultsCount" style="display:none;">24 produkty</span>
+        <div class="applied-filters" id="appliedFilters" style="display:none;">
+          <button class="clear-all" id="clearAllBtn" onclick="clearAllFilters()" style="display:none;">Wyczyść filtr</button>
+        </div>
+        <div class="filter-bar" style="justify-content:flex-end;">
           <div class="sort-trigger-wrap">
             <button class="mini-trigger" id="sortTrigger" onclick="toggleSortPanel()">
               <svg viewBox="0 -960 960 960" fill="currentColor"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z"></path></svg>
@@ -3501,9 +3632,7 @@
             </button>
             <div class="sort-panel" id="sortPanel"></div>
           </div>
-          </div><!-- /filter-bar-group -->
-          <div style="display:flex;align-items:center;gap:var(--space-md);margin-left:auto;">
-          <div class="ean-toggle" id="eanToggle" style="cursor:pointer;" onclick="eanOn=!eanOn;updateEanDisplay();event.stopPropagation();">
+          <div class="ean-toggle" id="eanToggle" style="cursor:pointer;margin-left:auto;" onclick="eanOn=!eanOn;updateEanDisplay();event.stopPropagation();">
             <span>EAN</span>
             <span class="toggle" id="eanKnob" style="background:var(--text-muted);"><span class="toggle-knob" style="right:auto;left:1px;"></span></span>
           </div>
@@ -3513,64 +3642,51 @@
                де є новий блок .pr-price-b2b (поки — лише картка №2), і спрощує
                заголовок "Cena sprzedaży" -> "Cena". Той самий візуальний патерн
                (.ean-toggle/.toggle/.toggle-knob), що й EAN-тумблер поруч.
+               ЗМІНА (09.08.2026, Ляна): при переробці панелі фільтрів результатів
+               тумблер тимчасово ПРИХОВАНО (display:none) — фіча ще не готова до показу,
+               маркування "новий функціонал" залишено як є.
                =================================================================== -->
-          <div class="ean-toggle" id="hideOwnPriceToggle" style="cursor:pointer;" onclick="toggleHideOwnPrice();event.stopPropagation();" title="Ukryj Twoją cenę zakupu przed klientem">
+          <div class="ean-toggle" id="hideOwnPriceToggle" style="cursor:pointer;display:none;" onclick="toggleHideOwnPrice();event.stopPropagation();" title="Ukryj Twoją cenę zakupu przed klientem">
             <span>Ukryj cenę</span>
             <span class="toggle" id="hideOwnPriceKnob" style="background:var(--text-muted);"><span class="toggle-knob" style="right:auto;left:1px;"></span></span>
           </div>
           <!-- ===== KONIEC NOWEJ FUNKCJI: тумблер "Ukryj cenę" ===== -->
-          </div>
-        </div><!-- /filter-bar -->
-
-        <!-- EXPANDED FILTERS -->
-        <div class="more-filters-wrap" id="moreFiltersWrap">
-          <div class="more-filters-inner" id="moreFiltersInner">
-            <div class="more-filters-pad" id="moreFiltersPad">
-            <!-- Filter chips: один суцільний потік, щоб дропдауни пакувались без зайвих порожніх місць -->
-            <div class="filters-dropdown-grid">
-              <div class="rozmiar-cluster" id="rozmiarClusterRes" style="display:flex;align-items:center;gap:2px;width:100%;">
-                <button class="mini-trigger results-filter-chip" id="rozmiar1Btn" style="flex:1;min-width:0;" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'rozmiar') : openDropdown('rozmiar',this)">Rozmiar <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button><span class="chip-tooltip-wrap"><button class="rozmiar-add-btn" id="rozmiarAddBtnRes" onclick="toggleRozmiar2(this)" aria-label="Dodaj drugi rozmiar"><svg class="plus-default" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"></path></svg><svg class="plus-hover" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 7v10M7 12h10" stroke-linecap="round"></path></svg></button><span class="chip-tip">Dodaj drugi rozmiar</span></span><button class="mini-trigger results-filter-chip" id="rozmiar2Btn" style="display:none;flex:1;min-width:0;justify-content:space-between;" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'rozmiar2') : openDropdown('rozmiar2',this)"><span>Rozmiar <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-2px;"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></span><svg id="rozmiarRemoveBtnRes" onclick="event.stopPropagation(); hideRozmiar2(this)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex:none;margin-left:6px;color:var(--text-muted);" aria-label="Usuń drugi rozmiar"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              </div>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'typ') : openDropdown('typ',this)">Typ <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <div id="rozmiarGridSpacer" aria-hidden="true"></div>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'sezon') : openDropdown('sezon',this)">Sezon <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'eu') : openEuDropdown(this)">Etykieta UE <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'marka') : openDropdown('marka',this)">Marka <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'segment') : openDropdown('segment',this)">Segment <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'ean') : openDropdown('ean',this)">EAN <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'homologacja') : openDropdown('homologacja',this)">Homologacja <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'nosnosc') : openDropdown('nosnosc',this)">Nośność <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'predkosc') : openDropdown('predkosc',this)">Prędkość <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-              <button class="mini-trigger results-filter-chip" onclick="this.classList.contains('is-active') ? clearFilterKey(this,'dot') : openDropdown('dot',this)">DOT <svg class="field-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg><svg class="filter-x" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-            </div>
-            <!-- Row 3: чіпи -->
-            <div class="chips-row">
-              <button class="chip" data-name="Run Flat">Run Flat</button>
-              <button class="chip" data-name="XL">XL</button>
-              <button class="chip" data-name="RF">RF</button>
-              <button class="chip" data-name="Ochrona felgi">Ochrona felgi</button>
-              <button class="chip" data-name="Dostawa do 48h">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h11v8H2zM13 11h4l4 3v1h-8z"></path><circle cx="6" cy="17" r="1.6"></circle><circle cx="17" cy="17" r="1.6"></circle></svg>
-                Dostawa do 48h
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button class="cta cta-secondary results-find-btn" style="margin-top:var(--space-xs);" onclick="runResultsSearch()">Pokaż opony</button>
-
-      </div><!-- /top-group -->
-
-      <!-- applied filters — bottom of card -->
-      <div style="display:flex;flex-direction:column;gap:var(--space-sm);">
-        <span class="results-count" id="resultsCount" style="display:none;">4 produkty</span>
-        <div class="applied-filters" id="appliedFilters" style="display:none;">
-          <button class="clear-all" id="clearAllBtn" onclick="clearAllFilters()" style="display:none;">Wyczyść filtr</button>
         </div>
       </div>
 
     </div>
+
+    <script>
+    (function(){
+      // ЗМІНА ІСНУЮЧОГО ФУНКЦІОНАЛУ (09.08.2026, Ляна): акордеон "Wyszukiwanie zaawansowane"
+      // для панелі фільтрів РЕЗУЛЬТАТІВ — окремий від домашнього (id filtersCard/accordionTrigger
+      // на домі вже зайняті), тож дублюємо той самий toggle-патерн під *Res id.
+      var card = document.getElementById('filtersCardRes');
+      var trigger = document.getElementById('accordionTriggerRes');
+      if(card && trigger){
+        trigger.addEventListener('click', function(){
+          var expanded = !card.classList.contains('is-expanded');
+          card.classList.toggle('is-expanded', expanded);
+          trigger.setAttribute('aria-expanded', String(expanded));
+        });
+      }
+
+      // ЗМІНА ІСНУЮЧОГО ФУНКЦІОНАЛУ (09.08.2026, Ляна): CTA "Pokaż opony" прихований
+      // за замовчуванням і показується лише після першої взаємодії користувача з
+      // фільтром (поле/чип/акордеон) — не клікає, отже додатковий пошук його не цікавить.
+      var wrap = document.getElementById('resultsFiltersWrap');
+      var cta  = document.getElementById('resultsFindBtnRes');
+      if(wrap && cta){
+        wrap.addEventListener('click', function(e){
+          if(cta.style.display === 'none'){
+            var t = e.target.closest('.field, .chip, .accordion-trigger');
+            if(t) cta.style.display = '';
+          }
+        });
+      }
+    })();
+    </script>
+    <!-- ===== KONIEC ZMIANY: панель фільтрів сторінки результатів ===== -->
 
     <!-- Empty results state (0 wyników) -->
     <div id="resultsEmptyState" style="display:none;flex-direction:column;align-items:center;padding:60px 24px 40px;text-align:center;gap:24px;">
