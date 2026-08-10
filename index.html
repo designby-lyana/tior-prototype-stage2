@@ -1771,19 +1771,19 @@
   }
   .pay-option:last-child{ margin-bottom:0; }
   .pay-option.pay-selected{
-    background:#f0f6f4;
-    border:1.5px solid #056b4b;
+    background:var(--status-success-soft);
+    border:1.5px solid var(--status-success);
   }
   .pay-option-header{
     display:flex; align-items:center; justify-content:space-between;
     margin-bottom:var(--space-sm);
   }
   .pay-badge{
-    border:1px solid #056b4b;
+    border:1px solid var(--status-success);
     border-radius:var(--radius-sm);
     padding:2px 8px;
     font-family:var(--font-body); font-size:12px;
-    color:#15803d; font-weight:500;
+    color:var(--status-success); font-weight:500;
     margin-left:auto;
     margin-right:var(--space-sm);
   }
@@ -2526,7 +2526,7 @@
     padding:6px 16px; border-radius:var(--radius-lg); border:none;
   }
   .od-badge.gray{ background:var(--bg-chip); color:var(--text-on-light); }
-  .od-badge.green{ background:#f0f6f4; color:#056b4b; }
+  .od-badge.green{ background:var(--status-success-soft); color:var(--status-success); }
 
   /* note */
   .od-note-label{ display:flex; align-items:center; gap:6px; font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); margin-bottom:2px; }
