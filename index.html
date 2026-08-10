@@ -36,6 +36,7 @@
     --space-md:12px;
     --space-lg:16px;
     --space-xl:24px;
+    --status-danger:#b3261e;
     --shadow-card:0 1px 3px rgba(0,0,0,.08), 0 6px 24px rgba(0,0,0,.12);
     --space-2xl:32px;
     --space-3xl:40px;
@@ -1520,7 +1521,7 @@
   }
   .cart-summary-value{
     font-family:var(--font-body); font-weight:400;
-    font-size:16px; line-height:18px; color:#111827;
+    font-size:16px; line-height:18px; color:var(--text-default);
   }
   .cart-summary-total-label{
     font-family:var(--font-body); font-weight:500;
@@ -1529,7 +1530,7 @@
   }
   .cart-summary-total-value{
     font-family:var(--font-body); font-weight:700;
-    font-size:16px; line-height:18px; color:#111827;
+    font-size:16px; line-height:18px; color:var(--text-default);
   }
   .cart-summary-actions{
     padding:0 20px var(--space-xl);
@@ -1738,11 +1739,11 @@
     cursor:not-allowed;
   }
   .checkout-step-hint{
-    font-family:var(--font-body); font-size:14px; color:#b3261e;
+    font-family:var(--font-body); font-size:14px; color:var(--status-danger);
     margin-top:4px;
   }
   .step-circle.step-error{
-    background:#b3261e !important; color:#fff !important;
+    background:var(--status-danger) !important; color:#fff !important;
     animation: stepErrorPulse 1s ease 2;
   }
   @keyframes stepErrorPulse{
@@ -1851,7 +1852,7 @@
   }
   .sum-brutto-value{
     font-family:var(--font-body); font-weight:700; font-size:16px;
-    color:#111827;
+    color:var(--text-default);
   }
 
   .sum-rows{ display:flex; flex-direction:column; gap:var(--space-md); }
@@ -1866,10 +1867,9 @@
   }
   .sum-row-value{
     font-family:var(--font-body); font-weight:400; font-size:16px;
-    color:#111827; flex:1; text-align:right;
+    color:var(--text-default); flex:1; text-align:right;
     line-height:18px; word-break:break-word;
   }
-  .sum-row-value.accent{ color:#056b4b; }
   .sum-row-value a{
     color:var(--accent-primary); text-decoration:underline; cursor:pointer;
   }
@@ -1947,7 +1947,7 @@
   .addr-row-top{ display:flex; align-items:flex-start; gap:2px; padding:0; }
   .addr-label{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); flex:0 0 auto; white-space:nowrap; line-height:18px; }
   .addr-value-col{ flex:1; display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:0; }
-  .addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
+  .sum-addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
   .addr-toggle-btn{
     font-family:var(--font-body); font-weight:400; font-size:14px;
     color:var(--accent-primary); line-height:18px; text-align:right;
@@ -8574,7 +8574,7 @@
           <div class="addr-row-top">
             <span class="addr-label">Adres</span>
             <div class="addr-value-col">
-              <span class="addr-name">Magazyn w Warszawie</span>
+              <span class="sum-addr-name">Magazyn w Warszawie</span>
               <button class="addr-toggle-btn" id="addrToggle" onclick="toggleAddr()">Pokaż</button>
             </div>
           </div>
