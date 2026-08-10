@@ -43,6 +43,8 @@
        Додано без зміни наявних токенів вище. ===== */
     --radius-md:12px;
     --radius-xs-v2:2px;
+    --border-subtle:#EDEBE9;
+    --focus-ring-inset:inset 0 0 0 2px rgba(0,95,110,.55);
     --color-season-summer:#FFAA55;
     --color-season-winter:#386D94;
     --font-mono:'JetBrains Mono', monospace;
@@ -728,19 +730,19 @@
   .pr-purchase{ display:flex; align-items:flex-start; gap: var(--space-lg); }
   .qty-stepper{
     display:flex; align-items:center;
-    border:1px solid var(--bg-chip);
+    border:1px solid var(--border-default);
     border-radius:var(--radius-lg);
     overflow:hidden;
     width:120px;
     height:40px;
     flex:none;
     padding:.5px;
-    background:var(--bg-chip);
+    background:var(--bg-input);
     box-sizing:border-box;
   }
   .qty-btn{
     -webkit-appearance:none;appearance:none; border:none;
-    background:var(--bg-chip);
+    background:transparent;
     width:22px; height:100%;
     flex:none;
     font-size:14px; color:var(--text-on-light);
@@ -748,9 +750,9 @@
     display:flex; align-items:center; justify-content:center;
     transition:background-color 140ms ease, color 140ms ease;
   }
-  .qty-btn:hover{ background:#C8C1BC; }
-  .qty-btn:active{ background: var(--accent-pressed); color:#fff; }
-  .qty-btn:focus-visible{ outline:2px solid var(--text-default); outline-offset:1px; }
+  .qty-btn:hover{ background:var(--border-subtle); }
+  .qty-btn:active{ background:transparent; color:var(--accent-primary); }
+  .qty-btn:focus-visible{ outline:none; box-shadow:var(--focus-ring-inset); }
   .qty-value{ flex:1; text-align:center; font-family:var(--font-body); font-size:18px; font-weight:400; line-height:18px; color:var(--text-on-light); background:var(--bg-input); height:100%; display:flex; align-items:center; justify-content:center; }
   .qty-limit-note{
     display:none; font-family:var(--font-body); font-size:13px; line-height:16px;
@@ -1441,7 +1443,7 @@
     color:var(--text-muted); margin-top:2px;
   }
   .cart-item-bottom{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:flex-end; justify-content:space-between;
     gap:var(--space-md);
   }
   .cart-item-unit{
@@ -12946,7 +12948,7 @@
         +   '<svg onclick="removeCartItem(' + idx + ')" style="cursor:pointer;width:18px;height:18px;flex:none;stroke:var(--text-muted);transition:stroke 140ms;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" onmouseover="this.style.stroke=\'var(--text-default)\'" onmouseout="this.style.stroke=\'var(--text-muted)\'"><path d="M3 6h18M5 6l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>'
         + '</div>'
         + '<div class="cart-item-bottom">'
-        +   '<div class="qty-stepper" style="width:100px;height:28px;">'
+        +   '<div class="qty-stepper" style="width:100px;height:32px;">'
         +     '<button class="qty-btn" onclick="cartChangeQty(' + idx + ',-1)" aria-label="Zmniejsz">&#8722;</button>'
         +     '<span class="qty-value" style="font-size:15px;">' + item.qty + '</span>'
         +     '<button class="qty-btn" onclick="cartChangeQty(' + idx + ',1)" aria-label="Zwiększ">+</button>'
