@@ -744,8 +744,8 @@
     -webkit-appearance:none;appearance:none; border:none;
     background:transparent;
     width:22px; height:100%;
-    flex:none;
-    font-size:14px; color:var(--text-on-light);
+    flex:none; padding:0;
+    font-family:var(--font-body); font-size:14px; font-weight:700; color:var(--text-on-light);
     cursor:pointer;
     display:flex; align-items:center; justify-content:center;
     transition:background-color 140ms ease, color 140ms ease;
@@ -753,7 +753,7 @@
   .qty-btn:hover{ background:var(--border-subtle); }
   .qty-btn:active{ background:transparent; color:var(--accent-primary); }
   .qty-btn:focus-visible{ outline:none; box-shadow:var(--focus-ring-inset); }
-  .qty-value{ flex:1; text-align:center; font-family:var(--font-body); font-size:18px; font-weight:400; line-height:18px; color:var(--text-on-light); background:var(--bg-input); height:100%; display:flex; align-items:center; justify-content:center; }
+  .qty-value{ flex:1; text-align:center; font-family:var(--font-body); font-size:18px; font-weight:700; line-height:18px; color:var(--text-on-light); background:var(--bg-input); height:100%; display:flex; align-items:center; justify-content:center; }
   .qty-limit-note{
     display:none; font-family:var(--font-body); font-size:13px; line-height:16px;
     color:var(--text-muted); white-space:nowrap;
@@ -12950,7 +12950,7 @@
         + '<div class="cart-item-bottom">'
         +   '<div class="qty-stepper" style="width:100px;height:32px;">'
         +     '<button class="qty-btn" onclick="cartChangeQty(' + idx + ',-1)" aria-label="Zmniejsz">&#8722;</button>'
-        +     '<span class="qty-value" style="font-size:15px;">' + item.qty + '</span>'
+        +     '<span class="qty-value">' + item.qty + '</span>'
         +     '<button class="qty-btn" onclick="cartChangeQty(' + idx + ',1)" aria-label="Zwiększ">+</button>'
         +   '</div>'
         +   '<div class="cart-right">'
