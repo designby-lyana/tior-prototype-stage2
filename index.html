@@ -45,6 +45,9 @@
     --radius-xs-v2:2px;
     --border-subtle:#EDEBE9;
     --focus-ring-inset:inset 0 0 0 2px rgba(0,95,110,.55);
+    --status-success:#4a7a52;
+    --status-success-soft:#eef4ee;
+    --status-success-ink:#d6e5d6;
     --color-season-summer:#FFAA55;
     --color-season-winter:#386D94;
     --font-mono:'JetBrains Mono', monospace;
@@ -1630,7 +1633,7 @@
     margin-bottom:var(--space-sm);
   }
   .delivery-option:last-child{ margin-bottom:0; }
-  .delivery-option.selected{ background:#f0f6f4; border:1.5px solid #056b4b; }
+  .delivery-option.selected{ background:var(--status-success-soft); border:1.5px solid var(--status-success); }
   .delivery-option-top{
     display:flex; align-items:center; gap:10px;
     margin-bottom:4px;
@@ -1641,8 +1644,8 @@
     flex:none; display:flex; align-items:center; justify-content:center;
     transition:border-color 140ms ease;
   }
-  .delivery-option.selected .radio{ border-color:var(--text-on-light); }
-  .delivery-option.selected .radio-dot{ display:block; background:var(--text-on-light); }
+  .delivery-option.selected .radio{ border-color:var(--status-success); }
+  .delivery-option.selected .radio-dot{ display:block; background:var(--status-success); }
   .radio-dot{
     width:7px; height:7px; border-radius:50%;
     background:var(--accent-primary);
@@ -2720,9 +2723,9 @@
 
   /* address card radio style — unified with pay-option.pay-selected */
   .address-card { cursor:pointer; transition:border-color 140ms ease; }
-  .address-card.selected { background:#f0f6f4; border:1.5px solid #056b4b; }
-  .address-card.selected .radio { border-color:var(--text-on-light); }
-  .address-card.selected .radio-dot { display:block; background:var(--text-on-light); }
+  .address-card.selected { background:var(--status-success-soft); border:1.5px solid var(--status-success); }
+  .address-card.selected .radio { border-color:var(--status-success); }
+  .address-card.selected .radio-dot { display:block; background:var(--status-success); }
 
   /* ===== HOME SEARCH TABS ===== */
   #homeSearchSection{
