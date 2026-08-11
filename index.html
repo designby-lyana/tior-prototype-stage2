@@ -36,10 +36,6 @@
     --space-md:12px;
     --space-lg:16px;
     --space-xl:24px;
-    --status-danger:#95524f;
-    --status-danger-soft:#f6eded;
-    --status-danger-ink:#e6d2d2;
-    --shadow-card:0 1px 3px rgba(0,0,0,.08), 0 6px 24px rgba(0,0,0,.12);
     --space-2xl:32px;
     --space-3xl:40px;
     /* ===== NOWA FUNKCJA (04.08.2026, Ляна): токени для еталонної картки товару
@@ -198,7 +194,7 @@
     display:flex;
     flex-direction:column;
     gap:16px;
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
@@ -1226,7 +1222,7 @@
     width:40px;
     max-width:100%;
     border-radius:100px;
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     padding:0;
     overflow:hidden;
     cursor:pointer;
@@ -1426,7 +1422,7 @@
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
     overflow:hidden;
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
   .cart-item{
     padding:var(--space-lg);
@@ -1478,7 +1474,7 @@
     background:#fff;
     border-radius:var(--radius-lg);
     display:flex; flex-direction:column;
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     overflow:hidden;
   }
   .cart-guest-disabled, .cart-guest-disabled *{
@@ -1523,7 +1519,7 @@
   }
   .cart-summary-value{
     font-family:var(--font-body); font-weight:400;
-    font-size:16px; line-height:18px; color:var(--text-default);
+    font-size:16px; line-height:18px; color:#111827;
   }
   .cart-summary-total-label{
     font-family:var(--font-body); font-weight:500;
@@ -1532,7 +1528,7 @@
   }
   .cart-summary-total-value{
     font-family:var(--font-body); font-weight:700;
-    font-size:16px; line-height:18px; color:var(--text-default);
+    font-size:16px; line-height:18px; color:#111827;
   }
   .cart-summary-actions{
     padding:0 20px var(--space-xl);
@@ -1591,7 +1587,7 @@
     margin-bottom:var(--space-sm);
   }
   .step-circle{
-    width:32px; height:32px; border-radius:16px;
+    width:32px; height:32px; border-radius:14px;
     display:flex; align-items:center; justify-content:center;
     font-family:var(--font-mono); font-weight:400; font-size:22px;
     line-height:18px; flex:none; cursor:pointer;
@@ -1600,7 +1596,7 @@
   .step-circle:hover{ opacity:.8; }
   .step-circle.active{ background:#323744; color:#fffaf2; }
   .step-circle.inactive{ background:rgba(11,12,12,0.48); color:#ddd8d4; }
-  .step-circle.done{ background:#323744; color:#fffaf2; }
+  .step-circle.done{ background:rgba(11,12,12,0.48); color:#ddd8d4; }
   .step-line{
     flex:1; height:1px; background:#9ca3af;
     margin:0 4px;
@@ -1617,21 +1613,21 @@
     border-radius:var(--radius-lg);
     padding:var(--space-lg);
     display:flex; flex-direction:column; gap:var(--space-lg);
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
   .section-title{
     display:flex; align-items:center; gap:var(--space-sm);
     font-family:var(--font-mono); font-weight:700; font-size:16px; letter-spacing:0; line-height:15.84px; text-transform:uppercase;
     color:var(--text-default);
   }
-  .section-title svg{ width:20px; height:20px; flex:none; }
+  .section-title svg{ width:20px; height:20px; flex:none; color:var(--text-muted); }
 
   /* delivery options */
   .delivery-options{ display:flex; flex-direction:column; gap:0; }
   .delivery-option{
     border:1px solid var(--border-default);
     border-radius:var(--radius-lg);
-    padding:var(--space-md) var(--space-lg);
+    padding:12px var(--space-lg);
     cursor:pointer;
     transition:border-color 140ms ease;
     margin-bottom:var(--space-sm);
@@ -1639,7 +1635,7 @@
   .delivery-option:last-child{ margin-bottom:0; }
   .delivery-option.selected{ background:var(--status-success-soft); border:1.5px solid var(--status-success); }
   .delivery-option-top{
-    display:flex; align-items:center; gap:var(--space-md);
+    display:flex; align-items:center; gap:10px;
     margin-bottom:4px;
   }
   .radio{
@@ -1741,11 +1737,11 @@
     cursor:not-allowed;
   }
   .checkout-step-hint{
-    font-family:var(--font-body); font-size:14px; color:var(--status-danger);
+    font-family:var(--font-body); font-size:14px; color:#b3261e;
     margin-top:4px;
   }
   .step-circle.step-error{
-    background:var(--status-danger) !important; color:#fff !important;
+    background:#b3261e !important; color:#fff !important;
     animation: stepErrorPulse 1s ease 2;
   }
   @keyframes stepErrorPulse{
@@ -1775,19 +1771,19 @@
   }
   .pay-option:last-child{ margin-bottom:0; }
   .pay-option.pay-selected{
-    background:#f0f6f4;
-    border:1.5px solid #056b4b;
+    background:var(--status-success-soft);
+    border:1.5px solid var(--status-success);
   }
   .pay-option-header{
     display:flex; align-items:center; justify-content:space-between;
     margin-bottom:var(--space-sm);
   }
   .pay-badge{
-    border:1px solid #056b4b;
+    border:1px solid var(--status-success);
     border-radius:var(--radius-sm);
     padding:2px 8px;
     font-family:var(--font-body); font-size:12px;
-    color:#15803d; font-weight:500;
+    color:var(--status-success); font-weight:500;
     margin-left:auto;
     margin-right:var(--space-sm);
   }
@@ -1797,7 +1793,7 @@
     display:flex; align-items:center; gap:4px;
   }
   .pay-option-top{
-    display:flex; align-items:center; gap:var(--space-md);
+    display:flex; align-items:center; gap:10px;
     margin-bottom:4px;
   }
   .pay-radio{
@@ -1830,8 +1826,8 @@
 
   /* swipe hint */
   .step-circle.done{
-    background:#323744;
-    color:#fffaf2;
+    background: rgba(11,12,12,0.48);
+    color:var(--bg-chip);
   }
 
   /* ── SUMMARY STEP ────────────────────────────────── */
@@ -1842,7 +1838,7 @@
     padding-bottom:var(--space-md);
     border-bottom:1px solid var(--border-surface);
   }
-  .sum-section-title svg{ width:18px; height:18px; flex:none; }
+  .sum-section-title svg{ width:18px; height:18px; flex:none; color:var(--accent-primary); }
 
   .sum-brutto{
     display:flex; align-items:center; justify-content:space-between;
@@ -1854,7 +1850,7 @@
   }
   .sum-brutto-value{
     font-family:var(--font-body); font-weight:700; font-size:16px;
-    color:var(--text-default);
+    color:#111827;
   }
 
   .sum-rows{ display:flex; flex-direction:column; gap:var(--space-md); }
@@ -1869,9 +1865,10 @@
   }
   .sum-row-value{
     font-family:var(--font-body); font-weight:400; font-size:16px;
-    color:var(--text-default); flex:1; text-align:right;
+    color:#111827; flex:1; text-align:right;
     line-height:18px; word-break:break-word;
   }
+  .sum-row-value.accent{ color:#056b4b; }
   .sum-row-value a{
     color:var(--accent-primary); text-decoration:underline; cursor:pointer;
   }
@@ -1949,7 +1946,7 @@
   .addr-row-top{ display:flex; align-items:flex-start; gap:2px; padding:0; }
   .addr-label{ font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); flex:0 0 auto; white-space:nowrap; line-height:18px; }
   .addr-value-col{ flex:1; display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:0; }
-  .sum-addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
+  .addr-name{ font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:16px; color:var(--text-default); line-height:18px; text-align:right; }
   .addr-toggle-btn{
     font-family:var(--font-body); font-weight:400; font-size:14px;
     color:var(--accent-primary); line-height:18px; text-align:right;
@@ -2022,7 +2019,7 @@
     border-radius:var(--radius-lg);
     padding:var(--space-lg);
     display:flex; flex-direction:column; gap:var(--space-sm);
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     cursor:pointer;
     transition:box-shadow 160ms ease, background 160ms ease, transform 120ms ease;
   }
@@ -2224,7 +2221,7 @@
     border-radius:var(--radius-lg);
     padding:var(--space-md) var(--space-lg);
     display:flex; flex-direction:column; gap:var(--space-sm);
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     transition:background 160ms ease, box-shadow 160ms ease;
   }
   .inv-row:hover{ background:#f4f6f7; box-shadow:0 2px 10px rgba(0,0,0,.09); }
@@ -2329,7 +2326,7 @@
     border-radius:var(--radius-lg);
     padding:var(--space-xl);
     display:flex; flex-direction:column; gap:0;
-    box-shadow:var(--shadow-card);
+    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
   }
   .firma-card-header{
     display:flex; align-items:center; justify-content:space-between;
@@ -2529,7 +2526,7 @@
     padding:6px 16px; border-radius:var(--radius-lg); border:none;
   }
   .od-badge.gray{ background:var(--bg-chip); color:var(--text-on-light); }
-  .od-badge.green{ background:#f0f6f4; color:#056b4b; }
+  .od-badge.green{ background:var(--status-success-soft); color:var(--status-success); }
 
   /* note */
   .od-note-label{ display:flex; align-items:center; gap:6px; font-family:var(--font-body); font-weight:400; font-size:16px; color:var(--text-muted); margin-bottom:2px; }
@@ -2929,7 +2926,7 @@
       border-radius: 100px;
       padding: 8px 16px;
       gap: 8px;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     }
     #screenHome .header-actions .lang-static {
       padding-right: 8px;
@@ -8328,7 +8325,7 @@
           </div>
           <div class="cart-summary-row">
             <span class="cart-summary-label">Dostawa</span>
-            <span class="cart-summary-value">0</span>
+            <span class="cart-summary-value">Darmowa</span>
           </div>
         </div>
         <div class="cart-summary-actions">
@@ -8493,7 +8490,7 @@
       <!-- płatność automatyczna: brak wyboru, tylko konstatacja -->
       <div class="pay-option pay-selected" style="cursor:default;">
         <div class="pay-option-top" style="gap:0;">
-          <span class="pay-option-name" style="font-weight:700;">Konto depozytowe</span>
+          <span class="pay-option-name" style="font-weight:600;">Konto depozytowe</span>
         </div>
         <div class="pay-option-desc" style="padding-left:0;">
           Płatność zostanie automatycznie pobrana z przedpłaconego salda firmowego.<br>
@@ -8576,7 +8573,7 @@
           <div class="addr-row-top">
             <span class="addr-label">Adres</span>
             <div class="addr-value-col">
-              <span class="sum-addr-name">Magazyn w Warszawie</span>
+              <span class="addr-name">Magazyn w Warszawie</span>
               <button class="addr-toggle-btn" id="addrToggle" onclick="toggleAddr()">Pokaż</button>
             </div>
           </div>
@@ -13015,9 +13012,6 @@
 
   function renderCartSummary(){
     var total = cartItems.reduce(function(s,i){return s+parseFloat(i.total);},0);
-    var itemCount = cartItems.reduce(function(s,i){return s+i.qty;},0);
-    var el = document.querySelector('.cart-summary-value');
-    if(el) el.textContent = itemCount + ' szt.';
     var totalEl = document.querySelector('.cart-summary-total-value');
     if(totalEl) totalEl.textContent = ((typeof isGuest !== 'undefined') && isGuest) ? '🔒 Cena po zalogowaniu' : '€' + total.toFixed(2);
   }
