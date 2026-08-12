@@ -66,6 +66,7 @@
     --shadow-card:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     --radius-step:14px;
     --btn-height-sm:34px;
+    --icon-sm:16px;
   }
   html{ scrollbar-width:none; }
   html::-webkit-scrollbar{ display:none; }
@@ -1725,6 +1726,7 @@
     transition:border-color 140ms ease;
   }
   .btn-addr-add:hover{ border-color:var(--accent-primary); }
+  .btn-addr-add svg{ width:var(--icon-sm); height:var(--icon-sm); flex:none; }
   .btn-addr-sel{
     -webkit-appearance:none;appearance:none; flex:1; height:var(--btn-height-sm);
     border:1px solid var(--border-default);
@@ -1736,6 +1738,7 @@
     transition:border-color 140ms ease;
   }
   .btn-addr-sel:hover{ border-color:var(--accent-primary); }
+  .btn-addr-sel svg{ width:var(--icon-sm); height:var(--icon-sm); flex:none; }
 
   /* next step button */
   .btn-checkout-next{
@@ -8436,8 +8439,8 @@
       <div class="section-title">ADRES DOSTAWY</div>
       <div id="checkoutAddrList" style="display:flex;flex-direction:column;gap:8px;"></div>
       <div class="address-actions" style="display:none;">
-        <button class="btn-addr-add" onclick="openAddrSheet()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9941 23.9882C18.5556 23.9882 23.9882 18.5439 23.9882 11.9941C23.9882 5.43262 18.5439 0 11.9823 0C5.43262 0 0 5.43262 0 11.9941C0 18.5439 5.44438 23.9882 11.9941 23.9882ZM11.9941 21.9892C6.4439 21.9892 2.01078 17.5443 2.01078 11.9941C2.01078 6.4439 6.43214 1.99902 11.9823 1.99902C17.5326 1.99902 21.9892 6.4439 21.9892 11.9941C21.9892 17.5443 17.5443 21.9892 11.9941 21.9892Z" fill="currentColor"></path><path d="M6.53711 11.9933C6.53711 12.5694 6.93692 12.9576 7.53662 12.9576H10.9937V16.4264C10.9937 17.0143 11.3936 17.4259 11.9698 17.4259C12.5577 17.4259 12.9693 17.0262 12.9693 16.4264V12.9576H16.4381C17.0261 12.9576 17.4376 12.5694 17.4376 11.9933C17.4376 11.4054 17.0261 10.9937 16.4381 10.9937H12.9693V7.53666C12.9693 6.93695 12.5577 6.52539 11.9698 6.52539C11.3936 6.52539 10.9937 6.93695 10.9937 7.53666V10.9937H7.53662C6.93692 10.9937 6.53711 11.4054 6.53711 11.9933Z" fill="currentColor"></path></svg> Dodaj adres</button>
-        <button class="btn-addr-sel" onclick="openAddrPickSheet()"><svg width="16" height="16" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-200v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360ZM200-160q-33 0-56.5-23.5T120-240q0-33 23.5-56.5T200-320q33 0 56.5 23.5T280-240q0 33-23.5 56.5T200-160Zm0-240q-33 0-56.5-23.5T120-480q0-33 23.5-56.5T200-560q33 0 56.5 23.5T280-480q0 33-23.5 56.5T200-400Zm-56.5-263.5Q120-687 120-720t23.5-56.5Q167-800 200-800t56.5 23.5Q280-753 280-720t-23.5 56.5Q233-640 200-640t-56.5-23.5Z"></path></svg> Wybierz</button>
+        <button class="btn-addr-add" onclick="openAddrSheet()"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9941 23.9882C18.5556 23.9882 23.9882 18.5439 23.9882 11.9941C23.9882 5.43262 18.5439 0 11.9823 0C5.43262 0 0 5.43262 0 11.9941C0 18.5439 5.44438 23.9882 11.9941 23.9882ZM11.9941 21.9892C6.4439 21.9892 2.01078 17.5443 2.01078 11.9941C2.01078 6.4439 6.43214 1.99902 11.9823 1.99902C17.5326 1.99902 21.9892 6.4439 21.9892 11.9941C21.9892 17.5443 17.5443 21.9892 11.9941 21.9892Z" fill="currentColor"></path><path d="M6.53711 11.9933C6.53711 12.5694 6.93692 12.9576 7.53662 12.9576H10.9937V16.4264C10.9937 17.0143 11.3936 17.4259 11.9698 17.4259C12.5577 17.4259 12.9693 17.0262 12.9693 16.4264V12.9576H16.4381C17.0261 12.9576 17.4376 12.5694 17.4376 11.9933C17.4376 11.4054 17.0261 10.9937 16.4381 10.9937H12.9693V7.53666C12.9693 6.93695 12.5577 6.52539 11.9698 6.52539C11.3936 6.52539 10.9937 6.93695 10.9937 7.53666V10.9937H7.53662C6.93692 10.9937 6.53711 11.4054 6.53711 11.9933Z" fill="currentColor"></path></svg> Dodaj adres</button>
+        <button class="btn-addr-sel" onclick="openAddrPickSheet()"><svg viewBox="0 -960 960 960" fill="currentColor"><path d="M360-200v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360ZM200-160q-33 0-56.5-23.5T120-240q0-33 23.5-56.5T200-320q33 0 56.5 23.5T280-240q0 33-23.5 56.5T200-160Zm0-240q-33 0-56.5-23.5T120-480q0-33 23.5-56.5T200-560q33 0 56.5 23.5T280-480q0 33-23.5 56.5T200-400Zm-56.5-263.5Q120-687 120-720t23.5-56.5Q167-800 200-800t56.5 23.5Q280-753 280-720t-23.5 56.5Q233-640 200-640t-56.5-23.5Z"></path></svg> Wybierz</button>
       </div>
       <div id="checkoutStep1Hint" class="checkout-step-hint" style="display:none;">Nie wybrano jeszcze adresu dostawy.</div>
     </div>
