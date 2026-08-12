@@ -8888,28 +8888,19 @@
       <h1 class="od-title" id="ordersPageTitle">Wszystkie zamówienia</h1>
     </div>
 
-    <!-- status summary cards (3.1, 🆕) -->
-    <div id="ordersStatusCards" style="display:flex;flex-direction:column;gap:var(--space-sm);">
-      <div class="checkout-card" id="statCardNieoplacone" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #b45309;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span class="flt-title" style="font-size:13px;">Nieopłacone</span>
-          <span id="statCardNieoplaconeCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
-        </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#fdf3e3;border-color:#e8d4a8;color:#9a6200;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">Zobacz nieopłacone</button>
+    <!-- status summary cards (3.1, 🆕; вузькі картки в один рядок, картка клікабельна, CTA-кнопка всередині прибрана) -->
+    <div id="ordersStatusCards" style="display:flex;flex-direction:row;gap:var(--space-sm);">
+      <div class="checkout-card" id="statCardNieoplacone" role="button" tabindex="0" style="flex:1;min-width:0;padding:var(--space-md);gap:var(--space-xs);border-left:4px solid #b45309;cursor:pointer;" onclick="openOrdersStatusFilter('orderPaymentSection','Nieopłacone')">
+        <span class="flt-title" style="font-size:10px;line-height:1.25;letter-spacing:0;">Nieopłacone</span>
+        <span id="statCardNieoplaconeCount" style="font-family:var(--font-mono);font-weight:700;font-size:22px;color:var(--text-default);">0</span>
       </div>
-      <div class="checkout-card" id="statCardWdostawie" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #1d4ed8;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span class="flt-title" style="font-size:13px;">W dostawie</span>
-          <span id="statCardWdostawieCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
-        </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">Zobacz w dostawie</button>
+      <div class="checkout-card" id="statCardWdostawie" role="button" tabindex="0" style="flex:1;min-width:0;padding:var(--space-md);gap:var(--space-xs);border-left:4px solid #1d4ed8;cursor:pointer;" onclick="openOrdersStatusFilter('orderStageSection','W dostawie')">
+        <span class="flt-title" style="font-size:10px;line-height:1.25;letter-spacing:0;">W dostawie</span>
+        <span id="statCardWdostawieCount" style="font-family:var(--font-mono);font-weight:700;font-size:22px;color:var(--text-default);">0</span>
       </div>
-      <div class="checkout-card" id="statCardWrealizacji" style="padding:var(--space-lg);gap:var(--space-md);border-left:4px solid #005f6e;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span class="flt-title" style="font-size:13px;">W realizacji</span>
-          <span id="statCardWrealizacjiCount" style="font-family:var(--font-mono);font-weight:700;font-size:28px;color:var(--text-default);">0</span>
-        </div>
-        <button class="orl-filter-btn" style="width:100%;justify-content:center;background:#e6f2f3;border-color:#a8cdd1;color:#005f6e;" onclick="openOrdersStatusFilter('orderStageSection','W realizacji')">Zobacz w realizacji</button>
+      <div class="checkout-card" id="statCardWrealizacji" role="button" tabindex="0" style="flex:1;min-width:0;padding:var(--space-md);gap:var(--space-xs);border-left:4px solid #005f6e;cursor:pointer;" onclick="openOrdersStatusFilter('orderStageSection','W realizacji')">
+        <span class="flt-title" style="font-size:10px;line-height:1.25;letter-spacing:0;">W realizacji</span>
+        <span id="statCardWrealizacjiCount" style="font-family:var(--font-mono);font-weight:700;font-size:22px;color:var(--text-default);">0</span>
       </div>
     </div><!-- /status summary cards -->
 
