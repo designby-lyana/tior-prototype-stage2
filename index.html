@@ -57,6 +57,9 @@
        екранів/діалогів, 700/20px) без токена. Рішення: залишити PJS як третій шрифт
        продукту, токенізувати замість видаляти. ===== */
     --font-heading:'Plus Jakarta Sans', sans-serif;
+    --bg-surface-elevated:#ffffff;
+    --border-on-surface:rgba(10,10,10,.12);
+    --accent-primary-rgb:0,95,110;
   }
   html{ scrollbar-width:none; }
   html::-webkit-scrollbar{ display:none; }
@@ -109,14 +112,14 @@
   header{
     height:72px;
     background:var(--bg-page);
-    border-bottom:1px solid rgba(0,95,110,.06);
+    border-bottom:1px solid rgba(var(--accent-primary-rgb),.06);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 24px;
+    padding:0 var(--space-xl);
     flex-shrink:0;
   }
-  .logo{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+  .logo{ display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-xs); }
   .logo-img{
     width:80px;
     height:auto;
@@ -136,10 +139,10 @@
     font-weight:400;
     font-size:14px;
     line-height:18px;
-    color:#6b7280;
+    color:var(--text-muted);
     white-space:nowrap;
   }
-  .header-actions{display:flex;align-items:center;gap:12px;}
+  .header-actions{display:flex;align-items:center;gap:var(--space-md);}
   .lang-static{
     font-family:var(--font-mono);
     font-weight:700;
@@ -152,8 +155,8 @@
   }
   .icon-btn{color:var(--text-on-light);display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:6px;padding:3px;margin:-3px;transition:color 140ms ease, background 140ms ease;}
   .icon-btn svg{width:22px;height:22px;flex:none;}
-  .icon-btn:hover{color:var(--accent-primary);background:rgba(0,95,110,.07);}
-  .icon-btn:active{color:var(--accent-pressed);background:rgba(0,95,110,.12);}
+  .icon-btn:hover{color:var(--accent-primary);background:rgba(var(--accent-primary-rgb),.07);}
+  .icon-btn:active{color:var(--accent-pressed);background:rgba(var(--accent-primary-rgb),.12);}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -2927,15 +2930,15 @@
 
     /* Pill toolbar for header actions — Home screen (design review 2026-07-09) */
     #screenHome .header-actions {
-      background: #fff;
-      border-radius: 100px;
-      padding: 8px 16px;
-      gap: 8px;
+      background: var(--bg-surface-elevated);
+      border-radius: var(--radius-pill);
+      padding: 8px var(--space-lg);
+      gap: var(--space-sm);
       box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
     }
     #screenHome .header-actions .lang-static {
-      padding-right: 8px;
-      border-right: 1px solid rgba(10,10,10,.12);
+      padding-right: var(--space-sm);
+      border-right: 1px solid var(--border-on-surface);
     }
 
     #screenHome header {
