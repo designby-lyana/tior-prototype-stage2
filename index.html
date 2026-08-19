@@ -63,7 +63,7 @@
     --status-error:#b3261e;
     --status-error-rgb:179,38,30;
     --step-inactive-bg:rgba(11,12,12,.48);
-    --shadow-card:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    --shadow-card:0 1px 3px rgba(0,0,0,.08), 0 6px 24px rgba(0,0,0,.12);
     --radius-step:14px;
     --btn-height-sm:34px;
     --icon-sm:16px;
@@ -209,7 +209,7 @@
     display:flex;
     flex-direction:column;
     gap:16px;
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
   }
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
@@ -1243,7 +1243,7 @@
     width:40px;
     max-width:100%;
     border-radius:100px;
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
     padding:0;
     overflow:hidden;
     cursor:pointer;
@@ -1443,7 +1443,7 @@
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
     overflow:hidden;
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
   }
   .cart-item{
     padding:var(--space-lg);
@@ -1495,7 +1495,7 @@
     background:#fff;
     border-radius:var(--radius-lg);
     display:flex; flex-direction:column;
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
     overflow:hidden;
   }
   .cart-guest-disabled, .cart-guest-disabled *{
@@ -2042,7 +2042,7 @@
     border-radius:var(--radius-lg);
     padding:var(--space-lg);
     display:flex; flex-direction:column; gap:var(--space-sm);
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
     cursor:pointer;
     transition:box-shadow 160ms ease, background 160ms ease, transform 120ms ease;
   }
@@ -2244,7 +2244,7 @@
     border-radius:var(--radius-lg);
     padding:var(--space-md) var(--space-lg);
     display:flex; flex-direction:column; gap:var(--space-sm);
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    box-shadow:var(--shadow-card);
     transition:background 160ms ease, box-shadow 160ms ease;
   }
   .inv-row:hover{ background:#f4f6f7; box-shadow:0 2px 10px rgba(0,0,0,.09); }
@@ -2344,53 +2344,62 @@
 
   /* ── FIRMA ───────────────────────────────── */
   .firma-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
+  /* Заголовок сторінки "Firma" — навмисний виняток із загального .od-title (Plus Jakarta Sans),
+     скоуплений лише на цю сторінку, щоб не чіпати Zamówienia/Faktury/Order Detail, які теж
+     використовують .od-title. */
+  .firma-content .od-title{ font-family:var(--font-mono); }
   .firma-card{
     background:var(--bg-surface-light);
     border-radius:var(--radius-lg);
     padding:var(--space-xl);
-    display:flex; flex-direction:column; gap:0;
-    box-shadow:0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+    display:flex; flex-direction:column; gap:var(--space-md);
+    box-shadow:var(--shadow-card);
   }
+  /* Єдиний дівайдер картки — під заголовком. Усі внутрішні блоки (fields/groups/accounts)
+     розділені лише проміжком через flex-gap батьківської .firma-card (var(--space-md)),
+     той самий проміжок, що вже був між парами title/value усередині .firma-field-group. */
   .firma-card-header{
     display:flex; align-items:center; justify-content:space-between;
     padding-bottom:var(--space-lg);
     border-bottom:1px solid var(--border-surface);
-    margin-bottom:var(--space-lg);
   }
   .firma-card-title{
     font-family:var(--font-mono); font-weight:700; font-size:16px;
-    text-transform:uppercase; letter-spacing:0;
+    /* text-transform:uppercase прибрано — той самий §6/§9.16 виняток, що й у #adresSheet:
+       капслок дозволений лише в картці чекауту. Тут лише 3 інстанси (Dane firmy/Rachunki
+       bankowe/Adres prawny), усі в межах Firma, тож фікс не скоуплю — на відміну від
+       .flt-title/.adres-label, які ще використовуються в 12+23 місцях поза цим екраном. */
+    letter-spacing:0;
     color:var(--text-default);
   }
   .firma-edit-btn{
     -webkit-appearance:none;appearance:none; background:none; border:none;
-    display:flex; align-items:center; gap:5px;
+    display:flex; align-items:center; gap:var(--space-xs);
     font-family:var(--font-body); font-size:14px; color:var(--text-muted);
     cursor:pointer; padding:0;
   }
   .firma-edit-btn:hover{ color:var(--text-default); }
-  .firma-field{
-    padding:var(--space-md) 0;
-    border-bottom:1px solid var(--border-surface);
-  }
-  .firma-field:last-child{ border-bottom:none; padding-bottom:0; }
+  /* 14px хардкод не збігався зі шкалою іконок (--icon-sm=16px, той самий токен, що й
+     .btn-addr-add/.btn-addr-sel) — усі 3 інстанси firma-edit-btn (Edytuj ×2, Dodaj ×1)
+     зведено разом, щоб пара іконка+лейбл лишалась однакового розміру по всій Firma. */
+  .firma-edit-btn svg{ width:var(--icon-sm); height:var(--icon-sm); flex:none; }
   .firma-field-title{
+    /* Кольори свапнуто з .firma-field-value на прохання (лейбл стає другорядним,
+       значення — головним): було --text-default (чорний), тепер --text-muted (сірий). */
     font-family:var(--font-body); font-weight:500; font-size:16px;
-    color:var(--text-default); margin-bottom:2px;
+    color:var(--text-muted); margin-bottom:var(--space-xs);
   }
   .firma-field-value{
-    font-family:var(--font-body); font-size:16px; color:var(--text-muted);
+    /* було --text-muted (сірий), тепер --text-default (чорний) — див. коментар вище. */
+    font-family:var(--font-body); font-size:16px; color:var(--text-default);
   }
-  .firma-field-group{ padding:var(--space-md) 0; border-bottom:1px solid var(--border-surface); display:flex; flex-direction:column; gap:var(--space-md); }
-  .firma-field-group:last-child{ border-bottom:none; padding-bottom:0; }
+  .firma-field-group{ display:flex; flex-direction:column; gap:var(--space-md); }
 
   /* bank account */
-  .firma-account{ padding:var(--space-md) 0; border-bottom:1px solid var(--border-surface); }
-  .firma-account:last-of-type{ border-bottom:none; }
   .firma-account-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-sm); }
   .firma-badge-default{
     font-family:var(--font-body); font-size:13px; font-weight:500;
-    color:#1e6b3c; background:#e8f4ed; border:1px solid #a8d4b8;
+    color:var(--status-success); background:var(--status-success-soft); border:1px solid var(--status-success-ink);
     border-radius:var(--radius-sm); padding:2px 10px;
   }
   .firma-badge-set{
@@ -2399,8 +2408,6 @@
     cursor:pointer;
     border-radius:var(--radius-sm); padding:2px 10px; cursor:pointer;
   }
-  .firma-account-icons{ display:flex; gap:var(--space-sm); color:var(--text-muted); }
-  .firma-account-icons svg{ width:16px; height:16px; cursor:pointer; }
   .firma-iban{
     font-family:var(--font-mono); font-weight:400; font-size:14px;
     color:var(--text-default); letter-spacing:.3px;
@@ -2521,6 +2528,24 @@
   }
   .adres-input::placeholder{ color:var(--text-placeholder); }
   .adres-input:focus{ border-color:var(--accent-primary); border-width:1.5px; }
+  /* Скоуплений виняток лише для #adresSheet ("Dodaj adres") — на прохання прибрано капслок
+     тут (§6/§9.16 дизайн-системи забороняють uppercase поза карткою чекауту). Решта
+     .flt-title (13 інстансів) і .adres-label (23 інстанси) капслок ще мають — те саме
+     порушення лишається на інших екранах (Dodaj rachunek, Dane firmy тощо), не займано
+     навмисно, це окреме рішення на потім. */
+  #adresSheet.flt-sheet .flt-title{ text-transform:none; }
+  #adresSheet .adres-label{ text-transform:none; letter-spacing:.2px; }
+  /* Відступи #adresSheet — скоуплено, на прохання ("контент розкиданий"). Причини:
+     1) .flt-handle мав власний margin-bottom:var(--space-sm)(8px), який додавався
+        до батьківського flex gap:var(--space-xl)(24px) — реальний проміжок хендл→заголовок
+        виходив 32px, тоді як усередині форми поля йдуть з 4-12px. Прибрано margin,
+        лишився лише gap.
+     2) Сам gap:var(--space-xl)(24px) між усіма секціями (хендл/хедер/поля/кнопка) при
+        такій щільній формі читався як "острівці" — звужено до var(--space-lg)(16px),
+        обидва токени зі шкали §5, не довільні числа. Інші 12 flt-sheet лишаються
+        на 24px — те саме враження там ще можливе, якщо треба, звужу і їх окремо. */
+  #adresSheet.flt-sheet{ gap:var(--space-lg); }
+  #adresSheet .flt-handle{ margin-bottom:0; }
   .adres-phone-group{
     display:flex; align-items:center;
     border:1px solid var(--border-default);
@@ -2688,11 +2713,11 @@
 
   /* ── ADDRESSES SCREEN ── */
   .addr-content{ padding:var(--space-2xl) var(--space-lg) var(--space-xl); display:flex; flex-direction:column; gap:var(--space-lg); }
-  .addr-empty{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-3xl) var(--space-xl); display:flex; flex-direction:column; align-items:center; gap:var(--space-lg); text-align:center; box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.08); }
+  .addr-empty{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-3xl) var(--space-xl); display:flex; flex-direction:column; align-items:center; gap:var(--space-lg); text-align:center; box-shadow:var(--shadow-card); }
   .addr-empty-icon{ width:48px; height:48px; background:var(--bg-page); border-radius:50%; display:flex; align-items:center; justify-content:center; }
   .addr-empty-title{ font-family:var(--font-body); font-weight:600; font-size:18px; color:var(--text-default); }
   .addr-empty-desc{ font-family:var(--font-body); font-size:16px; color:var(--text-muted); line-height:1.5; }
-  .firma-account-icons{display:flex;align-items:center;gap:12px;}
+  .firma-account-icons{display:flex;align-items:center;gap:var(--space-md);}
   .firma-account-icons svg{width:18px;height:18px;cursor:pointer;stroke:var(--text-muted);transition:stroke 140ms;flex:none;fill:none;}
   .firma-account-icons svg:not(.trash-disabled):hover{stroke:var(--text-default);}
   .trash-disabled{opacity:.35;cursor:default;pointer-events:none;width:18px;height:18px;flex:none;stroke:var(--text-muted);}
@@ -2704,7 +2729,7 @@
     z-index:9999;pointer-events:none;white-space:normal;
   }
   .addr-trash-wrap:hover .addr-trash-tip{display:block;}
-  .addr-card{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-lg); display:flex; align-items:flex-start; gap:var(--space-md); box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 20px rgba(0,0,0,.08); cursor:pointer; border:1.5px solid transparent; transition:border-color 150ms; }
+  .addr-card{ background:var(--bg-surface-light); border-radius:var(--radius-lg); padding:var(--space-lg); display:flex; align-items:flex-start; gap:var(--space-md); box-shadow:var(--shadow-card); cursor:pointer; border:1.5px solid transparent; transition:border-color 150ms; }
   .addr-card.selected{ border-color:var(--accent-primary); }
   .addr-radio{ width:20px; height:20px; border-radius:50%; border:2px solid var(--border-surface); flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; transition:border-color 150ms; }
   .addr-card.selected .addr-radio{ border-color:var(--accent-primary); }
@@ -2949,7 +2974,7 @@
       border-radius: var(--radius-pill);
       padding: 8px var(--space-lg);
       gap: var(--space-sm);
-      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.08);
+      box-shadow: var(--shadow-card);
     }
     #screenHome .header-actions .lang-static {
       padding-right: var(--space-sm);
@@ -9262,7 +9287,7 @@
       <div class="firma-card-header">
         <span class="firma-card-title">Dane firmy</span>
         <button class="firma-edit-btn" onclick="toggleDaneFirmyForm()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
           Edytuj
         </button>
       </div>
@@ -9280,7 +9305,7 @@
           <div class="firma-field-value" id="dispFirmaVAT">DE123456789</div>
         </div>
       </div>
-      <div class="firma-field" style="border-bottom:none;padding-bottom:0;">
+      <div class="firma-field">
         <div class="firma-field-title">Osoba kontaktowa</div>
         <div class="firma-field-value" id="dispFirmaOsoba" style="line-height:1.7;">Jan Kowalski<br>+48 601234567<br>jan@company.com</div>
       </div>
@@ -9291,7 +9316,7 @@
       <div class="firma-card-header">
         <span class="firma-card-title">Rachunki bankowe</span>
         <button class="firma-edit-btn" onclick="openAddRachunek()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           Dodaj
         </button>
       </div>
@@ -9305,7 +9330,7 @@
         </div>
         <div class="firma-iban" id="dispIBAN1">DE89 3704 0044 0532 0130 00</div>
       </div>
-      <div class="firma-account" style="border-bottom:none;">
+      <div class="firma-account">
         <div class="firma-account-top">
           <span class="firma-badge-set" id="rachunkiBadge2" onclick="setDefaultRachunek(2)">Ustaw jako domyślny</span>
           <div class="firma-account-icons">
@@ -9322,7 +9347,7 @@
       <div class="firma-card-header">
         <span class="firma-card-title">Adres prawny</span>
         <button class="firma-edit-btn" onclick="toggleAdresForm()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           Dodaj
         </button>
       </div>
@@ -9965,29 +9990,29 @@
   <div style="display:flex;flex-direction:column;gap:var(--space-md);">
 
     <div class="adres-field">
-      <div class="adres-label">NAZWA / OSOBA KONTAKTOWA</div>
-      <input type="text" class="adres-input" id="adresNazwa" placeholder="np. Jan Kowalski">
+      <div class="adres-label">Nazwa / osoba kontaktowa</div>
+      <input type="text" class="adres-input" id="adresNazwa">
     </div>
 
     <div class="adres-field">
-      <div class="adres-label">ULICA I NUMER</div>
-      <input type="text" class="adres-input" id="adresUlica" placeholder="np. ul. Zakopiańska 58">
+      <div class="adres-label">Ulica i numer</div>
+      <input type="text" class="adres-input" id="adresUlica">
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);">
       <div class="adres-field">
-        <div class="adres-label">KOD POCZTOWY</div>
-        <input type="text" class="adres-input" id="adresKod" placeholder="00-000">
+        <div class="adres-label">Kod pocztowy</div>
+        <input type="text" class="adres-input" id="adresKod">
       </div>
       <div class="adres-field">
-        <div class="adres-label">MIASTO</div>
-        <input type="text" class="adres-input" id="adresMiasto" placeholder="np. Kraków">
+        <div class="adres-label">Miasto</div>
+        <input type="text" class="adres-input" id="adresMiasto">
       </div>
     </div>
 
     <div class="adres-field">
-      <div class="adres-label">KRAJ</div>
-      <input type="text" class="adres-input" id="adresKraj" placeholder="np. Polska">
+      <div class="adres-label">Kraj</div>
+      <input type="text" class="adres-input" id="adresKraj">
     </div>
 
   </div>
